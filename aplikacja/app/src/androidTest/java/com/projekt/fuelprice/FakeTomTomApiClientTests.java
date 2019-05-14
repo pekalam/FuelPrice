@@ -37,6 +37,7 @@ public class FakeTomTomApiClientTests {
         });
         assertTrue(numberOfStations == 10);
         assertTrue(stations[0].brandName.equals("Shell"));
-
+        assertTrue(stations[0].lat == 50.04268);
+        assertTrue(stations[0].lon == 21.99056);
     }
 }

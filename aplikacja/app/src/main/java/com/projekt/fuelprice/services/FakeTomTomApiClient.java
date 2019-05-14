@@ -109,7 +109,7 @@ public class FakeTomTomApiClient implements AsyncMapApiClient {
                                     if(name.equals("lat"))
                                         gasStations[i].lat = reader.nextDouble();
                                     if(name.equals("lon"))
-                                        gasStations[i].lat = reader.nextDouble();
+                                        gasStations[i].lon = reader.nextDouble();
                                 }
                                 reader.endObject();
                             }
