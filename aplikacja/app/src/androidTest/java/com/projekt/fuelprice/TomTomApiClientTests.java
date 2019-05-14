@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class TomTomApiClientTests {
-    private MockWebServer mockApiServer(MockResponse[] responses) throws IOException {
+    private MockWebServer createMockWebServer(MockResponse[] responses) throws IOException {
         MockWebServer server = new MockWebServer();
         for (MockResponse resp: responses
              ) {
@@ -42,19 +42,17 @@ public class TomTomApiClientTests {
         return server;
     }
 
+
     @Test
-    public void returns_nearby_stations() throws InterruptedException, IOException {
+    public void getNearbyGasStations_ValidParams_ReturnsStations() throws InterruptedException, IOException {
 
         Context testContext = InstrumentationRegistry.getInstrumentation().getContext();
-
         Scanner s = new Scanner(testContext.getAssets().open("testsData/tomTomApiClient/nearby.json"))
                 .useDelimiter("\\A");
         String json = s.hasNext() ? s.next() : "";
-        MockWebServer server = mockApiServer(new MockResponse[]{
+        MockWebServer server = createMockWebServer(new MockResponse[]{
                 new MockResponse().setBody(json)
         });
-
-
         final CountDownLatch lock = new CountDownLatch(1);
 
         Thread ui = new Thread(new Runnable() {
@@ -62,7 +60,7 @@ public class TomTomApiClientTests {
             public void run() {
                 Looper.prepare();
                 TomTomApiClient client = new TomTomApiClient();
-                client.getNearbyGasStations(1, 1, 1, new Consumer<GasStation[]>() {
+                client.getNearbyGasStations(1, 1, 1000, new Consumer<GasStation[]>() {
                     @Override
                     public void accept(GasStation[] gasStations) {
                         if(gasStations.length == 10)
@@ -82,6 +80,7 @@ public class TomTomApiClientTests {
         ui.start();
         lock.await(2000, TimeUnit.MILLISECONDS);
         ui.interrupt();
+
 
         assertTrue(lock.getCount() == 0);
 
