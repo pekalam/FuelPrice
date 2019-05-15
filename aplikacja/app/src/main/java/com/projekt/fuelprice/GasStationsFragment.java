@@ -33,6 +33,8 @@ public class GasStationsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     
+    private GasStationsAdapter adapter;
+    
     @Inject
     GasStationsViewModelFactory gasStationsViewModelFactory;
 
@@ -48,16 +50,18 @@ public class GasStationsFragment extends Fragment {
         AndroidSupportInjection.inject(this);
         gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gas_stations, container, false);
+        recyclerView = fragment.findViewById(R.id.rec1);
+        adapter = new GasStationsAdapter(getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         /*
             Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie
          */
         gasStationsViewModel.getGasStations().observe(this ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
-                /*
-                Ustawienie danych dla adaptera listy
-                adapter.setGasStations(gasStations) ??
-                 */
+                adapter.setGasStations(gasStations);
+
             }
         });
 

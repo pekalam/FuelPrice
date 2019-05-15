@@ -18,10 +18,11 @@ import java.util.ArrayList;
 
 public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.ViewHolder> {
 
-    private ArrayList<GasStation> gasStations = new ArrayList<>();
+    private GasStation[] gasStations = new GasStation[0];
+    private Context context;
 
-    public GasStationsAdapter(ArrayList<GasStation> Stations) {
-        gasStations=Stations;
+    public GasStationsAdapter(Context context) {
+        this.context = context;
     }
 
     
@@ -36,14 +37,26 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        /*viewHolder.cena.setText();
-        viewHolder.odleglosc.setText();*/
-        viewHolder.button.setText("Nawigoj");        
+        viewHolder.cena.setText(String.valueOf(gasStations[i].price95));
+        viewHolder.odleglosc.setText("x");
+        switch (gasStations[i].brandName){
+            case "Shell":
+                viewHolder.image.setImageDrawable(context.getResources().getDrawable(R.drawable.shell));
+                break;
+            case "Orlen":
+                viewHolder.image.setImageDrawable(context.getResources().getDrawable(R.drawable.orlen));
+                break;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return gasStations.size();
+        return gasStations.length;
+    }
+
+    public void setGasStations(GasStation[] gasStations){
+        this.gasStations = gasStations;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
