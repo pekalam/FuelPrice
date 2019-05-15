@@ -10,22 +10,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.projekt.fuelprice.data.GasStation;
+
 import java.util.ArrayList;
 
 
 
 public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.ViewHolder> {
 
-    private ArrayList<String> ceny = new ArrayList<>();
-    private ArrayList<String> odleglosci = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
-    private Context mContext;
+    private ArrayList<GasStation> gasStations = new ArrayList<>();
 
-    public GasStationsAdapter(ArrayList<String> ceny, ArrayList<String> odleglosci, ArrayList<String> mImages, Context mContext) {
-        this.ceny = ceny;
-        this.odleglosci = odleglosci;
-        this.mImages = mImages;
-        this.mContext = mContext;
+    public GasStationsAdapter(ArrayList<GasStation> Stations) {
+        gasStations=Stations;
     }
 
     
@@ -35,19 +31,19 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item,viewGroup,false);
         ViewHolder holder = new ViewHolder(view);
-        return null;
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.cena.setText(ceny.get(i));
-        viewHolder.odleglosc.setText(odleglosci.get(i));
+        /*viewHolder.cena.setText();
+        viewHolder.odleglosc.setText();*/
         viewHolder.button.setText("Nawigoj");        
     }
 
     @Override
     public int getItemCount() {
-        return ceny.size();
+        return gasStations.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
