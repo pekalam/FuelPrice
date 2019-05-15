@@ -31,15 +31,11 @@ public class GasStationsFragment extends Fragment {
 
     private FragmentGasStationsBinding binding;
 
+    private RecyclerView recyclerView;
+    
     @Inject
     GasStationsViewModelFactory gasStationsViewModelFactory;
 
-    /*
-        Trzeba utworzyc RecyclerView w layoucie fragment_gas_stations
-        Dodac RecyclerView do fragmentu i utworzyc do niego referencje tak jak tutaj do testowy
-        W onCreateView ustawic dla tego RecyclerView adapter i layoutmanagera
-        https://codelabs.developers.google.com/codelabs/android-room-with-a-view/#10
-     */
 
     public GasStationsFragment() {
         // Required empty public constructor

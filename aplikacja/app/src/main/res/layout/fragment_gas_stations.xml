@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rec1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".GasStationsFragment">
+        android:layout_weight="0.25" />
 
-
-    </FrameLayout>
-
-</layout>
+</FrameLayout>
