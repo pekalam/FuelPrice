@@ -1,31 +1,29 @@
 package com.projekt.fuelprice;
 
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.projekt.fuelprice.data.GasStation;
+import com.projekt.fuelprice.databinding.FragmentGasStationsBinding;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class GasStationsFragment extends Fragment {
 
     private GasStationsViewModel gasStationsViewModel;
 
-    private TextView testowy;
+    private FragmentGasStationsBinding binding;
 
     /*
         Trzeba utworzyc RecyclerView w layoucie fragment_gas_stations
@@ -43,14 +41,13 @@ public class GasStationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         gasStationsViewModel = ViewModelProviders.of(getActivity(), new GasStationsViewModelFactory(this.getActivity().getApplication())).get(GasStationsViewModel.class);
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gas_stations, container, false);
         /*
             Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie
          */
         gasStationsViewModel.getGasStations().observe(this ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
-                testowy.setText(gasStations[0].brandName);
 
                 /*
                 Ustawienie danych dla adaptera listy
@@ -59,11 +56,7 @@ public class GasStationsFragment extends Fragment {
             }
         });
 
-
-        // Inflate the layout for this fragment
-        View fragment = inflater.inflate(R.layout.fragment_gas_stations, container, false);
-        this.testowy = fragment.findViewById(R.id.testowy);
-        return fragment;
+        return binding.getRoot();
     }
 
 }

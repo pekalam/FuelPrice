@@ -1,9 +1,9 @@
 package com.projekt.fuelprice.viewmodels;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.support.v4.util.Consumer;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.core.util.Consumer;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.projekt.fuelprice.data.GasStation;

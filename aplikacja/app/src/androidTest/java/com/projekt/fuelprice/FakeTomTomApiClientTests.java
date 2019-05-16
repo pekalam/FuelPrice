@@ -1,8 +1,8 @@
 package com.projekt.fuelprice;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.util.Consumer;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+import androidx.core.util.Consumer;
 
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.services.AsyncMapApiClient;
@@ -11,7 +11,6 @@ import com.projekt.fuelprice.services.FakeTomTomApiClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.concurrent.CountDownLatch;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)

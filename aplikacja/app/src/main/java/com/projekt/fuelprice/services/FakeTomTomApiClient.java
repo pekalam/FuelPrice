@@ -1,18 +1,15 @@
 package com.projekt.fuelprice.services;
 
-import android.app.Application;
 import android.content.Context;
-import android.support.v4.util.Consumer;
+import androidx.core.util.Consumer;
 import android.util.JsonReader;
 import android.util.JsonToken;
 
-import com.google.android.gms.common.util.JsonUtils;
 import com.projekt.fuelprice.data.GasStation;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 public class FakeTomTomApiClient implements AsyncMapApiClient {
 

@@ -1,6 +1,6 @@
 package com.projekt.fuelprice.services;
 
-import android.support.v4.util.Consumer;
+import androidx.core.util.Consumer;
 
 import com.projekt.fuelprice.data.GasStation;
 

@@ -1,6 +1,6 @@
 package com.projekt.fuelprice.data;
 
-import android.support.v4.util.Consumer;
+import androidx.core.util.Consumer;
 
 import com.google.android.gms.maps.model.LatLng;
 

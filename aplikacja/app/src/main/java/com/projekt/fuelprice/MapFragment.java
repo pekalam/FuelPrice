@@ -1,22 +1,14 @@
 package com.projekt.fuelprice;
 
-
-import android.app.Activity;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.arch.lifecycle.ViewModelStore;
-
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -24,13 +16,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.projekt.fuelprice.data.GasStation;
+import com.projekt.fuelprice.databinding.FragmentMapBinding;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
@@ -42,23 +33,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GasStationsViewModel gasStationsViewModel;
 
+    private FragmentMapBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false);
         /*
             Zainicjowanie wspolnego viewmodelu
          */
         gasStationsViewModel = ViewModelProviders.of(getActivity(), new GasStationsViewModelFactory(this.getActivity().getApplication())).get(GasStationsViewModel.class);
 
-        // Inflate the layout for this fragment
-        View fragment = inflater.inflate(R.layout.fragment_map, container, false);
+        /*
+            Na bindingu sie nie da
+         */
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                     .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
 
-        return fragment;
+        return binding.getRoot();
     }
 
     /*

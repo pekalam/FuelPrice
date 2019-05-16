@@ -2,9 +2,9 @@ package com.projekt.fuelprice;
 
 import android.content.Context;
 import android.os.Looper;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.util.Consumer;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+import androidx.core.util.Consumer;
 
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.services.TomTomApiClient;
