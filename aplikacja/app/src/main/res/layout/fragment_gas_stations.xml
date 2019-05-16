@@ -2,6 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,10 +39,11 @@
             android:background="#00FF9A"/>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/list_item"/>
 
 </LinearLayout>
+</layout>

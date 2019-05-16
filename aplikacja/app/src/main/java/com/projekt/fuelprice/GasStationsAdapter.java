@@ -1,19 +1,15 @@
 package com.projekt.fuelprice;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
+
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.projekt.fuelprice.data.GasStation;
-
-import java.util.ArrayList;
-
+import com.projekt.fuelprice.databinding.ListItemBinding;
 
 
 public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.ViewHolder> {
@@ -30,23 +26,16 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item,viewGroup,false);
-        ViewHolder holder = new ViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        ListItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.list_item, viewGroup, false);
+        ViewHolder holder = new ViewHolder(binding);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.cena.setText(String.valueOf(gasStations[i].price95));
-        viewHolder.odleglosc.setText("x");
-        switch (gasStations[i].brandName){
-            case "Shell":
-                viewHolder.image.setImageDrawable(context.getResources().getDrawable(R.drawable.shell));
-                break;
-            case "Orlen":
-                viewHolder.image.setImageDrawable(context.getResources().getDrawable(R.drawable.orlen));
-                break;
-        }
+        GasStation station = gasStations[i];
+        viewHolder.bindGasStation(station);
     }
 
     @Override
@@ -61,20 +50,24 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
-        TextView cena;
-        TextView odleglosc;
-        Button button;
-        LinearLayout linearLayout;
+        private ListItemBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            image = itemView.findViewById(R.id.image1);
-            cena = itemView.findViewById(R.id.tekst1);
-            odleglosc = itemView.findViewById(R.id.tekst2);
-            button =  itemView.findViewById(R.id.btn1);
-            linearLayout = itemView.findViewById(R.id.list_item);
+        public ViewHolder(ListItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
 
+        public void bindGasStation(GasStation station){
+            binding.tekst1.setText(String.valueOf(station.price95));
+            binding.tekst2.setText("x");
+            switch (station.brandName){
+                case "Shell":
+                    binding.image1.setImageDrawable(context.getResources().getDrawable(R.drawable.shell));
+                    break;
+                case "Orlen":
+                    binding.image1.setImageDrawable(context.getResources().getDrawable(R.drawable.orlen));
+                    break;
+            }
         }
     }
 }

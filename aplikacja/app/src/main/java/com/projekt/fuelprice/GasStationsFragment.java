@@ -7,13 +7,12 @@ import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.support.v7.widget.RecyclerView;
 
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FragmentGasStationsBinding;
@@ -31,8 +30,6 @@ public class GasStationsFragment extends Fragment {
 
     private FragmentGasStationsBinding binding;
 
-    private RecyclerView recyclerView;
-    
     private GasStationsAdapter adapter;
     
     @Inject
@@ -50,10 +47,9 @@ public class GasStationsFragment extends Fragment {
         AndroidSupportInjection.inject(this);
         gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gas_stations, container, false);
-        recyclerView = fragment.findViewById(R.id.rec1);
         adapter = new GasStationsAdapter(getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        binding.rec1.setAdapter(adapter);
+        binding.rec1.setLayoutManager(new LinearLayoutManager(this.getContext()));
         /*
             Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie
          */
