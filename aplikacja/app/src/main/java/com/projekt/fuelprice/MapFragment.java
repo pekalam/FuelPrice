@@ -50,21 +50,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
          */
         gasStationsViewModel = ViewModelProviders.of(getActivity(), new GasStationsViewModelFactory(this.getActivity().getApplication())).get(GasStationsViewModel.class);
 
-        /*
-            Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie
-         */
-        gasStationsViewModel.getGasStations().observe(this ,new Observer<GasStation[]>() {
-            @Override
-            public void onChanged(@Nullable GasStation[] gasStations) {
-
-                for (GasStation station: gasStations
-                     ) {
-                    //dodanie markera do mapy
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(station.lat, station.lon)).title(station.name).snippet(station.brandName));
-                }
-
-            }
-        });
         // Inflate the layout for this fragment
         View fragment = inflater.inflate(R.layout.fragment_map, container, false);
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
@@ -76,9 +61,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return fragment;
     }
 
+    /*
+        Miejsce na podlaczenie logiki zwiazanej z mapka
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        /*
+            Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie.
+            Observe tutaj bo przy apply changes w android studio jest bug
+         */
+        gasStationsViewModel.getGasStations().observe(this ,new Observer<GasStation[]>() {
+            @Override
+            public void onChanged(@Nullable GasStation[] gasStations) {
+
+                for (GasStation station: gasStations
+                ) {
+                    //dodanie markera do mapy
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(station.lat, station.lon)).title(station.name).snippet(station.brandName));
+                }
+
+            }
+        });
+
         LatLng rze = new LatLng(50.041187, 21.999121);
 
         //pobranie listy stacji (test)
