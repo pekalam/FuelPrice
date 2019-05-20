@@ -20,6 +20,9 @@ import com.projekt.fuelprice.databinding.FragmentMapBinding;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
+import javax.inject.Inject;
+
+import dagger.android.support.AndroidSupportInjection;
 
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
@@ -35,15 +38,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private FragmentMapBinding binding;
 
+    @Inject
+    GasStationsViewModelFactory gasStationsViewModelFactory;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        AndroidSupportInjection.inject(this);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false);
         /*
             Zainicjowanie wspolnego viewmodelu
          */
-        gasStationsViewModel = ViewModelProviders.of(getActivity(), new GasStationsViewModelFactory(this.getActivity().getApplication())).get(GasStationsViewModel.class);
+        gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel.class);
 
         /*
             Na bindingu sie nie da

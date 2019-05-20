@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,9 @@ import com.projekt.fuelprice.databinding.FragmentGasStationsBinding;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
+import javax.inject.Inject;
+
+import dagger.android.support.AndroidSupportInjection;
 
 
 public class GasStationsFragment extends Fragment {
@@ -24,6 +29,9 @@ public class GasStationsFragment extends Fragment {
     private GasStationsViewModel gasStationsViewModel;
 
     private FragmentGasStationsBinding binding;
+
+    @Inject
+    GasStationsViewModelFactory gasStationsViewModelFactory;
 
     /*
         Trzeba utworzyc RecyclerView w layoucie fragment_gas_stations
@@ -40,7 +48,8 @@ public class GasStationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        gasStationsViewModel = ViewModelProviders.of(getActivity(), new GasStationsViewModelFactory(this.getActivity().getApplication())).get(GasStationsViewModel.class);
+        AndroidSupportInjection.inject(this);
+        gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gas_stations, container, false);
         /*
             Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie
@@ -48,7 +57,6 @@ public class GasStationsFragment extends Fragment {
         gasStationsViewModel.getGasStations().observe(this ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
-
                 /*
                 Ustawienie danych dla adaptera listy
                 adapter.setGasStations(gasStations) ??
