@@ -15,6 +15,9 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import io.fabric.sdk.android.Fabric;
 
+/*
+TODO: pasek nawigacji
+ */
 public class HomeActivity extends FragmentActivity implements HasSupportFragmentInjector {
 
     @Inject
@@ -28,7 +31,11 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
+        //dzieki temu pod binding.fab jest ten przycisk ktory w xml ma id fab
+        //tak samo jest ze wszystkim czemu nadacie id w xml
+        //dla kazdej innnej aktywnosci i fragmentu mozna robic tak samo
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+
     }
 
     @Override
