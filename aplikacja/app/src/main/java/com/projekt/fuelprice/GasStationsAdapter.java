@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,7 +15,11 @@ import com.projekt.fuelprice.databinding.ListItemBinding;
 
 public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.ViewHolder> {
 
-    private GasStation[] gasStations = new GasStation[0];
+    private GasStationListItemVM[] listItemVM = new GasStationListItemVM[0];
+    /*
+    TODO: default fueltype
+     */
+    private GasStation.FuelType fuelType = GasStation.FuelType.t95;
     private Context context;
 
     public GasStationsAdapter(Context context) {
@@ -34,18 +39,46 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        GasStation station = gasStations[i];
-        viewHolder.bindGasStation(station);
+        GasStationListItemVM itemVM = listItemVM[i];
+        viewHolder.bindGasStation(itemVM);
     }
 
     @Override
     public int getItemCount() {
-        return gasStations.length;
+        return listItemVM.length;
     }
 
     public void setGasStations(GasStation[] gasStations){
-        this.gasStations = gasStations;
+        listItemVM = new GasStationListItemVM[gasStations.length];
+        for (int i = 0; i < gasStations.length; i++) {
+            listItemVM[i] = new GasStationListItemVM(gasStations[i]);
+        }
         notifyDataSetChanged();
+    }
+
+    public void setSelectedFuelPrice(GasStation.FuelType fuelType){
+        this.fuelType = fuelType;
+        notifyDataSetChanged();
+    }
+
+    public class GasStationListItemVM{
+        public GasStation gasStation;
+
+        public GasStationListItemVM(GasStation gasStation){
+            this.gasStation = gasStation;
+        }
+
+        public float getSelectedFuelPrice(){
+            switch (GasStationsAdapter.this.fuelType){
+                case LPG:
+                    return gasStation.priceLPG;
+                case t95:
+                    return gasStation.price95;
+                case t98:
+                    return gasStation.price98;
+            }
+            return 0;
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -57,17 +90,8 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
             this.binding = binding;
         }
 
-        public void bindGasStation(GasStation station){
-            binding.tekst1.setText(String.valueOf(station.price95));
-            binding.tekst2.setText("x");
-            switch (station.brandName){
-                case "Shell":
-                    binding.image1.setImageDrawable(context.getResources().getDrawable(R.drawable.shell));
-                    break;
-                case "Orlen":
-                    binding.image1.setImageDrawable(context.getResources().getDrawable(R.drawable.orlen));
-                    break;
-            }
+        public void bindGasStation(GasStationListItemVM itemVM){
+            binding.setVm(itemVM);
         }
     }
 }

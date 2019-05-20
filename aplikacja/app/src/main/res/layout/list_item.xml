@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="vm"
+            type="com.projekt.fuelprice.GasStationsAdapter.GasStationListItemVM" />
+    </data>
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/list_item">
@@ -10,11 +15,13 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/image1"
+
+            android:src="@{vm.gasStation.logo}"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cena"
+            android:text="@{Float.toString(vm.getSelectedFuelPrice())}"
             android:id="@+id/tekst1"
             android:layout_weight="1"
             android:gravity="center|center_vertical"
@@ -24,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Odległość"
+            android:text="@{Float.toString(vm.gasStation.price95)}"
             android:id="@+id/tekst2"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"

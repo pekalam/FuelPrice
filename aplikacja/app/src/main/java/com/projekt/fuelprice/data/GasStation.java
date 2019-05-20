@@ -1,6 +1,12 @@
 package com.projekt.fuelprice.data;
 
+import android.graphics.drawable.Drawable;
+
 public class GasStation {
+    public enum FuelType{
+        t98, t95, LPG
+    }
+
     public String brandName;
     public String name;
     public double lat;
@@ -9,6 +15,7 @@ public class GasStation {
     public float price95;
     public float priceLPG;
     public float priceON;
+    public Drawable logo;
 
     public GasStation(){
         randomPrices();
