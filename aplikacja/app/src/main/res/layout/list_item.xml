@@ -7,44 +7,47 @@
             name="vm"
             type="com.projekt.fuelprice.GasStationsAdapter.GasStationListItemVM" />
     </data>
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_item">
+
+    <LinearLayout
+        android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:background = "@drawable/text_border">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
             android:id="@+id/image1"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="10dp"
+            android:src="@{vm.gasStation.logo}" />
 
-            android:src="@{vm.gasStation.logo}"
-            />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{Float.toString(vm.getSelectedFuelPrice())}"
             android:id="@+id/tekst1"
-            android:layout_weight="1"
-            android:gravity="center|center_vertical"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="50dp"
-            />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Float.toString(vm.gasStation.price95)}"
-            android:id="@+id/tekst2"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="0.8"
             android:gravity="center|center_vertical"
-            />
+            android:text="@{Float.toString(vm.getSelectedFuelPrice())}" />
+
+        <TextView
+            android:id="@+id/tekst2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.8"
+            android:gravity="center|center_vertical"
+            android:text="@{Float.toString(vm.gasStation.price95)}" />
 
         <Button
             android:id="@+id/btn1"
-            android:layout_width="6dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="Navigate" />
+            android:background="@drawable/arrow_enable" />
     </LinearLayout>
 </layout>
 
