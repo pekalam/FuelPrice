@@ -6,13 +6,38 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Powitanie extends AppCompatActivity {
+import com.projekt.fuelprice.services.PermissionsService;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
+public class Powitanie extends AppCompatActivity implements PermissionsService.Listener {
+
+    @Inject
+    PermissionsService permissionsService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_powitanie);
+        permissionsService.checkServicesAvailability(this, this);
+    }
+
+    @Override
+    public void onPermissionsGranted() {
+
+    }
+
+    @Override
+    public void onPermissionsDenied() {
+
+    }
+
+    @Override
+    public void onRequiredServicesEnabled() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -21,5 +46,10 @@ public class Powitanie extends AppCompatActivity {
                 finish();
             }
         }, 2000);
+    }
+
+    @Override
+    public void onRequiredServicesDisabled() {
+
     }
 }

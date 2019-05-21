@@ -1,8 +1,10 @@
 package com.projekt.fuelprice.di.modules;
 
+import com.projekt.fuelprice.EkranStartowy;
 import com.projekt.fuelprice.GasStationsFragment;
 import com.projekt.fuelprice.HomeActivity;
 import com.projekt.fuelprice.MapFragment;
+import com.projekt.fuelprice.Powitanie;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
@@ -20,4 +22,7 @@ public abstract class AppComponentInjectorContributors {
 
     @ContributesAndroidInjector
     abstract HomeActivity bindHomeActivity();
+
+    @ContributesAndroidInjector
+    abstract Powitanie bindPowitanie();
 }

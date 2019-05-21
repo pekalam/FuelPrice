@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
 import com.crashlytics.android.Crashlytics;
 import com.projekt.fuelprice.databinding.ActivityHomeBinding;
+import com.projekt.fuelprice.services.PermissionsService;
 
 import javax.inject.Inject;
 

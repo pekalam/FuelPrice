@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FragmentGasStationsBinding;
+import com.projekt.fuelprice.services.PermissionsService;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
@@ -31,7 +32,7 @@ public class GasStationsFragment extends Fragment {
     private FragmentGasStationsBinding binding;
 
     private GasStationsAdapter adapter;
-    
+
     @Inject
     GasStationsViewModelFactory gasStationsViewModelFactory;
 
