@@ -23,6 +23,7 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_powitanie);
         permissionsService.checkServicesAvailability(this, this);
+        getSupportActionBar().hide();
     }
 
     @Override
@@ -40,7 +41,7 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), EkranStartowy.class);
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
