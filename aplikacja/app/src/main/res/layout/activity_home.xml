@@ -3,140 +3,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".HomeActivity"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/mainLayout">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/mapFragmentLayout"
-            android:orientation="vertical"
-            android:layout_weight="0.4">
+            android:orientation="vertical">
+                        <LinearLayout
+                            android:id="@+id/mapFragmentLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.55"
+                            android:orientation="vertical">
 
-            <fragment
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:name="com.projekt.fuelprice.MapFragment"
-                android:id="@+id/mapFragment"/>
+                            <fragment
+                                android:id="@+id/mapFragment"
+                                android:name="com.projekt.fuelprice.MapFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/gasStationsFragmentLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.35"
+                            android:orientation="vertical">
+
+                            <fragment
+                                android:id="@+id/gasStationsFragment"
+                                android:name="com.projekt.fuelprice.GasStationsFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                        </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/gasStationsFragmentLayout"
-            android:orientation="vertical"
-            android:layout_weight="0.4">
-
-            <fragment
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:name="com.projekt.fuelprice.GasStationsFragment"
-                android:id="@+id/gasStationsFragment"/>
-
-        </LinearLayout>
-
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom">
             <!-- Other components and views -->
-
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="bottom"
-                app:navigationIcon="@drawable/ic_menu_white_24dp"/>
+
+                app:navigationIcon="@drawable/ic_menu_white_24dp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_mic_black_24dp"
-                app:layout_anchor="@id/bar"/>
+                app:layout_anchor="@id/bar" />
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_8"
-                android:layout_marginTop="@dimen/dp_8"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_bottom_sheet_heading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_56"
-                    android:layout_marginEnd="@dimen/dp_16"
-                    android:layout_marginStart="@dimen/dp_16"
-                    android:gravity="center"
-                    android:text="@string/bottom_sheet_option_heading"
-
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_btn_add_photo_camera"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_48"
-                    android:layout_marginEnd="@dimen/dp_16"
-                    android:layout_marginStart="@dimen/dp_16"
-                    android:backgroundTint="@android:color/white"
-                    android:drawablePadding="@dimen/dp_32"
-
-
-                    android:gravity="start|center_vertical"
-                    android:text="@string/bottom_sheet_option_camera"
-
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_btn_add_photo_gallery"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="@dimen/dp_16"
-                    android:layout_marginStart="@dimen/dp_16"
-                    android:backgroundTint="@android:color/white"
-                    android:drawablePadding="@dimen/dp_32"
-
-
-                    android:gravity="start|center_vertical"
-                    android:text="@string/bottom_sheet_option_gallery"
-
-                    android:textSize="16sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/dp_8"
-
-                    android:layout_marginTop="@dimen/md_bottom_sheet_separator_top_margin"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_btn_remove_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_48"
-                    android:layout_marginEnd="@dimen/dp_16"
-                    android:layout_marginStart="@dimen/dp_16"
-                    android:backgroundTint="@android:color/white"
-                    android:drawablePadding="@dimen/dp_32"
-
-
-                    android:gravity="start|center_vertical"
-                    android:text="@string/bottom_sheet_option_remove_photo"
-
-                    android:textSize="16sp" />
-
-            </LinearLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-    </LinearLayout>
+    </FrameLayout>
 
 </layout>
