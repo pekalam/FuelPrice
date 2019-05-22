@@ -8,6 +8,9 @@ import androidx.core.util.Consumer;
 import com.google.android.gms.maps.model.LatLng;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.data.GasStationsRepository;
+import com.projekt.fuelprice.services.DistanceService;
+
+import java.util.ArrayList;
 
 /**
  * Zawiera logikę i dane dla mapy i tabelki.
@@ -21,8 +24,11 @@ public class GasStationsViewModel extends ViewModel {
 
     private GasStationsRepository gasStationsRepo;
 
-    public GasStationsViewModel(GasStationsRepository gasStationsRepository){
+    private DistanceService distanceService;
+
+    public GasStationsViewModel(GasStationsRepository gasStationsRepository, DistanceService distanceService){
         this.gasStationsRepo = gasStationsRepository;
+        this.distanceService = distanceService;
     }
 
     /**
@@ -37,6 +43,30 @@ public class GasStationsViewModel extends ViewModel {
                 gasStations.setValue(fetchedGasStations);
             }
         });
+    }
+
+    // TODO: jak to zrobic normalnie bez bibliotek
+    public void getDistanceToGasStations(final GasStation[] gasStations, final Consumer<double[]> onDistancesFound){
+        final double[] distances = new double[gasStations.length];
+        final ArrayList<Integer> complete = new ArrayList<Integer>();
+        for (int i = 0; i < gasStations.length; i++) {
+            final int stationInd = i;
+            distanceService.findDistance(gasStations[i].lat, gasStations[i].lon, gasStations[i].lat, gasStations[i].lon, new DistanceService.Listener() {
+                @Override
+                public void onDistanceFound(double distance) {
+                    distances[stationInd] = distance;
+                    complete.add(1);
+                    if(complete.size() == gasStations.length){
+                        onDistancesFound.accept(distances);
+                    }
+                }
+
+                @Override
+                public void onDistanceServiceError() {
+                    //TODO
+                }
+            });
+        }
     }
 
     public LiveData<GasStation[]> getGasStations() {

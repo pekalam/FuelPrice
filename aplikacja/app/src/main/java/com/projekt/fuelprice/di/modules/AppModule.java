@@ -2,11 +2,13 @@ package com.projekt.fuelprice.di.modules;
 
 import android.app.Application;
 import com.projekt.fuelprice.services.AsyncMapApiClient;
+import com.projekt.fuelprice.services.DistanceService;
 import com.projekt.fuelprice.services.FakePermissionsService;
 import com.projekt.fuelprice.services.FakeTomTomApiClient;
 import com.projekt.fuelprice.services.GasStationLocalLogoService;
 import com.projekt.fuelprice.services.GasStationLogoService;
 import com.projekt.fuelprice.services.PermissionsService;
+import com.projekt.fuelprice.services.SimpleDistanceService;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -17,6 +19,13 @@ import dagger.Provides;
 public class AppModule {
 
 
+    @Provides
+    @Named("distanceService")
+    DistanceService provideDistanceService(){
+        return new SimpleDistanceService();
+    }
+
+    @Singleton
     @Provides
     PermissionsService providePermissionsService(){
         return new FakePermissionsService();

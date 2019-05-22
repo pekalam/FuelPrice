@@ -20,7 +20,6 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_powitanie);
         permissionsService.checkServicesAvailability(this, this);

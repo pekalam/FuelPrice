@@ -16,7 +16,6 @@ public class EkranStartowy extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ekran_startowy);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_ekran_startowy);

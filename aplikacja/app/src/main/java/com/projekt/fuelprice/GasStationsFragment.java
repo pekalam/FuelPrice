@@ -1,6 +1,7 @@
 package com.projekt.fuelprice;
 
 
+import androidx.core.util.Consumer;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FragmentGasStationsBinding;
 import com.projekt.fuelprice.services.PermissionsService;
+import com.projekt.fuelprice.viewmodels.GasStationListItemVM;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
@@ -58,7 +60,20 @@ public class GasStationsFragment extends Fragment {
         gasStationsViewModel.getGasStations().observe(this ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
-                adapter.setGasStations(gasStations);
+                final GasStationListItemVM[] listItemVMs = new GasStationListItemVM[gasStations.length];
+                for (int i = 0; i < gasStations.length; i++) {
+                    listItemVMs[i] = new GasStationListItemVM(gasStations[i]);
+                }
+                gasStationsViewModel.getDistanceToGasStations(gasStations, new Consumer<double[]>() {
+                    @Override
+                    public void accept(double[] distances) {
+                        for (int i = 0; i < distances.length; i++) {
+                            listItemVMs[i].distance = distances[i];
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                adapter.setGasStations(listItemVMs);
 
             }
         });

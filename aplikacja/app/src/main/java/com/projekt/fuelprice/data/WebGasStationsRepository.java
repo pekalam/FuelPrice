@@ -9,6 +9,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.projekt.fuelprice.services.AsyncMapApiClient;
 import com.projekt.fuelprice.services.GasStationLogoService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Domyslne repozytorium stacji korzystajace z AsyncMapApiClient
  */
@@ -23,12 +26,28 @@ public class WebGasStationsRepository implements GasStationsRepository {
 
     @Override
     public void getGasStations(LatLng pos, int radius, final Consumer<GasStation[]> onSuccess) {
+        int i = 0;
+
+
+
         apiClient.getNearbyGasStations(pos.latitude, pos.longitude, radius, new Consumer<GasStation[]>() {
             /*
             TODO: callback hell
              */
             @Override
-            public void accept(GasStation[] gasStations) {
+            public void accept(final GasStation[] gasStations) {
+
+                final ArrayList<Drawable> li = new ArrayList<Drawable>();
+                final GasStationLogoService.Listener l = new GasStationLogoService.Listener() {
+                    @Override
+                    public void onSuccess(Drawable drawable) {
+                        li.add(drawable);
+                        if(li.size() == gasStations.length)
+                            onSuccess.accept(gasStations);
+                    }
+                };
+
+
                 for (final GasStation station: gasStations
                      ) {
                     try {
@@ -36,6 +55,7 @@ public class WebGasStationsRepository implements GasStationsRepository {
                             @Override
                             public void onSuccess(Drawable drawable) {
                                 station.logo = drawable;
+                                l.onSuccess(drawable);
                             }
                         });
                     } catch (Exception e) {
@@ -44,7 +64,6 @@ public class WebGasStationsRepository implements GasStationsRepository {
                         return;
                     }
                 }
-                onSuccess.accept(gasStations);
             }
         }, new Consumer<Throwable>() {
             @Override

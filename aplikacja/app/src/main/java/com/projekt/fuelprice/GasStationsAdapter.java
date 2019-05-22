@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.ListItemBinding;
+import com.projekt.fuelprice.viewmodels.GasStationListItemVM;
 
 
 public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.ViewHolder> {
@@ -48,37 +49,17 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         return listItemVM.length;
     }
 
-    public void setGasStations(GasStation[] gasStations){
-        listItemVM = new GasStationListItemVM[gasStations.length];
-        for (int i = 0; i < gasStations.length; i++) {
-            listItemVM[i] = new GasStationListItemVM(gasStations[i]);
-        }
+    public void setGasStations(GasStationListItemVM[] gasStationListItemVMS){
+        listItemVM = new GasStationListItemVM[gasStationListItemVMS.length + 1];
+        System.arraycopy(gasStationListItemVMS, 0, listItemVM, 0, gasStationListItemVMS.length);
+        //null item
+        listItemVM[gasStationListItemVMS.length] = new GasStationListItemVM(null);
         notifyDataSetChanged();
     }
 
     public void setSelectedFuelPrice(GasStation.FuelType fuelType){
         this.fuelType = fuelType;
         notifyDataSetChanged();
-    }
-
-    public class GasStationListItemVM{
-        public GasStation gasStation;
-
-        public GasStationListItemVM(GasStation gasStation){
-            this.gasStation = gasStation;
-        }
-
-        public float getSelectedFuelPrice(){
-            switch (GasStationsAdapter.this.fuelType){
-                case LPG:
-                    return gasStation.priceLPG;
-                case t95:
-                    return Math.round(gasStation.price95*100)/100f;
-                case t98:
-                    return gasStation.price98;
-            }
-            return 0;
-        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

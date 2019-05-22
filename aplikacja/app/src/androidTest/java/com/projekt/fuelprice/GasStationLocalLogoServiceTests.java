@@ -1,7 +1,5 @@
 package com.projekt.fuelprice;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import androidx.test.InstrumentationRegistry;
@@ -15,7 +13,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.security.acl.LastOwnerException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +27,7 @@ public class GasStationLocalLogoServiceTests {
         final CountDownLatch lock = new CountDownLatch(1);
 
         final Drawable expected = InstrumentationRegistry.getTargetContext().getDrawable(R.drawable.shell);
-        service.getGasStationLogo(station, new GasStationLogoService.Listener() {
+        service.getGasStationsLogo(station, new GasStationLogoService.Listener() {
             @Override
             public void onSuccess(Drawable logo) {
                 /*
