@@ -73,7 +73,7 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
                 case LPG:
                     return gasStation.priceLPG;
                 case t95:
-                    return gasStation.price95;
+                    return Math.round(gasStation.price95*100)/100f;
                 case t98:
                     return gasStation.price98;
             }

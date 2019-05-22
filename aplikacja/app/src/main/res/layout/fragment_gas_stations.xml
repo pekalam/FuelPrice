@@ -10,33 +10,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:gravity="right"
-        android:paddingLeft="120dp">
-        <TextView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="98"
-            android:gravity="center_horizontal|center_vertical"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:background="#00FF9A"/>
+
+        android:paddingLeft="10dp"
+        android:paddingRight="90dp">
+
         <TextView
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:text="Odległość"
+            android:text="Stacja:"
             android:gravity="center_horizontal|center_vertical"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            android:background="#00FF9A"/>
+            android:background="#00FF9A"
+            android:layout_weight="0.4" />
+
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="Nawiguj"
-            android:gravity="center_horizontal|center_vertical"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_horizontal|center_vertical"
             android:layout_margin="10dp"
-            android:background="#00FF9A"/>
+            android:background="#00FF9A"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="95"
+            android:layout_weight="0.1" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="#00FF9A"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_marginRight="10dp"
+            android:text="Odległość"
+            android:layout_weight="0.5"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
