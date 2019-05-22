@@ -3,40 +3,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".HomeActivity"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/mapFragmentLayout"
-            android:orientation="vertical"
-            android:layout_weight="0.5">
-
-            <fragment
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:name="com.projekt.fuelprice.MapFragment"
-                android:id="@+id/mapFragment"/>
-
-        </LinearLayout>
+        android:orientation="vertical"
+        android:id="@+id/mainLayout">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/gasStationsFragmentLayout"
-            android:orientation="vertical"
-            android:layout_weight="0.5">
+            android:orientation="vertical">
+                        <LinearLayout
+                            android:id="@+id/mapFragmentLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.55"
+                            android:orientation="vertical">
 
-            <fragment
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:name="com.projekt.fuelprice.GasStationsFragment"
-                android:id="@+id/gasStationsFragment"/>
+                            <fragment
+                                android:id="@+id/mapFragment"
+                                android:name="com.projekt.fuelprice.MapFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/gasStationsFragmentLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.35"
+                            android:orientation="vertical">
+
+                            <fragment
+                                android:id="@+id/gasStationsFragment"
+                                android:name="com.projekt.fuelprice.GasStationsFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                        </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom">
+            <!-- Other components and views -->
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+
+                app:navigationIcon="@drawable/ic_menu_white_24dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_mic_black_24dp"
+                app:layout_anchor="@id/bar" />
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </FrameLayout>
 
 </layout>
