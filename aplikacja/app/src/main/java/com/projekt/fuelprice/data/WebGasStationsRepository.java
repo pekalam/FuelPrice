@@ -26,10 +26,7 @@ public class WebGasStationsRepository implements GasStationsRepository {
 
     @Override
     public void getGasStations(LatLng pos, int radius, final Consumer<GasStation[]> onSuccess) {
-        int i = 0;
-
-
-
+        
         apiClient.getNearbyGasStations(pos.latitude, pos.longitude, radius, new Consumer<GasStation[]>() {
             /*
             TODO: callback hell
@@ -37,11 +34,11 @@ public class WebGasStationsRepository implements GasStationsRepository {
             @Override
             public void accept(final GasStation[] gasStations) {
 
-                final ArrayList<Drawable> li = new ArrayList<Drawable>();
+                final ArrayList<Integer> li = new ArrayList<Integer>();
                 final GasStationLogoService.Listener l = new GasStationLogoService.Listener() {
                     @Override
                     public void onSuccess(Drawable drawable) {
-                        li.add(drawable);
+                        li.add(1);
                         if(li.size() == gasStations.length)
                             onSuccess.accept(gasStations);
                     }
