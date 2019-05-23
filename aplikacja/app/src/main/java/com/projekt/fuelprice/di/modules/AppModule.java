@@ -9,6 +9,7 @@ import com.projekt.fuelprice.services.GasStationLocalLogoService;
 import com.projekt.fuelprice.services.GasStationLogoService;
 import com.projekt.fuelprice.services.PermissionsService;
 import com.projekt.fuelprice.services.SimpleDistanceService;
+import com.projekt.fuelprice.services.TomTomApiClient;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -35,6 +36,7 @@ public class AppModule {
     @Provides
     @Named("asyncMapApiClient")
     AsyncMapApiClient provideAsyncMapApiClient(Application app){
+        //return new TomTomApiClient();
         return new FakeTomTomApiClient(app.getApplicationContext());
     }
 

@@ -57,7 +57,7 @@ public class GasStationsFragment extends Fragment {
         /*
             Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie
          */
-        gasStationsViewModel.getGasStations().observe(this ,new Observer<GasStation[]>() {
+        gasStationsViewModel.getGasStations().observe(getViewLifecycleOwner() ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
                 final GasStationListItemVM[] listItemVMs = new GasStationListItemVM[gasStations.length];
