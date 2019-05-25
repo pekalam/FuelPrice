@@ -63,10 +63,13 @@ public class TomTomApiClientTests {
                 client.getNearbyGasStations(1, 1, 1000, new Consumer<GasStation[]>() {
                     @Override
                     public void accept(GasStation[] gasStations) {
-                        if(gasStations.length == 10)
-                            assertTrue(true);
-                        else
-                            fail("gasStations.length != 0");
+                        assertTrue(gasStations.length == 10);
+                        assertTrue(gasStations[0].lat == 50.04268);
+                        assertTrue(gasStations[0].lon == 21.99056);
+                        assertTrue(gasStations[0].brandName.equals("Shell"));
+                        assertTrue(gasStations[1].brandName.equals("Orlen"));
+                        assertTrue(gasStations[1].lat == 50.04874);
+                        assertTrue(gasStations[1].lon == 21.99922);
                         lock.countDown();
                     }}, new Consumer<Throwable>() {
                     @Override

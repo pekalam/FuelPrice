@@ -27,7 +27,7 @@ public class GasStationLocalLogoServiceTests {
         final CountDownLatch lock = new CountDownLatch(1);
 
         final Drawable expected = InstrumentationRegistry.getTargetContext().getDrawable(R.drawable.shell);
-        service.getGasStationsLogo(station, new GasStationLogoService.Listener() {
+        service.getGasStationLogo(station, new GasStationLogoService.Listener() {
             @Override
             public void onSuccess(Drawable logo) {
                 /*

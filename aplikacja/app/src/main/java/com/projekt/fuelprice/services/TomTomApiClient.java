@@ -93,7 +93,7 @@ public class TomTomApiClient implements AsyncMapApiClient {
                             stations[i].lat = ob.getJSONObject("position")
                                     .getDouble("lat");
                             stations[i].lon = ob.getJSONObject("position")
-                                    .getDouble("lat");
+                                    .getDouble("lon");
                         }
                         onSuccess.accept(stations);
 
