@@ -24,7 +24,7 @@ public class GasStationLocalLogoService implements GasStationLogoService {
 
     @Override
     public void getGasStationLogo(GasStation gasStation, final GasStationLogoService.Listener listener){
-        int logoId = -1;
+        int logoId;
         switch (gasStation.brandName){
             case "Orlen":
                 logoId = R.drawable.orlen;
@@ -47,12 +47,12 @@ public class GasStationLocalLogoService implements GasStationLogoService {
             case "Valdi":
                 logoId = R.drawable.valdi;
                 break;
-            case "Nieoznakowana":
+            default:
                 logoId = R.drawable.nieoznakowana;
                 break;
         }
 
-        if(logoId != -1){
+        {
             Glide
                     .with(context)
                     .asDrawable()
@@ -68,9 +68,6 @@ public class GasStationLocalLogoService implements GasStationLogoService {
                             listener.onSuccess(placeholder);
                         }
                     });
-        }
-        else {
-            listener.onSuccess(context.getResources().getDrawable(R.drawable.orlen));
         }
 
     }

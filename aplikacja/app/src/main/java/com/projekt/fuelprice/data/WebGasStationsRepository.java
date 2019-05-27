@@ -56,8 +56,11 @@ public class WebGasStationsRepository implements GasStationsRepository {
                             }
                         });
                     } catch (Exception e) {
+
                         e.printStackTrace();
+
                         Log.d("ERROR", "WebGasStationsRepository: logo service error", e);
+
                         return;
                     }
                 }
