@@ -35,6 +35,21 @@ public class GasStationLocalLogoService implements GasStationLogoService {
             case "Shell":
                 logoId = R.drawable.shell;
                 break;
+            case "BP":
+                logoId = R.drawable.bp;
+                break;
+            case "Watkem":
+                logoId = R.drawable.watkem;
+                break;
+            case "Zrodelko":
+                logoId = R.drawable.zrodelko;
+                break;
+            case "Valdi":
+                logoId = R.drawable.valdi;
+                break;
+            case "Nieoznakowana":
+                logoId = R.drawable.nieoznakowana;
+                break;
         }
 
         if(logoId != -1){
