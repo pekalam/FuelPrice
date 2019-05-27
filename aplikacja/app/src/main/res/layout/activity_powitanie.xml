@@ -22,14 +22,17 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.9"
+            android:layout_gravity="center"
+            android:layout_weight="0.8"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             app:srcCompat="@drawable/fuel" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.05"
+            android:layout_weight="0.1"
             app:srcCompat="@drawable/napis" />
 
         <ProgressBar
@@ -37,7 +40,7 @@
             style="@android:style/Widget.DeviceDefault.ProgressBar.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.05"
+            android:layout_weight="0.1"
             android:paddingTop="10dp"/>
 
     </LinearLayout>

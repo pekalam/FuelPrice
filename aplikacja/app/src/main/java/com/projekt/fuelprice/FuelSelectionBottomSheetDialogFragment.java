@@ -26,12 +26,6 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                              @Nullable Bundle savedInstanceState) {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fuel_bottom_sheet, container, false);
-        binding.buttonReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
 
         return binding.getRoot();
 
