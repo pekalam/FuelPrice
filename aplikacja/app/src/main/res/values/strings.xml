@@ -9,4 +9,6 @@
     <string name="bottom_sheet_option_heading">Add Photo</string>
     <string name="bottom_sheet_option_remove_photo">Remove Photo</string>
     <string name="null_string"> </string>
+    <string name="preferences_file_name">FuelPrice_preferences</string>
+    <string name="preferences_fuel_type_key">fuel_type</string>
 </resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FuelPrice</string>
+    <string name="preferences_file_name">FuelPrice_preferences</string>
+    <string name="preferences_fuel_type_key">fuel_type</string>
+</resources>

@@ -4,7 +4,26 @@ import android.graphics.drawable.Drawable;
 
 public class GasStation {
     public enum FuelType{
-        t98, t95, LPG
+        t98(0), t95(1), LPG(2);
+
+        private int type;
+
+        FuelType(int type){
+            this.type = type;
+        }
+
+        public int asInt(){
+            return type;
+        }
+
+        public static FuelType intToFuelType(int type){
+            for(FuelType t : FuelType.values()){
+                if(t.type == type) {
+                    return t;
+                }
+            }
+            return t98;
+        }
     }
 
     public String brandName;
