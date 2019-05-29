@@ -89,7 +89,6 @@ public class GasStationsFragment extends Fragment {
                     }
                 });
                 adapter.setGasStations(listItemVMs);
-
             }
         });
 

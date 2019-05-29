@@ -30,6 +30,8 @@ public class GasStationsViewModel extends ViewModel {
 
     private MutableLiveData<GasStation.FuelType> selectedFuelType = new MutableLiveData<GasStation.FuelType>();
 
+    private MutableLiveData<GasStation> selectedGasStation = new MutableLiveData<GasStation>();
+
     private GasStationsRepository gasStationsRepo;
 
     private DistanceService distanceService;
@@ -120,6 +122,14 @@ public class GasStationsViewModel extends ViewModel {
     public void setSelectedFuelType(GasStation.FuelType selectedFuelType) {
         applicationSettingsService.setSelectedFuelType(selectedFuelType);
         this.selectedFuelType.postValue(selectedFuelType);
+    }
+
+    public LiveData<GasStation> getSelectedGasStation(){
+        return selectedGasStation;
+    }
+
+    public void setSelectedGasStation(GasStation station){
+        selectedGasStation.postValue(station);
     }
 
     public LiveData<GasStation[]> getGasStations() {

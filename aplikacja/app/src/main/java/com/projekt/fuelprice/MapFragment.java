@@ -43,6 +43,9 @@ import com.projekt.fuelprice.utils.DistanceUtils;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
@@ -97,6 +100,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        gasStationsViewModel.getSelectedGasStation().observe(getViewLifecycleOwner(), new Observer<GasStation>() {
+            @Override
+            public void onChanged(GasStation gasStation) {
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(gasStation.lat, gasStation.lon)));
+            }
+        });
+
         return binding.getRoot();
     }
 
@@ -143,7 +153,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         gasStationsViewModel.getGasStations().observe(getViewLifecycleOwner() ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
-
                 for (final GasStation station: gasStations
                 ) {
 
@@ -160,7 +169,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             .snippet(station.brandName)
                             .icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
                     mMap.addMarker(options);
-
                 }
 
             }
