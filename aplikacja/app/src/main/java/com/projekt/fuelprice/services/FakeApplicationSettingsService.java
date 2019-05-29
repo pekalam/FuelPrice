@@ -3,7 +3,7 @@ package com.projekt.fuelprice.services;
 import com.projekt.fuelprice.data.GasStation;
 
 public class FakeApplicationSettingsService implements ApplicationSettingsService {
-    private GasStation.FuelType fuelType = GasStation.FuelType.t95;
+    private GasStation.FuelType fuelType = GasStation.FuelType.LPG;
 
     @Override
     public GasStation.FuelType getSelectedFuelType() {

@@ -33,8 +33,18 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="0.8"
             android:gravity="center|center_vertical"
-            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"
-            android:text="@{vm.nullItem ? @string/null_string : Float.toString(vm.getSelectedFuelPrice())}" />
+            android:text="@{vm.nullItem ? @string/null_string : Float.toString(vm.getSelectedFuelPrice())}"
+            android:textStyle="bold|italic"
+            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}" />
+
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.2"
+            android:background="@drawable/lpg"
+            android:clickable="false" />
 
         <TextView
             android:id="@+id/tekst2"
@@ -43,8 +53,9 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0.8"
             android:gravity="center|center_vertical"
-            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"
-            android:text="@{vm.nullItem ? @string/null_string : Double.toString(vm.distance)}" />
+            android:text="@{vm.nullItem ? @string/null_string : Double.toString(vm.distance)}"
+            android:textStyle="bold"
+            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}" />
 
         <Button
             android:id="@+id/btn1"

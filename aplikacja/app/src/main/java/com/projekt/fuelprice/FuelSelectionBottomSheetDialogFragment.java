@@ -7,19 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FuelBottomSheetBinding;
 import com.projekt.fuelprice.services.ApplicationSettingsService;
 import com.projekt.fuelprice.viewmodels.FuelSelectionBottomSheetVM;
 
 public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-    boolean iscolorLPG = false;
+    boolean iscolorLPG = true;
     boolean iscolor95 = true;
     boolean iscolor98 = true;
     boolean iscolorON = true;
@@ -56,7 +58,27 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
         Button btn98 = binding.button98;
         final FrameLayout frame98 = binding.frame98;
 
-        frameLPG.setBackgroundColor(Color.BLUE);
+
+        if(settingsService.getSelectedFuelType()==GasStation.FuelType.LPG)
+        {
+            frameLPG.setBackgroundColor(Color.BLUE);
+            iscolorLPG = false;
+        }
+        else if (settingsService.getSelectedFuelType()==GasStation.FuelType.ON)
+        {
+            frameON.setBackgroundColor(Color.BLUE);
+            iscolorON = false;
+        }
+        else if (settingsService.getSelectedFuelType()==GasStation.FuelType.t95)
+        {
+            frame95.setBackgroundColor(Color.BLUE);
+            iscolor95 = false;
+        }
+        else if (settingsService.getSelectedFuelType()==GasStation.FuelType.t98)
+        {
+            frame98.setBackgroundColor(Color.BLUE);
+            iscolor98 = false;
+        }
 
         btnLPG.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -71,6 +93,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                     iscolorON = true;
                     iscolor95 = true;
                     iscolor98 = true;
+                    settingsService.setSelectedFuelType(GasStation.FuelType.LPG);
                 }
 
             }
@@ -89,6 +112,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                     iscolorON = false;
                     iscolor95 = true;
                     iscolor98 = true;
+                    settingsService.setSelectedFuelType(GasStation.FuelType.ON);
                 }
 
 
@@ -108,6 +132,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                     iscolorON = true;
                     iscolor95 = false;
                     iscolor98 = true;
+                    settingsService.setSelectedFuelType(GasStation.FuelType.t95);
                 }
 
             }
@@ -126,7 +151,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                     iscolorON = true;
                     iscolor95 = true;
                     iscolor98 = false;
-
+                    settingsService.setSelectedFuelType(GasStation.FuelType.t98);
                 }
 
             }
