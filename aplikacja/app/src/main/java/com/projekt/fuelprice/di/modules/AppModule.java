@@ -35,6 +35,7 @@ public class AppModule {
     }
     @Singleton
     @Provides
+    @Named("applicationSettingsService")
     ApplicationSettingsService provideApplicationSettingsService(Application app){
         return new FakeApplicationSettingsService();
     }

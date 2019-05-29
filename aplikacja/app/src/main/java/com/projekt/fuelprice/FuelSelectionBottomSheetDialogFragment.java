@@ -7,17 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FuelBottomSheetBinding;
 import com.projekt.fuelprice.services.ApplicationSettingsService;
-import com.projekt.fuelprice.viewmodels.FuelSelectionBottomSheetVM;
+import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
+import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
 
 public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -26,18 +32,18 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
     boolean iscolor98 = true;
     boolean iscolorON = true;
 
-    private ApplicationSettingsService settingsService;
 
-    private FuelSelectionBottomSheetVM viewModel;
 
-    private FuelSelectionBottomSheetDialogFragment(ApplicationSettingsService settingsService){
-        this.settingsService = settingsService;
+    private GasStationsViewModel gasStationsViewModel;
+
+    private FuelSelectionBottomSheetDialogFragment(GasStationsViewModel gasStationsViewModel){
+        this.gasStationsViewModel = gasStationsViewModel;
     }
 
     private FuelBottomSheetBinding binding;
 
-    public static FuelSelectionBottomSheetDialogFragment newInstance(ApplicationSettingsService settingsService) {
-        return new FuelSelectionBottomSheetDialogFragment(settingsService);
+    public static FuelSelectionBottomSheetDialogFragment newInstance(GasStationsViewModel gasStationsViewModel) {
+        return new FuelSelectionBottomSheetDialogFragment(gasStationsViewModel);
     }
 
     @Nullable
@@ -45,9 +51,8 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        viewModel = new FuelSelectionBottomSheetVM(settingsService);
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fuel_bottom_sheet, container, false);
-        binding.setVm(viewModel);
 
         Button btnLPG = binding.buttonLPG;
         final FrameLayout frameLPG = binding.frameLPG;
@@ -59,22 +64,22 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
         final FrameLayout frame98 = binding.frame98;
 
 
-        if(settingsService.getSelectedFuelType()==GasStation.FuelType.LPG)
+        if(gasStationsViewModel.getSelectedFuelType().getValue()==GasStation.FuelType.LPG)
         {
             frameLPG.setBackgroundColor(Color.BLUE);
             iscolorLPG = false;
         }
-        else if (settingsService.getSelectedFuelType()==GasStation.FuelType.ON)
+        else if (gasStationsViewModel.getSelectedFuelType().getValue()==GasStation.FuelType.ON)
         {
             frameON.setBackgroundColor(Color.BLUE);
             iscolorON = false;
         }
-        else if (settingsService.getSelectedFuelType()==GasStation.FuelType.t95)
+        else if (gasStationsViewModel.getSelectedFuelType().getValue()==GasStation.FuelType.t95)
         {
             frame95.setBackgroundColor(Color.BLUE);
             iscolor95 = false;
         }
-        else if (settingsService.getSelectedFuelType()==GasStation.FuelType.t98)
+        else if (gasStationsViewModel.getSelectedFuelType().getValue()==GasStation.FuelType.t98)
         {
             frame98.setBackgroundColor(Color.BLUE);
             iscolor98 = false;
@@ -93,7 +98,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                     iscolorON = true;
                     iscolor95 = true;
                     iscolor98 = true;
-                    settingsService.setSelectedFuelType(GasStation.FuelType.LPG);
+                    gasStationsViewModel.setSelectedFuelType(GasStation.FuelType.LPG);
                 }
 
             }
@@ -112,7 +117,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                     iscolorON = false;
                     iscolor95 = true;
                     iscolor98 = true;
-                    settingsService.setSelectedFuelType(GasStation.FuelType.ON);
+                    gasStationsViewModel.setSelectedFuelType(GasStation.FuelType.ON);
                 }
 
 
@@ -132,7 +137,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                     iscolorON = true;
                     iscolor95 = false;
                     iscolor98 = true;
-                    settingsService.setSelectedFuelType(GasStation.FuelType.t95);
+                    gasStationsViewModel.setSelectedFuelType(GasStation.FuelType.t95);
                 }
 
             }
@@ -151,7 +156,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
                     iscolorON = true;
                     iscolor95 = true;
                     iscolor98 = false;
-                    settingsService.setSelectedFuelType(GasStation.FuelType.t98);
+                    gasStationsViewModel.setSelectedFuelType(GasStation.FuelType.t98);
                 }
 
             }

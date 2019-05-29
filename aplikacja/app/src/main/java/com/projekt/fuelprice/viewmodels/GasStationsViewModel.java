@@ -8,6 +8,7 @@ import androidx.core.util.Consumer;
 import com.google.android.gms.maps.model.LatLng;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.data.GasStationsRepository;
+import com.projekt.fuelprice.services.ApplicationSettingsService;
 import com.projekt.fuelprice.services.DistanceService;
 import com.projekt.fuelprice.services.LocationService;
 
@@ -27,19 +28,26 @@ public class GasStationsViewModel extends ViewModel {
 
     private MutableLiveData<LatLng> currentPosition = new MutableLiveData<LatLng>();
 
+    private MutableLiveData<GasStation.FuelType> selectedFuelType = new MutableLiveData<GasStation.FuelType>();
+
     private GasStationsRepository gasStationsRepo;
 
     private DistanceService distanceService;
 
     private LocationService locationService;
 
+    private ApplicationSettingsService applicationSettingsService;
+
 
     private boolean _locationServiceStarted = false;
 
-    public GasStationsViewModel(GasStationsRepository gasStationsRepository, DistanceService distanceService, LocationService locationService){
+    public GasStationsViewModel(GasStationsRepository gasStationsRepository, DistanceService distanceService, LocationService locationService, ApplicationSettingsService applicationSettingsService){
         this.gasStationsRepo = gasStationsRepository;
         this.distanceService = distanceService;
         this.locationService = locationService;
+        this.applicationSettingsService = applicationSettingsService;
+        GasStation.FuelType selected = applicationSettingsService.getSelectedFuelType();
+        selectedFuelType.setValue(selected);
     }
 
     /**
@@ -51,14 +59,6 @@ public class GasStationsViewModel extends ViewModel {
         gasStationsRepo.getGasStations(pos, radius, new Consumer<GasStation[]>() {
             @Override
             public void accept(GasStation[] fetchedGasStations) {
-
-                //Sortowanie pod wzgledem ceny paliwa
-                Arrays.sort(fetchedGasStations, new Comparator<GasStation>() {
-                    @Override
-                    public int compare(GasStation o1, GasStation o2) {
-                        return 1;
-                    }
-                });
                 gasStations.setValue(fetchedGasStations);
             }
         });
@@ -111,6 +111,15 @@ public class GasStationsViewModel extends ViewModel {
                 }
             });
         }
+    }
+
+    public LiveData<GasStation.FuelType> getSelectedFuelType() {
+        return selectedFuelType;
+    }
+
+    public void setSelectedFuelType(GasStation.FuelType selectedFuelType) {
+        applicationSettingsService.setSelectedFuelType(selectedFuelType);
+        this.selectedFuelType.postValue(selectedFuelType);
     }
 
     public LiveData<GasStation[]> getGasStations() {

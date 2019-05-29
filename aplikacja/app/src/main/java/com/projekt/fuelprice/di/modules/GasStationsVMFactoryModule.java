@@ -1,6 +1,7 @@
 package com.projekt.fuelprice.di.modules;
 
 import com.projekt.fuelprice.data.GasStationsRepository;
+import com.projekt.fuelprice.services.ApplicationSettingsService;
 import com.projekt.fuelprice.services.DistanceService;
 import com.projekt.fuelprice.services.LocationService;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
@@ -17,7 +18,8 @@ public class GasStationsVMFactoryModule {
     @Provides
     GasStationsViewModelFactory provideGasStationsViewModelFactory(@Named("gasStationsRepository") GasStationsRepository gasStationsRepository,
                                                                    @Named("distanceService")DistanceService distanceService,
-                                                                   @Named("locationService")LocationService locationService){
-        return new GasStationsViewModelFactory(gasStationsRepository, distanceService, locationService);
+                                                                   @Named("locationService")LocationService locationService,
+                                                                   @Named("applicationSettingsService")ApplicationSettingsService applicationSettingsService){
+        return new GasStationsViewModelFactory(gasStationsRepository, distanceService, locationService, applicationSettingsService);
     }
 }

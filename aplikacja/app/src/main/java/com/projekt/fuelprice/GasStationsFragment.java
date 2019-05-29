@@ -23,6 +23,9 @@ import com.projekt.fuelprice.viewmodels.GasStationListItemVM;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
@@ -70,8 +73,10 @@ public class GasStationsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
                 final GasStationListItemVM[] listItemVMs = new GasStationListItemVM[gasStations.length];
+
                 for (int i = 0; i < gasStations.length; i++) {
                     listItemVMs[i] = new GasStationListItemVM(gasStations[i]);
+                    listItemVMs[i].setSelectedFuelPrice(gasStationsViewModel.getSelectedFuelType().getValue());
                 }
 
                 gasStationsViewModel.getDistanceToGasStations(gasStations, new Consumer<double[]>() {
@@ -85,6 +90,14 @@ public class GasStationsFragment extends Fragment {
                 });
                 adapter.setGasStations(listItemVMs);
 
+            }
+        });
+
+
+        gasStationsViewModel.getSelectedFuelType().observe(getViewLifecycleOwner(), new Observer<GasStation.FuelType>() {
+            @Override
+            public void onChanged(GasStation.FuelType fuelType) {
+                adapter.setSelectedFuelPrice(fuelType);
             }
         });
 

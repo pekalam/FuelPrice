@@ -1,5 +1,6 @@
 package com.projekt.fuelprice.di.modules;
 
+import com.projekt.fuelprice.FuelSelectionBottomSheetDialogFragment;
 import com.projekt.fuelprice.GasStationsFragment;
 import com.projekt.fuelprice.HomeActivity;
 import com.projekt.fuelprice.MapFragment;

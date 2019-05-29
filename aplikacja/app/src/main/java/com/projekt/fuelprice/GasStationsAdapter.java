@@ -15,21 +15,33 @@ import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.ListItemBinding;
 import com.projekt.fuelprice.viewmodels.GasStationListItemVM;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 
 public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.ViewHolder> {
 
     private GasStationListItemVM[] listItemVM = new GasStationListItemVM[0];
-    /*
-    TODO: default fueltype
-     */
-    private GasStation.FuelType fuelType = GasStation.FuelType.t95;
     private Context context;
 
     public GasStationsAdapter(Context context) {
         this.context = context;
     }
 
-    
+
+    private void sortListItems(){
+        Arrays.sort(listItemVM, 0, listItemVM.length-1, new Comparator<GasStationListItemVM>() {
+            @Override
+            public int compare(GasStationListItemVM o1, GasStationListItemVM o2) {
+                if(o1.getSelectedFuelPrice() == o2.getSelectedFuelPrice()){
+                    if(o1.distance != -1 && o2.distance != -1){
+                        return o1.distance > o2.distance ? 1 : -1;
+                    }
+                }
+                return o1.getSelectedFuelPrice() > o2.getSelectedFuelPrice() ? 1 : -1;
+            }
+        });
+    }
 
     @NonNull
     @Override
@@ -54,13 +66,16 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
     public void setGasStations(GasStationListItemVM[] gasStationListItemVMS){
         listItemVM = new GasStationListItemVM[gasStationListItemVMS.length + 1];
         System.arraycopy(gasStationListItemVMS, 0, listItemVM, 0, gasStationListItemVMS.length);
+        sortListItems();
         //null item
         listItemVM[gasStationListItemVMS.length] = new GasStationListItemVM(null);
         notifyDataSetChanged();
     }
 
     public void setSelectedFuelPrice(GasStation.FuelType fuelType){
-        this.fuelType = fuelType;
+        for(GasStationListItemVM vm : listItemVM){
+            vm.setSelectedFuelPrice(fuelType);
+        }
         notifyDataSetChanged();
     }
 
@@ -86,7 +101,7 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
                            return true;
                     }
                     return false;
-                   //
+
                 }
             }
             );

@@ -7,44 +7,56 @@
             name="vm"
             type="com.projekt.fuelprice.viewmodels.GasStationListItemVM" />
         <import type="android.view.View"/>
+        <import type="com.projekt.fuelprice.data.GasStation.FuelType" alias="FuelType" />
     </data>
 
     <LinearLayout
         android:id="@+id/list_item"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:paddingBottom="2dp"
-        android:paddingTop="2dp"
+        android:layout_height="90dp"
+        android:gravity="center_vertical"
         android:background = "@drawable/text_border">
 
         <ImageView
             android:id="@+id/image1"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
             android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"
-            android:src="@{vm.gasStation.logo}" />
+            android:src="@{vm.gasStation.logo}"
+            tools:src="@drawable/nieoznakowana"/>
 
         <TextView
             android:id="@+id/tekst1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
             android:layout_weight="0.8"
             android:gravity="center|center_vertical"
-            android:text="@{vm.nullItem ? @string/null_string : Float.toString(vm.getSelectedFuelPrice())}"
-            android:textStyle="bold|italic"
-            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}" />
+            android:text="@{vm.nullItem ? @string/null_string : vm.formattedPrice()}"
+            android:textStyle="bold"
+            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"
+            tools:text="4.05 zł"/>
 
-        <ImageView
-            android:id="@+id/image3"
-            android:layout_width="15dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:background="@drawable/lpg"
-            android:clickable="false" />
+            android:layout_gravity="center_vertical">
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical|left"
+
+                android:background="@{vm.selectedFuelType == FuelType.LPG ? @drawable/lpg : (vm.selectedFuelType == FuelType.t95 ? @drawable/pb95 : (vm.selectedFuelType == FuelType.t98 ? @drawable/pb98 : (vm.selectedFuelType == FuelType.ON ? @drawable/on : @drawable/on))) }"
+                android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"
+                android:clickable="false" />
+        </FrameLayout>
+
+
 
         <TextView
             android:id="@+id/tekst2"
@@ -55,13 +67,14 @@
             android:gravity="center|center_vertical"
             android:textStyle="bold"
             android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"
-            android:text="@{vm.nullItem ? @string/null_string : vm.formattedDistance()}" />
-            
+            android:text="@{vm.nullItem ? @string/null_string : vm.formattedDistance()}"
+            tools:text="6.55 km"/>
+
 
         <Button
             android:id="@+id/btn1"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/arrow_enable"
             android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"/>

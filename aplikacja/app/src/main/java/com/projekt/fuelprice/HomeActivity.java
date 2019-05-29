@@ -3,12 +3,16 @@ package com.projekt.fuelprice;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.os.Bundle;
 import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
 import com.projekt.fuelprice.databinding.ActivityHomeBinding;
 import com.projekt.fuelprice.services.ApplicationSettingsService;
+import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
+import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
 
 import javax.inject.Inject;
@@ -28,8 +32,10 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
+
     @Inject
-    ApplicationSettingsService settingsService;
+    GasStationsViewModelFactory gasStationsViewModelFactory;
+    private GasStationsViewModel gasStationsViewModel;
 
     private ActivityHomeBinding binding;
 
@@ -37,17 +43,15 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+        gasStationsViewModel = ViewModelProviders.of(this, gasStationsViewModelFactory).get(GasStationsViewModel .class);
         Fabric.with(this, new Crashlytics());
 
-        //dzieki temu pod binding.fab jest ten przycisk ktory w xml ma id fab
-        //tak samo jest ze wszystkim czemu nadacie id w xml
-        //dla kazdej innnej aktywnosci i fragmentu mozna robic tak samo
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         binding.bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FuelSelectionBottomSheetDialogFragment fuelSelectionBottomSheetDialogFragment =
-                        FuelSelectionBottomSheetDialogFragment.newInstance(settingsService);
+                        FuelSelectionBottomSheetDialogFragment.newInstance(gasStationsViewModel);
 
                 fuelSelectionBottomSheetDialogFragment.show(getSupportFragmentManager(),
                         "fuel_bottom_sheet");
