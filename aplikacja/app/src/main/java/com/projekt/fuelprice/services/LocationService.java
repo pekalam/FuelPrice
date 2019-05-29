@@ -8,4 +8,5 @@ public interface LocationService {
     }
     void startService(Listener listener);
     void singleRequest(Listener listener);
+    void stopService();
 }

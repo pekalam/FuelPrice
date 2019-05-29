@@ -69,9 +69,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Inject
     PermissionsService permissionsService;
 
-    @Inject
-    LocationService locationService;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,34 +87,40 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        gasStationsViewModel.getCurrentPosition().observe(getViewLifecycleOwner(), new Observer<LatLng>() {
+            @Override
+            public void onChanged(LatLng newLocation) {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 11.6f));
+                MarkerOptions positionMarker = new MarkerOptions()
+                        .position(newLocation);
+                mMap.addMarker(positionMarker);
+            }
+        });
+
         return binding.getRoot();
     }
 
-    /*
-        Miejsce na podlaczenie logiki zwiazanej z mapka
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setTrafficEnabled(false);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.setMinZoomPreference(9.7f);
+        //mMap.setMaxZoomPreference(19f);
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
             public boolean onMyLocationButtonClick() {
-                locationService.singleRequest(new LocationService.Listener() {
-                    @Override
-                    public void onLocationChanged(LatLng newLocation) {
-                        
-                    }
-                });
+
                 return false;
             }
         });
         permissionsService.checkServicesAvailability(new PermissionsService.Listener() {
             @Override
             public void onPermissionsGranted() {
-                mMap.setMyLocationEnabled(true);
+                //mMap.setMyLocationEnabled(true);
+                gasStationsViewModel.findCurrentPositionContinuous();
             }
 
             @Override
@@ -135,10 +138,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             }
         }, getActivity());
-        /*
-            Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie.
-            Observe tutaj bo przy apply changes w android studio jest bug
-         */
+
+
         gasStationsViewModel.getGasStations().observe(getViewLifecycleOwner() ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
@@ -165,16 +166,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        LatLng rze = new LatLng(50.041187, 21.999121);
-
 
 
 
         //pobranie listy stacji (test)
-        if(gasStationsViewModel.getGasStations().getValue() == null)
-            gasStationsViewModel.loadGasStations(new LatLng(50.041187, 21.999121), 2000);
+        //if(gasStationsViewModel.getGasStations().getValue() == null)
+          //  gasStationsViewModel.loadGasStations(new LatLng(50.041187, 21.999121), 2000);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rze, 11f));
+
 
         LatLng l = mMap.getProjection().getVisibleRegion().nearLeft;
         LatLng r = mMap.getProjection().getVisibleRegion().farRight;

@@ -32,6 +32,7 @@ public class AppModule {
 
     @Singleton
     @Provides
+    @Named("locationService")
     LocationService provideLocationService(Application app){
         return new RealLocationService(app.getApplicationContext());
     }

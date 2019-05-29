@@ -5,7 +5,8 @@ import android.app.Activity;
 /**
  * Sprawdza czy aplikacja posiada wszystkie uprawnienia
  * i czy wlaczone sa wymagane uslugi.
- * TODO
+ * Serwis  uzywany przez widoki (fragmenty) aby uzyskac dostep do
+ * innych serwisow / widgetow wymagajacych uprawnien
  */
 public interface PermissionsService {
     interface Listener{

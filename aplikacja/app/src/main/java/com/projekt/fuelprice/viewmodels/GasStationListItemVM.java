@@ -23,6 +23,13 @@ public class GasStationListItemVM{
         return 0;
     }
 
+    public String formattedDistance(){
+        if(distance == -1) {
+            return "";
+        }
+        return String.format("%.2f km", distance);
+    }
+
     public boolean isNullItem(){
         if(gasStation == null)
             return true;

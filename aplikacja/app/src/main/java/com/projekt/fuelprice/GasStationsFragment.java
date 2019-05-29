@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FragmentGasStationsBinding;
 import com.projekt.fuelprice.services.PermissionsService;
@@ -38,6 +39,8 @@ public class GasStationsFragment extends Fragment {
     @Inject
     GasStationsViewModelFactory gasStationsViewModelFactory;
 
+    private boolean needDistanceUpdate = false;
+
 
     public GasStationsFragment() {
         // Required empty public constructor
@@ -54,9 +57,15 @@ public class GasStationsFragment extends Fragment {
         adapter = new GasStationsAdapter(getContext());
         binding.rec1.setAdapter(adapter);
         binding.rec1.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        /*
-            Co ma sie stac jak lista stacji w viewmodel ulegnie zmianie
-         */
+
+
+        gasStationsViewModel.getCurrentPosition().observe(getViewLifecycleOwner(), new Observer<LatLng>() {
+            @Override
+            public void onChanged(LatLng latLng) {
+                gasStationsViewModel.loadGasStations(latLng, 2000);
+            }
+        });
+
         gasStationsViewModel.getGasStations().observe(getViewLifecycleOwner() ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
@@ -64,6 +73,7 @@ public class GasStationsFragment extends Fragment {
                 for (int i = 0; i < gasStations.length; i++) {
                     listItemVMs[i] = new GasStationListItemVM(gasStations[i]);
                 }
+
                 gasStationsViewModel.getDistanceToGasStations(gasStations, new Consumer<double[]>() {
                     @Override
                     public void accept(double[] distances) {

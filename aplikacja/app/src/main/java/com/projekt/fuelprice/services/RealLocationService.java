@@ -43,4 +43,9 @@ public class RealLocationService implements LocationService {
                     }
                 });
     }
+
+    @Override
+    public void stopService() {
+        SmartLocation.with(this.context).location().stop();
+    }
 }
