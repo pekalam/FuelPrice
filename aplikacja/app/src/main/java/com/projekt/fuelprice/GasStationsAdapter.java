@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.projekt.fuelprice.data.GasStation;
@@ -66,9 +68,28 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
         private ListItemBinding binding;
 
-        public ViewHolder(ListItemBinding binding) {
+        public ViewHolder(final ListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.btn1.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    switch(event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            binding.btn1.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.arrow_disable));
+                            return true;
+                        case MotionEvent.ACTION_UP:
+                            binding.btn1.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.arrow_enable));
+                           return true;
+                        case MotionEvent.ACTION_OUTSIDE:
+                            binding.btn1.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.arrow_enable));
+                           return true;
+                    }
+                    return false;
+                   //
+                }
+            }
+            );
         }
 
         public void bindGasStation(GasStationListItemVM itemVM){
