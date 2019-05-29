@@ -51,8 +51,8 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"
-            android:background="@drawable/arrow_enable" />
+            android:background="@drawable/arrow_enable"
+            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}" />
     </LinearLayout>
 </layout>
 

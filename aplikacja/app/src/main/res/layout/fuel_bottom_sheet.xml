@@ -32,62 +32,89 @@
                 android:layout_height="match_parent"
                 android:visibility="visible">
 
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buttonLPG"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/lpg"
-                    android:clickable="true"
-                    android:focusable="true"
-
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_horizontal|center_vertical" />
-
-                <TextView
+                <FrameLayout
+                    android:id="@+id/frameLPG"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="KOLOR ZALEZNY OD WYBRANEGO"
-                    android:textColor="@{vm.t95 ? @color/blue : @color/green}"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#FFFFFF"
+                    android:padding="5dp">
 
-                <Button
-                    android:id="@+id/button95"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/pb95"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_horizontal|center_vertical" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonLPG"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/lpg"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center_horizontal|center_vertical" />
 
-                <Button
-                    android:id="@+id/button98"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/pb98"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_horizontal|center_vertical" />
+                </FrameLayout>
 
-                <Button
-                    android:id="@+id/buttonON"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/on"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:gravity="center_horizontal|center_vertical" />
+                <FrameLayout
+                    android:id="@+id/frame95"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#FFFFFF"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/button95"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/pb95"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center_horizontal|center_vertical" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/frame98"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#FFFFFF"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/button98"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/pb98"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center_horizontal|center_vertical" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/frameON"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#FFFFFF"
+                    android:padding="5dp">
+
+                    <Button
+                        android:id="@+id/buttonON"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/on"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center_horizontal|center_vertical" />
+
+                </FrameLayout>
 
             </LinearLayout>
 
@@ -96,4 +123,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
 </layout>

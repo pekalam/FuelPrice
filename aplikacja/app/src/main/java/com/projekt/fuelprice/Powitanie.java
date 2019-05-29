@@ -45,7 +45,7 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 100);
     }
 
     @Override

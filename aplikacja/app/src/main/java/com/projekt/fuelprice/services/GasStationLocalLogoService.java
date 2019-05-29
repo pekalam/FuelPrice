@@ -33,7 +33,7 @@ public class GasStationLocalLogoService implements GasStationLogoService {
                 logoId = R.drawable.lotos;
                 break;
             case "Shell":
-                logoId = R.drawable.shell;
+                logoId = R.drawable.shell1;
                 break;
             case "BP":
                 logoId = R.drawable.bp;
@@ -42,7 +42,7 @@ public class GasStationLocalLogoService implements GasStationLogoService {
                 logoId = R.drawable.watkem;
                 break;
             case "Zrodelko":
-                logoId = R.drawable.zrodelko;
+                logoId = R.drawable.zrodelko1;
                 break;
             case "Valdi":
                 logoId = R.drawable.valdi;
