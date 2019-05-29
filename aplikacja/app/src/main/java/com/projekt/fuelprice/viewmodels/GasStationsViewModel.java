@@ -11,6 +11,8 @@ import com.projekt.fuelprice.data.GasStationsRepository;
 import com.projekt.fuelprice.services.DistanceService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Zawiera logikę i dane dla mapy i tabelki.
@@ -40,6 +42,14 @@ public class GasStationsViewModel extends ViewModel {
         gasStationsRepo.getGasStations(pos, radius, new Consumer<GasStation[]>() {
             @Override
             public void accept(GasStation[] fetchedGasStations) {
+
+                //Sortowanie pod wzgledem ceny paliwa
+                Arrays.sort(fetchedGasStations, new Comparator<GasStation>() {
+                    @Override
+                    public int compare(GasStation o1, GasStation o2) {
+                        return 1;
+                    }
+                });
                 gasStations.setValue(fetchedGasStations);
             }
         });
