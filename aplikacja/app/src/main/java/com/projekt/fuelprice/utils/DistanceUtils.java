@@ -24,6 +24,6 @@ public class DistanceUtils {
                 + " Meter   " + meterInDec);
 
         double distance = Radius * c;
-        return distance;
+        return Math.round(distance);
     }
 }

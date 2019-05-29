@@ -53,9 +53,10 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0.8"
             android:gravity="center|center_vertical"
-            android:text="@{vm.nullItem ? @string/null_string : Double.toString(vm.distance)}"
             android:textStyle="bold"
-            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}" />
+            android:visibility="@{vm.nullItem ? View.INVISIBLE : View.VISIBLE}"
+            android:text="@{vm.nullItem ? @string/null_string : vm.formattedDistance()}" />
+            
 
         <Button
             android:id="@+id/btn1"

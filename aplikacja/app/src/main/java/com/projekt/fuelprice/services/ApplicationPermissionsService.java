@@ -30,6 +30,6 @@ public class ApplicationPermissionsService implements PermissionsService {
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                         token.continuePermissionRequest();
                     }
-                });
+                }).check();
     }
 }

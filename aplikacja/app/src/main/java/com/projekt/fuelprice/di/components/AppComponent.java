@@ -18,11 +18,11 @@ import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
 @Component(modules = {
-        AndroidSupportInjectionModule.class,
         AppModule.class,
         GasStationsRepositoryModule.class,
         GasStationsVMFactoryModule.class,
-        AppComponentInjectorContributors.class
+        AppComponentInjectorContributors.class,
+        AndroidSupportInjectionModule.class
 })
 public interface AppComponent {
     @Component.Builder

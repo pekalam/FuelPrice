@@ -9,9 +9,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.data.GasStationsRepository;
 import com.projekt.fuelprice.services.DistanceService;
-import com.projekt.fuelprice.utils.FuelTypeSettings;
+import com.projekt.fuelprice.services.LocationService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Zawiera logikę i dane dla mapy i tabelki.
@@ -23,15 +25,21 @@ public class GasStationsViewModel extends ViewModel {
      */
     private MutableLiveData<GasStation[]> gasStations = new MutableLiveData<GasStation[]>();
 
+    private MutableLiveData<LatLng> currentPosition = new MutableLiveData<LatLng>();
+
     private GasStationsRepository gasStationsRepo;
 
     private DistanceService distanceService;
 
-    public MutableLiveData<GasStation.FuelType> selectedFuelType = new MutableLiveData<>();
+    private LocationService locationService;
 
-    public GasStationsViewModel(GasStationsRepository gasStationsRepository, DistanceService distanceService){
+
+    private boolean _locationServiceStarted = false;
+
+    public GasStationsViewModel(GasStationsRepository gasStationsRepository, DistanceService distanceService, LocationService locationService){
         this.gasStationsRepo = gasStationsRepository;
         this.distanceService = distanceService;
+        this.locationService = locationService;
     }
 
     /**
@@ -43,18 +51,51 @@ public class GasStationsViewModel extends ViewModel {
         gasStationsRepo.getGasStations(pos, radius, new Consumer<GasStation[]>() {
             @Override
             public void accept(GasStation[] fetchedGasStations) {
+
+                //Sortowanie pod wzgledem ceny paliwa
+                Arrays.sort(fetchedGasStations, new Comparator<GasStation>() {
+                    @Override
+                    public int compare(GasStation o1, GasStation o2) {
+                        return 1;
+                    }
+                });
                 gasStations.setValue(fetchedGasStations);
             }
         });
     }
 
-    // TODO: jak to zrobic normalnie bez bibliotek
+    public void findCurrentPositionContinuous(){
+        if(!_locationServiceStarted) {
+            locationService.startService(new LocationService.Listener() {
+                @Override
+                public void onLocationChanged(LatLng newLocation) {
+                    currentPosition.postValue(newLocation);
+                }
+            });
+        }
+    }
+
+    public void stopFindCurrentPosition(){
+        _locationServiceStarted = false;
+        locationService.stopService();
+    }
+
+    public void findCurrrentPositionOneFix(final LocationService.Listener listener){
+        locationService.singleRequest(new LocationService.Listener() {
+            @Override
+            public void onLocationChanged(LatLng newLocation) {
+                listener.onLocationChanged(newLocation);
+            }
+        });
+    }
+
     public void getDistanceToGasStations(final GasStation[] gasStations, final Consumer<double[]> onDistancesFound){
         final double[] distances = new double[gasStations.length];
         final ArrayList<Integer> complete = new ArrayList<Integer>();
         for (int i = 0; i < gasStations.length; i++) {
             final int stationInd = i;
-            distanceService.findDistance(gasStations[i].lat, gasStations[i].lon, gasStations[i].lat, gasStations[i].lon, new DistanceService.Listener() {
+            LatLng myPos = getCurrentPosition().getValue();
+            distanceService.findDistance(myPos.latitude, myPos.longitude, gasStations[i].lat, gasStations[i].lon, new DistanceService.Listener() {
                 @Override
                 public void onDistanceFound(double distance) {
                     distances[stationInd] = distance;
@@ -75,4 +116,6 @@ public class GasStationsViewModel extends ViewModel {
     public LiveData<GasStation[]> getGasStations() {
         return gasStations;
     }
+
+    public LiveData<LatLng> getCurrentPosition(){return currentPosition;}
 }
