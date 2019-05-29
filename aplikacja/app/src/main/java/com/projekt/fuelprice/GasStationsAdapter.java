@@ -5,7 +5,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -76,6 +78,7 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         for(GasStationListItemVM vm : listItemVM){
             vm.setSelectedFuelPrice(fuelType);
         }
+        sortListItems();
         notifyDataSetChanged();
     }
 
@@ -107,8 +110,17 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
             );
         }
 
-        public void bindGasStation(GasStationListItemVM itemVM){
+        public void bindGasStation(final GasStationListItemVM itemVM){
             binding.setVm(itemVM);
+            binding.btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri gmmIntentUri = Uri.parse("google.navigation:q=" + itemVM.gasStation.lat + "," + itemVM.gasStation.lon);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    context.startActivity(mapIntent);
+                }
+            });
         }
     }
 }
