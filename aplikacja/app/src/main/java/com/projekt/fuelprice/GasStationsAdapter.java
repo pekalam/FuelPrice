@@ -78,6 +78,7 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         for(GasStationListItemVM vm : listItemVM){
             vm.setSelectedFuelPrice(fuelType);
         }
+        sortListItems();
         notifyDataSetChanged();
     }
 
