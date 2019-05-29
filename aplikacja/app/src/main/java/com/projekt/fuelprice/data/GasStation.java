@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 
 public class GasStation {
     public enum FuelType{
-        t98(0), t95(1), LPG(2);
+        t98(0), t95(1), LPG(2), ON(3);
 
         private int type;
 

@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
 import com.projekt.fuelprice.databinding.ActivityHomeBinding;
+import com.projekt.fuelprice.services.ApplicationSettingsService;
 
 
 import javax.inject.Inject;
@@ -27,6 +28,9 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
+    @Inject
+    ApplicationSettingsService settingsService;
+
     private ActivityHomeBinding binding;
 
     @Override
@@ -43,7 +47,7 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
             @Override
             public void onClick(View v) {
                 FuelSelectionBottomSheetDialogFragment fuelSelectionBottomSheetDialogFragment =
-                        FuelSelectionBottomSheetDialogFragment.newInstance();
+                        FuelSelectionBottomSheetDialogFragment.newInstance(settingsService);
 
                 fuelSelectionBottomSheetDialogFragment.show(getSupportFragmentManager(),
                         "fuel_bottom_sheet");

@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.data.GasStationsRepository;
 import com.projekt.fuelprice.services.DistanceService;
+import com.projekt.fuelprice.utils.FuelTypeSettings;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,8 @@ public class GasStationsViewModel extends ViewModel {
     private GasStationsRepository gasStationsRepo;
 
     private DistanceService distanceService;
+
+    public MutableLiveData<GasStation.FuelType> selectedFuelType = new MutableLiveData<>();
 
     public GasStationsViewModel(GasStationsRepository gasStationsRepository, DistanceService distanceService){
         this.gasStationsRepo = gasStationsRepository;
