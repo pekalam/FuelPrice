@@ -32,17 +32,19 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
 
     private void sortListItems(){
-        Arrays.sort(listItemVM, 0, listItemVM.length-1, new Comparator<GasStationListItemVM>() {
-            @Override
-            public int compare(GasStationListItemVM o1, GasStationListItemVM o2) {
-                if(o1.getSelectedFuelPrice() == o2.getSelectedFuelPrice()){
-                    if(o1.distance != -1 && o2.distance != -1){
-                        return o1.distance > o2.distance ? 1 : -1;
+        if(listItemVM.length > 0) {
+            Arrays.sort(listItemVM, 0, listItemVM.length - 1, new Comparator<GasStationListItemVM>() {
+                @Override
+                public int compare(GasStationListItemVM o1, GasStationListItemVM o2) {
+                    if (o1.getSelectedFuelPrice() == o2.getSelectedFuelPrice()) {
+                        if (o1.distance != -1 && o2.distance != -1) {
+                            return o1.distance > o2.distance ? 1 : -1;
+                        }
                     }
+                    return o1.getSelectedFuelPrice() > o2.getSelectedFuelPrice() ? 1 : -1;
                 }
-                return o1.getSelectedFuelPrice() > o2.getSelectedFuelPrice() ? 1 : -1;
-            }
-        });
+            });
+        }
     }
 
     @NonNull

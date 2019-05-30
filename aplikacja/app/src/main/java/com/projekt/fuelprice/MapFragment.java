@@ -19,10 +19,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -66,6 +68,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private FragmentMapBinding binding;
 
+    private Marker mPositionMarker;
+
+    private Toast _testToast;
+
     @Inject
     GasStationsViewModelFactory gasStationsViewModelFactory;
 
@@ -96,7 +102,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 11.6f));
                 MarkerOptions positionMarker = new MarkerOptions()
                         .position(newLocation);
-                mMap.addMarker(positionMarker);
+                if(mPositionMarker != null) {
+                    mPositionMarker.remove();
+                }
+                mPositionMarker = mMap.addMarker(positionMarker);
+
+                if(_testToast != null)
+                    _testToast.cancel();
+                _testToast = Toast.makeText(getContext(), "[TEST] Znaleziono bieżącą lokalizacje", Toast.LENGTH_LONG);
+                _testToast.show();
             }
         });
 
@@ -131,6 +145,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             public void onPermissionsGranted() {
                 //mMap.setMyLocationEnabled(true);
                 gasStationsViewModel.findCurrentPositionContinuous();
+                if(_testToast != null)
+                    _testToast.cancel();
+                _testToast = Toast.makeText(getContext(), "[TEST] Trwa wyszukiwanie bieżącej lokalizacji...", Toast.LENGTH_LONG);
+                _testToast.show();
             }
 
             @Override
