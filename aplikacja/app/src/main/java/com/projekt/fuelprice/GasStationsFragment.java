@@ -65,6 +65,7 @@ public class GasStationsFragment extends Fragment {
                 GasStation.FuelType selectedFuelType = gasStationsViewModel.getSelectedFuelType().getValue();
                 adapter.setGasStations(gasStations);
                 adapter.setSelectedFuelType(selectedFuelType);
+                binding.rec1.scrollToPosition(0);
             }
         });
 
@@ -72,6 +73,7 @@ public class GasStationsFragment extends Fragment {
             @Override
             public void onChanged(GasStation.FuelType fuelType) {
                 adapter.setSelectedFuelType(fuelType);
+                binding.rec1.scrollToPosition(0);
             }
         });
 
