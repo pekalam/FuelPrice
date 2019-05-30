@@ -1,0 +1,1439 @@
+{
+  "summary": {
+    "queryType": "NEARBY",
+    "queryTime": 34,
+    "numResults": 20,
+    "offset": 0,
+    "totalResults": 45,
+    "fuzzyLevel": 1,
+    "geoBias": {
+      "lat": 50.041187,
+      "lon": 21.999121
+    }
+  },
+  "results": [
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526760",
+      "score": -0.634,
+      "dist": 633.5016145340137,
+      "info": "search:ta:616009002429652-PL",
+      "poi": {
+        "name": "Shell Reymonta",
+        "brands": [
+          {
+            "name": "Shell"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.shell.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "3",
+        "streetName": "Władysława Stanisława Reymonta",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Władysława Stanisława Reymonta 3, Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.04268,
+        "lon": 21.99056
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.04358,
+          "lon": 21.98916
+        },
+        "btmRightPoint": {
+          "lat": 50.04178,
+          "lon": 21.99196
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "minor",
+          "position": {
+            "lat": 50.04254,
+            "lon": 21.98976
+          }
+        },
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.04309,
+            "lon": 21.99001
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526770",
+      "score": -0.84,
+      "dist": 839.886189825857,
+      "info": "search:ta:616009002588135-PL",
+      "poi": {
+        "name": "Orlen Warszawska",
+        "phone": "+(48)-(24)-2561246",
+        "brands": [
+          {
+            "name": "Orlen"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.orlen.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "10",
+        "streetName": "Warszawska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-205",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Warszawska 10, 35-205 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.04874,
+        "lon": 21.99922
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.04964,
+          "lon": 21.99782
+        },
+        "btmRightPoint": {
+          "lat": 50.04784,
+          "lon": 22.00062
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.04857,
+            "lon": 21.99937
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526774",
+      "score": -1.106,
+      "dist": 1106.3505642880207,
+      "info": "search:ta:616009002450468-PL",
+      "poi": {
+        "name": "Shell Lubelska",
+        "phone": "+(48)-(17)-8600028",
+        "brands": [
+          {
+            "name": "Shell"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.shell.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "4a",
+        "streetName": "Lubelska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-233",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Lubelska 4a, 35-233 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.0509,
+        "lon": 22.00248
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.0518,
+          "lon": 22.00108
+        },
+        "btmRightPoint": {
+          "lat": 50.05,
+          "lon": 22.00388
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.05097,
+            "lon": 22.00214
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526772",
+      "score": -1.313,
+      "dist": 1313.083644595727,
+      "info": "search:ta:616009002751713-PL",
+      "poi": {
+        "name": "PP PKS Rzeszów",
+        "phone": "+(48)-(17)-7856400",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.pksrzeszow-towarowy.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "12",
+        "streetName": "Towarowa",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-231",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Towarowa 12, 35-231 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.05293,
+        "lon": 22.00106
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.05383,
+          "lon": 21.99966
+        },
+        "btmRightPoint": {
+          "lat": 50.05203,
+          "lon": 22.00246
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.05236,
+            "lon": 22.00061
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526759",
+      "score": -1.325,
+      "dist": 1324.8365280195258,
+      "info": "search:ta:616009002632342-PL",
+      "poi": {
+        "name": "Watkem Agnieszka",
+        "phone": "+(48)-(17)-8630460",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.watkem.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "16",
+        "streetName": "Generała Leopolda Okulickiego",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-222",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Generała Leopolda Okulickiego 16, 35-222 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.05139,
+        "lon": 21.98954
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.05229,
+          "lon": 21.98814
+        },
+        "btmRightPoint": {
+          "lat": 50.05049,
+          "lon": 21.99094
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.05135,
+            "lon": 21.98943
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/523683",
+      "score": -1.656,
+      "dist": 1655.8639562760918,
+      "info": "search:ta:616009002651706-PL",
+      "poi": {
+        "name": "Stacja Paliw MPK",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "3",
+        "streetName": "Stanisława Trembeckiego",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-234",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Stanisława Trembeckiego 3, 35-234 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.05474,
+        "lon": 22.00873
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.05564,
+          "lon": 22.00733
+        },
+        "btmRightPoint": {
+          "lat": 50.05384,
+          "lon": 22.01013
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.0544,
+            "lon": 22.00789
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526767",
+      "score": -1.754,
+      "dist": 1754.4695834779122,
+      "info": "search:ta:616009002612587-PL",
+      "poi": {
+        "name": "Źródełko",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetName": "Warszawska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-205",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Warszawska, 35-205 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.05683,
+        "lon": 21.99591
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.05773,
+          "lon": 21.99451
+        },
+        "btmRightPoint": {
+          "lat": 50.05593,
+          "lon": 21.99731
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "minor",
+          "position": {
+            "lat": 50.05649,
+            "lon": 21.99555
+          }
+        },
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.05698,
+            "lon": 21.99573
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526752",
+      "score": -1.822,
+      "dist": 1821.7818884954095,
+      "info": "search:ta:616009002485229-PL",
+      "poi": {
+        "name": "Czwórka Wincentego Witosa",
+        "phone": "+(48)-(17)-8590216",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "11A",
+        "streetName": "Aleja Wincentego Witosa",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-115",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Aleja Wincentego Witosa 11A, 35-115 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.03442,
+        "lon": 21.97589
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.03532,
+          "lon": 21.97449
+        },
+        "btmRightPoint": {
+          "lat": 50.03352,
+          "lon": 21.97729
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.03446,
+            "lon": 21.9765
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/523966",
+      "score": -1.85,
+      "dist": 1850.4850712277528,
+      "info": "search:ta:616009002498591-PL",
+      "poi": {
+        "name": "Stacja Paliw PKS",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "6",
+        "streetName": "Aleja Wyzwolenia",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-201",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Aleja Wyzwolenia 6, 35-201 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.05641,
+        "lon": 21.98865
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.05731,
+          "lon": 21.98725
+        },
+        "btmRightPoint": {
+          "lat": 50.05551,
+          "lon": 21.99005
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.05591,
+            "lon": 21.98926
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526764",
+      "score": -1.874,
+      "dist": 1873.5671163421096,
+      "info": "search:ta:616009002464111-PL",
+      "poi": {
+        "name": "Orlen Warszawska",
+        "phone": "+(48)-(24)-2560447",
+        "brands": [
+          {
+            "name": "Orlen"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.orlen.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "75a",
+        "streetName": "Warszawska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-230",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Warszawska 75a, 35-230 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.05772,
+        "lon": 21.99406
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.05862,
+          "lon": 21.99266
+        },
+        "btmRightPoint": {
+          "lat": 50.05682,
+          "lon": 21.99546
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.05832,
+            "lon": 21.99455
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/525323",
+      "score": -1.922,
+      "dist": 1922.2734540818665,
+      "info": "search:ta:616009002818328-PL",
+      "poi": {
+        "name": "Circle K Rejtana",
+        "phone": "+(48)-(17)-8526537",
+        "brands": [
+          {
+            "name": "Circle K"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.statoil.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "18",
+        "streetName": "Aleja Tadeusza Rejtana",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-310",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Aleja Tadeusza Rejtana 18, 35-310 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.02765,
+        "lon": 22.01586
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.02855,
+          "lon": 22.01446
+        },
+        "btmRightPoint": {
+          "lat": 50.02675,
+          "lon": 22.01726
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "minor",
+          "position": {
+            "lat": 50.0273,
+            "lon": 22.01625
+          }
+        },
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.02806,
+            "lon": 22.01528
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/523136",
+      "score": -1.981,
+      "dist": 1981.475016796509,
+      "info": "search:ta:616008000011055-PL",
+      "poi": {
+        "name": "Tan-gaz",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "69",
+        "streetName": "Generała Mariana Langiewicza",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-021",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Generała Mariana Langiewicza 69, 35-021 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.03039,
+        "lon": 21.97705
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.03129,
+          "lon": 21.97565
+        },
+        "btmRightPoint": {
+          "lat": 50.02949,
+          "lon": 21.97845
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.03046,
+            "lon": 21.97677
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526753",
+      "score": -2.106,
+      "dist": 2105.729549462415,
+      "info": "search:ta:616009002721322-PL",
+      "poi": {
+        "name": "LOTOS Batalionów Chłopskich",
+        "brands": [
+          {
+            "name": "Lotos"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.lotos.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "8",
+        "streetName": "Aleja Batalionów Chłopskich",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-038",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Aleja Batalionów Chłopskich 8, 35-038 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.02883,
+        "lon": 21.97678
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.02973,
+          "lon": 21.97538
+        },
+        "btmRightPoint": {
+          "lat": 50.02793,
+          "lon": 21.97818
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.02858,
+            "lon": 21.97652
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/524241",
+      "score": -2.142,
+      "dist": 2141.611789107945,
+      "info": "search:ta:616009002490194-PL",
+      "poi": {
+        "name": "Stacja Paliw LPG",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetName": "Lubelska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-233",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Lubelska, 35-233 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.05965,
+        "lon": 22.00766
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.06055,
+          "lon": 22.00626
+        },
+        "btmRightPoint": {
+          "lat": 50.05875,
+          "lon": 22.00906
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.05974,
+            "lon": 22.00751
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526755",
+      "score": -2.301,
+      "dist": 2301.186036233738,
+      "info": "search:ta:616009002507326-PL",
+      "poi": {
+        "name": "Źródełko",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "4",
+        "streetName": "Aleja Batalionów Chłopskich",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-038",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Aleja Batalionów Chłopskich 4, 35-038 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.02592,
+        "lon": 21.97737
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.02682,
+          "lon": 21.97597
+        },
+        "btmRightPoint": {
+          "lat": 50.02502,
+          "lon": 21.97877
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.02555,
+            "lon": 21.97729
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526763",
+      "score": -2.314,
+      "dist": 2314.3709495449393,
+      "info": "search:ta:616009002606708-PL",
+      "poi": {
+        "name": "Shell Hetmańska",
+        "phone": "+(48)-(17)-8540903",
+        "brands": [
+          {
+            "name": "Shell"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.shell.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "46",
+        "streetName": "Hetmańska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-078",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Hetmańska 46, 35-078 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.02068,
+        "lon": 21.99358
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.02158,
+          "lon": 21.99218
+        },
+        "btmRightPoint": {
+          "lat": 50.01978,
+          "lon": 21.99498
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.02025,
+            "lon": 21.99372
+          }
+        },
+        {
+          "type": "minor",
+          "position": {
+            "lat": 50.02078,
+            "lon": 21.9948
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526746",
+      "score": -2.33,
+      "dist": 2329.812823068485,
+      "info": "search:ta:616009002634013-PL",
+      "poi": {
+        "name": "Shell Krakowska",
+        "phone": "+(48)-(17)-8601036",
+        "brands": [
+          {
+            "name": "Shell"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.shell.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetName": "Krakowska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-111",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Krakowska, 35-111 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.05232,
+        "lon": 21.97148
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.05322,
+          "lon": 21.97008
+        },
+        "btmRightPoint": {
+          "lat": 50.05142,
+          "lon": 21.97288
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.05163,
+            "lon": 21.97176
+          }
+        },
+        {
+          "type": "minor",
+          "position": {
+            "lat": 50.05239,
+            "lon": 21.97095
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526761",
+      "score": -2.424,
+      "dist": 2423.90569045947,
+      "info": "search:ta:616009002504872-PL",
+      "poi": {
+        "name": "Stacja paliw Eksa",
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetName": "Emilii Plater",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-079",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Emilii Plater, 35-079 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.01986,
+        "lon": 21.9921
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.02076,
+          "lon": 21.9907
+        },
+        "btmRightPoint": {
+          "lat": 50.01896,
+          "lon": 21.9935
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.01963,
+            "lon": 21.99172
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/525024",
+      "score": -2.486,
+      "dist": 2485.9235625224155,
+      "info": "search:ta:616009002460035-PL",
+      "poi": {
+        "name": "bp Młocin",
+        "phone": "+(48)-(17)-8500016",
+        "brands": [
+          {
+            "name": "BP"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.bp.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "40B",
+        "streetName": "Warszawska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-230",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Warszawska 40B, 35-230 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.06322,
+        "lon": 21.99322
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.06412,
+          "lon": 21.99182
+        },
+        "btmRightPoint": {
+          "lat": 50.06232,
+          "lon": 21.99462
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.06272,
+            "lon": 21.99296
+          }
+        }
+      ]
+    },
+    {
+      "type": "POI",
+      "id": "PL/POI/p0/526778",
+      "score": -2.576,
+      "dist": 2575.6944105529396,
+      "info": "search:ta:616009002610226-PL",
+      "poi": {
+        "name": "Orlen Lubelska",
+        "phone": "+(48)-(24)-2564224",
+        "brands": [
+          {
+            "name": "Orlen"
+          }
+        ],
+        "categorySet": [
+          {
+            "id": 7311
+          }
+        ],
+        "url": "www.orlen.pl",
+        "categories": [
+          "petrol station"
+        ],
+        "classifications": [
+          {
+            "code": "PETROL_STATION",
+            "names": [
+              {
+                "nameLocale": "en-US",
+                "name": "petrol station"
+              }
+            ]
+          }
+        ]
+      },
+      "address": {
+        "streetNumber": "46",
+        "streetName": "Lubelska",
+        "municipalitySubdivision": "Rzeszów",
+        "municipality": "Rzeszów",
+        "countrySecondarySubdivision": "Rzeszów",
+        "countrySubdivision": "Podkarpackie",
+        "postalCode": "35-241",
+        "countryCode": "PL",
+        "country": "Poland",
+        "countryCodeISO3": "POL",
+        "freeformAddress": "Lubelska 46, 35-241 Rzeszów",
+        "localName": "Rzeszów"
+      },
+      "position": {
+        "lat": 50.06297,
+        "lon": 22.01139
+      },
+      "viewport": {
+        "topLeftPoint": {
+          "lat": 50.06387,
+          "lon": 22.00999
+        },
+        "btmRightPoint": {
+          "lat": 50.06207,
+          "lon": 22.01279
+        }
+      },
+      "entryPoints": [
+        {
+          "type": "main",
+          "position": {
+            "lat": 50.06301,
+            "lon": 22.01121
+          }
+        }
+      ]
+    }
+  ]
+}

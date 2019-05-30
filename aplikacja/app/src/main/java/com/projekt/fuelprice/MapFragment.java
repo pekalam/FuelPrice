@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,12 +42,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private static float MIN_ZOOM = 9.7f;
     private static float LOCATION_FOUND_ZOOM = 11.6f;
+    private static int ZOOM_CHECK_INTERVAL = 500;
+    private static float ZOOM_CHECK_THRESHOLD = 0.15f;
+    private static int ZOOM_CHECK_RADIUS_THRESHOLD = 2000;
 
     public MapFragment() {
         // Required empty public constructor
     }
 
     private GoogleMap mMap;
+    private Handler zoomCheckHandler;
+    private float currentZoom;
 
     private GasStationsViewModel gasStationsViewModel;
 
@@ -88,6 +94,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             public void onChanged(LatLng newLocation) {
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, LOCATION_FOUND_ZOOM));
+                currentZoom = mMap.getCameraPosition().zoom;
                 int searchingRadius = calcSearchingRadius();
                 gasStationsViewModel.setSearchingRadius(searchingRadius);
                 MarkerOptions positionMarker = new MarkerOptions()
@@ -114,6 +121,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return binding.getRoot();
     }
 
+    private Runnable zoomCheck = new Runnable() {
+        @Override
+        public void run() {
+            float newZoom = mMap.getCameraPosition().zoom;
+            if(currentZoom - newZoom > ZOOM_CHECK_THRESHOLD ||
+                    newZoom - currentZoom > ZOOM_CHECK_THRESHOLD){
+                int newRadius = calcSearchingRadius();
+                int currentRadius = gasStationsViewModel.getSearchingRadius().getValue();
+                if(newRadius - currentRadius > ZOOM_CHECK_RADIUS_THRESHOLD){
+                    gasStationsViewModel.setSearchingRadius(newRadius);
+                    if(currentZoom - newZoom > ZOOM_CHECK_THRESHOLD) {
+                        gasStationsViewModel.forceLoadGasStations();
+                    }
+                }
+                currentZoom = newZoom;
+            }
+
+            zoomCheckHandler.removeCallbacks(zoomCheck);
+            zoomCheckHandler.postDelayed(zoomCheck, ZOOM_CHECK_INTERVAL);
+        }
+    };
+
     private int calcSearchingRadius(){
         LatLng l = mMap.getProjection().getVisibleRegion().nearLeft;
         LatLng r = mMap.getProjection().getVisibleRegion().farRight;
@@ -130,15 +159,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(MIN_ZOOM);
         //mMap.setMaxZoomPreference(19f);
-        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-            @Override
-            public boolean onMyLocationButtonClick() {
-
-                return false;
-            }
-        });
-
-
 
         permissionCheckUtility.check(new PermissionsService.Listener() {
             @Override
@@ -181,12 +201,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-
-
-
-        //pobranie listy stacji (test)
-        //if(gasStationsViewModel.getGasStations().getValue() == null)
-          //  gasStationsViewModel.loadGasStations(new LatLng(50.041187, 21.999121), 2000);
-
+        zoomCheckHandler = new Handler();
+        zoomCheckHandler.postDelayed(zoomCheck, ZOOM_CHECK_INTERVAL);
     }
 }

@@ -70,6 +70,12 @@ public class GasStationsViewModel extends ViewModel {
         searchingRadius.setValue(DEFAULT_SEARCHING_RADIUS);
     }
 
+    public void forceLoadGasStations(){
+        LatLng pos = currentPosition.getValue();
+        Integer radius = searchingRadius.getValue();
+        loadGasStations(pos, radius);
+    }
+
     /**
      * Pobranie stacji dla danej lokalizacji i w okreslonym promieniu
      * @param pos lokalizacja

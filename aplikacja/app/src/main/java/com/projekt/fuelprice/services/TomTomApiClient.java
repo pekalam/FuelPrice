@@ -39,6 +39,7 @@ public class TomTomApiClient implements AsyncMapApiClient {
                 .put("radius", String.valueOf(radius))
                 .put("countrySet", "PL")
                 .put("categorySet", "7311")
+                .put("limit", "100")
                 .build();
 
 
