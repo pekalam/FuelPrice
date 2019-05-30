@@ -25,6 +25,7 @@ import java.util.Comparator;
 public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.ViewHolder> {
 
     private GasStationListItemVM[] listItemVM = new GasStationListItemVM[0];
+    private GasStationListItemVM[] initialOrderListItemVM = new GasStationListItemVM[0];
     private Context context;
 
     public GasStationsAdapter(Context context) {
@@ -70,8 +71,10 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
     public void setGasStations(GasStation[] gasStations){
         listItemVM = new GasStationListItemVM[gasStations.length+1];
+        initialOrderListItemVM = new GasStationListItemVM[gasStations.length+1];
         for(int i = 0; i < gasStations.length; i++){
             listItemVM[i] = new GasStationListItemVM(gasStations[i]);
+            initialOrderListItemVM[i] = listItemVM[i];
         }
         //null item
         listItemVM[gasStations.length] = new GasStationListItemVM(null);
@@ -79,11 +82,14 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
     }
 
     public void setGasStationsDistance(Double[] distances){
+        if(listItemVM.length == 0 || distances.length == 0){
+            return;
+        }
         if(distances.length != listItemVM.length-1){
             throw new InvalidParameterException();
         }
         for(int i = 0; i < distances.length; i++){
-            listItemVM[i].distance = distances[i];
+            initialOrderListItemVM[i].distance = distances[i];
         }
     }
 
