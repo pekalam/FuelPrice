@@ -67,8 +67,8 @@ public class AppModule {
     @Provides
     @Named("asyncMapApiClient")
     AsyncMapApiClient provideAsyncMapApiClient(Application app){
-        //return new TomTomApiClient();
-        return new FakeTomTomApiClient(app.getApplicationContext());
+        return new TomTomApiClient();
+        //return new FakeTomTomApiClient(app.getApplicationContext());
     }
 
 }

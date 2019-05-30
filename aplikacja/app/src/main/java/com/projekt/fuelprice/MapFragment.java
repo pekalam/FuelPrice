@@ -40,6 +40,7 @@ import dagger.android.support.AndroidSupportInjection;
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private static float MIN_ZOOM = 9.7f;
+    private static float LOCATION_FOUND_ZOOM = 11.6f;
 
     public MapFragment() {
         // Required empty public constructor
@@ -85,7 +86,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         gasStationsViewModel.getCurrentPosition().observe(getViewLifecycleOwner(), new Observer<LatLng>() {
             @Override
             public void onChanged(LatLng newLocation) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 11.6f));
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, LOCATION_FOUND_ZOOM));
+                int searchingRadius = calcSearchingRadius();
+                gasStationsViewModel.setSearchingRadius(searchingRadius);
                 MarkerOptions positionMarker = new MarkerOptions()
                         .position(newLocation);
                 if(mPositionMarker != null) {
@@ -110,6 +114,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return binding.getRoot();
     }
 
+    private int calcSearchingRadius(){
+        LatLng l = mMap.getProjection().getVisibleRegion().nearLeft;
+        LatLng r = mMap.getProjection().getVisibleRegion().farRight;
+        double dist = DistanceUtils.distanceBetween(l.latitude, l.longitude, r.latitude, r.longitude);
+        return (int)dist*1000;
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -127,9 +138,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        LatLng l = mMap.getProjection().getVisibleRegion().nearLeft;
-        LatLng r = mMap.getProjection().getVisibleRegion().farRight;
-        double dist = DistanceUtils.distanceBetween(l.latitude, l.longitude, r.latitude, r.longitude);
+
 
         permissionCheckUtility.check(new PermissionsService.Listener() {
             @Override
