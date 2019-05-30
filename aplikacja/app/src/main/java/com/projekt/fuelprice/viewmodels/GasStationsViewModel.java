@@ -22,6 +22,7 @@ public class GasStationsViewModel extends ViewModel {
 
     public static int DEFAULT_SEARCHING_RADIUS = 2000;
     public static int MIN_SEARCHING_RADIUS = 1000;
+    public static int MAX_SEARCHING_RADIUS = 30000;
 
     /**
      * Aktualna lokalizacja klienta
@@ -69,6 +70,12 @@ public class GasStationsViewModel extends ViewModel {
         searchingRadius.setValue(DEFAULT_SEARCHING_RADIUS);
     }
 
+    public void forceLoadGasStations(){
+        LatLng pos = currentPosition.getValue();
+        Integer radius = searchingRadius.getValue();
+        loadGasStations(pos, radius);
+    }
+
     /**
      * Pobranie stacji dla danej lokalizacji i w okreslonym promieniu
      * @param pos lokalizacja
@@ -77,6 +84,9 @@ public class GasStationsViewModel extends ViewModel {
     private void loadGasStations(LatLng pos, int radius){
         if(radius <= MIN_SEARCHING_RADIUS){
             throw new InvalidParameterException();
+        }
+        if(radius > MAX_SEARCHING_RADIUS){
+            radius = MAX_SEARCHING_RADIUS;
         }
         gasStationsRepo.getGasStations(pos, radius, new Consumer<GasStation[]>() {
             @Override
@@ -125,7 +135,7 @@ public class GasStationsViewModel extends ViewModel {
             locationService.startService(new LocationService.Listener() {
                 @Override
                 public void onLocationChanged(LatLng newLocation) {
-                    currentPosition.postValue(newLocation);
+                    currentPosition.setValue(newLocation);
                     Integer radius = searchingRadius.getValue();
                     if(radius == null){
                         loadGasStations(newLocation, DEFAULT_SEARCHING_RADIUS);
