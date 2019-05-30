@@ -1,17 +1,13 @@
 package com.projekt.fuelprice.viewmodels;
-
-import android.database.Observable;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-
+import android.widget.ImageView;
+import androidx.databinding.BindingAdapter;
 import com.projekt.fuelprice.R;
 import com.projekt.fuelprice.data.GasStation;
 
 public class GasStationListItemVM{
     public GasStation gasStation;
-    public double distance = -1;
-    private GasStation.FuelType selectedFuelType = GasStation.FuelType.LPG;
+    public double distance = Double.NaN;
+    private GasStation.FuelType selectedFuelType;
 
     public GasStationListItemVM(GasStation gasStation){
         this.gasStation = gasStation;
@@ -35,15 +31,30 @@ public class GasStationListItemVM{
         return 0;
     }
 
-    public GasStation.FuelType getSelectedFuelType(){
-        return selectedFuelType;
-    }
-
     public String formattedDistance(){
-        if(distance == -1) {
+        if(distance == Double.NaN) {
             return "";
         }
         return String.format("%.2f km", distance);
+    }
+
+    @BindingAdapter("android:src")
+    public static void setImageResource(ImageView img, int res){
+        img.setImageResource(res);
+    }
+
+    public int getSelectedFuelIcon(){
+        switch (selectedFuelType){
+            case LPG:
+                return R.drawable.lpg;
+            case t95:
+                return R.drawable.pb95;
+            case t98:
+                return R.drawable.pb98;
+            case ON:
+                return R.drawable.on;
+        }
+        return R.drawable.lpg;
     }
 
     public String formattedPrice(){

@@ -39,6 +39,7 @@ import dagger.android.support.AndroidSupportInjection;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
+    private static float MIN_ZOOM = 9.7f;
 
     public MapFragment() {
         // Required empty public constructor
@@ -116,7 +117,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.setTrafficEnabled(false);
         mMap.getUiSettings().setMapToolbarEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.setMinZoomPreference(9.7f);
+        mMap.setMinZoomPreference(MIN_ZOOM);
         //mMap.setMaxZoomPreference(19f);
         mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
             @Override
@@ -126,10 +127,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        LatLng l = mMap.getProjection().getVisibleRegion().nearLeft;
+        LatLng r = mMap.getProjection().getVisibleRegion().farRight;
+        double dist = DistanceUtils.distanceBetween(l.latitude, l.longitude, r.latitude, r.longitude);
+
         permissionCheckUtility.check(new PermissionsService.Listener() {
             @Override
             public void onPermissionsGranted() {
-                gasStationsViewModel.findCurrentPositionContinuous();
+                gasStationsViewModel.startFindingCurrentPosition();
                 if(_testToast != null)
                     _testToast.cancel();
                 _testToast = Toast.makeText(getContext(), "[TEST] Trwa wyszukiwanie bieżącej lokalizacji...", Toast.LENGTH_LONG);
@@ -173,12 +178,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         //pobranie listy stacji (test)
         //if(gasStationsViewModel.getGasStations().getValue() == null)
           //  gasStationsViewModel.loadGasStations(new LatLng(50.041187, 21.999121), 2000);
-
-
-
-        LatLng l = mMap.getProjection().getVisibleRegion().nearLeft;
-        LatLng r = mMap.getProjection().getVisibleRegion().farRight;
-        double dist = DistanceUtils.distanceBetween(l.latitude, l.longitude, r.latitude, r.longitude);
 
     }
 }

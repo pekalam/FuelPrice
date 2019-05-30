@@ -17,6 +17,7 @@ import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.ListItemBinding;
 import com.projekt.fuelprice.viewmodels.GasStationListItemVM;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -67,16 +68,29 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         return listItemVM.length;
     }
 
-    public void setGasStations(GasStationListItemVM[] gasStationListItemVMS){
-        listItemVM = new GasStationListItemVM[gasStationListItemVMS.length + 1];
-        System.arraycopy(gasStationListItemVMS, 0, listItemVM, 0, gasStationListItemVMS.length);
-        sortListItems();
+    public void setGasStations(GasStation[] gasStations){
+        listItemVM = new GasStationListItemVM[gasStations.length+1];
+        for(int i = 0; i < gasStations.length; i++){
+            listItemVM[i] = new GasStationListItemVM(gasStations[i]);
+        }
         //null item
-        listItemVM[gasStationListItemVMS.length] = new GasStationListItemVM(null);
+        listItemVM[gasStations.length] = new GasStationListItemVM(null);
         notifyDataSetChanged();
     }
 
-    public void setSelectedFuelPrice(GasStation.FuelType fuelType){
+    public void setGasStationsDistance(Double[] distances){
+        if(distances.length != listItemVM.length-1){
+            throw new InvalidParameterException();
+        }
+        for(int i = 0; i < distances.length; i++){
+            listItemVM[i].distance = distances[i];
+        }
+    }
+
+    public void setSelectedFuelType(GasStation.FuelType fuelType){
+        if(listItemVM.length == 0){
+            return;
+        }
         for(GasStationListItemVM vm : listItemVM){
             vm.setSelectedFuelPrice(fuelType);
         }
@@ -91,7 +105,7 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         public ViewHolder(final ListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.btn1.setOnTouchListener(new View.OnTouchListener() {
+            /*binding.btn1.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent event) {
                     switch(event.getAction()) {
@@ -109,7 +123,7 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
                 }
             }
-            );
+            );*/
         }
 
         public void bindGasStation(final GasStationListItemVM itemVM){

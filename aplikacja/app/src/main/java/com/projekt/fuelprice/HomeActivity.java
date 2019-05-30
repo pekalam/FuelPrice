@@ -32,27 +32,21 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
-
-    @Inject
-    GasStationsViewModelFactory gasStationsViewModelFactory;
-    private GasStationsViewModel gasStationsViewModel;
-
     private ActivityHomeBinding binding;
+
+    FuelSelectionBottomSheetDialogFragment fuelSelectionBottomSheetDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        gasStationsViewModel = ViewModelProviders.of(this, gasStationsViewModelFactory).get(GasStationsViewModel .class);
-        Fabric.with(this, new Crashlytics());
-
+        //Fabric.with(this, new Crashlytics());
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        fuelSelectionBottomSheetDialogFragment =
+                FuelSelectionBottomSheetDialogFragment.newInstance();
         binding.bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FuelSelectionBottomSheetDialogFragment fuelSelectionBottomSheetDialogFragment =
-                        FuelSelectionBottomSheetDialogFragment.newInstance(gasStationsViewModel);
-
                 fuelSelectionBottomSheetDialogFragment.show(getSupportFragmentManager(),
                         "fuel_bottom_sheet");
             }

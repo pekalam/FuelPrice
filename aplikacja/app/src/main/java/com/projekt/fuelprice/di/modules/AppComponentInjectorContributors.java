@@ -23,4 +23,7 @@ public abstract class AppComponentInjectorContributors {
 
     @ContributesAndroidInjector
     abstract Powitanie bindPowitanie();
+
+    @ContributesAndroidInjector
+    abstract FuelSelectionBottomSheetDialogFragment bindFuelSelectionBottomSheetDialogFragment();
 }

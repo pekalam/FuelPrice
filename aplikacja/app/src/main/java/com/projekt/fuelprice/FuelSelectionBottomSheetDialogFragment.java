@@ -33,17 +33,17 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
     boolean iscolorON = true;
 
 
-
+    @Inject
+    GasStationsViewModelFactory gasStationsViewModelFactory;
     private GasStationsViewModel gasStationsViewModel;
 
-    private FuelSelectionBottomSheetDialogFragment(GasStationsViewModel gasStationsViewModel){
-        this.gasStationsViewModel = gasStationsViewModel;
+    private FuelSelectionBottomSheetDialogFragment(){
     }
 
     private FuelBottomSheetBinding binding;
 
-    public static FuelSelectionBottomSheetDialogFragment newInstance(GasStationsViewModel gasStationsViewModel) {
-        return new FuelSelectionBottomSheetDialogFragment(gasStationsViewModel);
+    public static FuelSelectionBottomSheetDialogFragment newInstance() {
+        return new FuelSelectionBottomSheetDialogFragment();
     }
 
     @Nullable
@@ -51,7 +51,7 @@ public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFra
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
+        gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel .class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fuel_bottom_sheet, container, false);
 
         Button btnLPG = binding.buttonLPG;
