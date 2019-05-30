@@ -4,55 +4,37 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FragmentMapBinding;
-import com.projekt.fuelprice.services.GasStationLogoService;
-import com.projekt.fuelprice.services.LocationService;
 import com.projekt.fuelprice.services.PermissionsService;
 import com.projekt.fuelprice.utils.DistanceUtils;
+import com.projekt.fuelprice.utils.PermissionCheckUtility;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
-import io.nlopez.smartlocation.OnLocationUpdatedListener;
-import io.nlopez.smartlocation.SmartLocation;
 
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
@@ -72,6 +54,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private Toast _testToast;
 
+    private PermissionCheckUtility permissionCheckUtility;
+
     @Inject
     GasStationsViewModelFactory gasStationsViewModelFactory;
 
@@ -84,6 +68,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         AndroidSupportInjection.inject(this);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false);
+        permissionCheckUtility = new PermissionCheckUtility(permissionsService, getActivity());
         /*
             Zainicjowanie wspolnego viewmodelu
          */
@@ -140,10 +125,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 return false;
             }
         });
-        permissionsService.checkServicesAvailability(new PermissionsService.Listener() {
+
+        permissionCheckUtility.check(new PermissionsService.Listener() {
             @Override
             public void onPermissionsGranted() {
-                //mMap.setMyLocationEnabled(true);
                 gasStationsViewModel.findCurrentPositionContinuous();
                 if(_testToast != null)
                     _testToast.cancel();
@@ -153,20 +138,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onPermissionsDenied() {
-
+                permissionCheckUtility.tryAgain();
             }
 
-            @Override
-            public void onRequiredServicesEnabled() {
-
-            }
-
-            @Override
-            public void onRequiredServicesDisabled() {
-
-            }
-        }, getActivity());
-
+        });
 
         gasStationsViewModel.getGasStations().observe(getViewLifecycleOwner() ,new Observer<GasStation[]>() {
             @Override
