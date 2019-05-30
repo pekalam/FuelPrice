@@ -1,12 +1,16 @@
 package com.projekt.fuelprice;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.projekt.fuelprice.services.PermissionsService;
+import com.projekt.fuelprice.utils.PermissionCheckUtility;
 
 import javax.inject.Inject;
 
@@ -17,14 +21,16 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
     @Inject
     PermissionsService permissionsService;
 
+    private PermissionCheckUtility permissionCheckUtility;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_powitanie);
-        permissionsService.checkServicesAvailability(this, this);
         getSupportActionBar().hide();
-
+        permissionCheckUtility = new PermissionCheckUtility(permissionsService, this);
+        permissionCheckUtility.check(this);
     }
 
     @Override
@@ -41,16 +47,6 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
 
     @Override
     public void onPermissionsDenied() {
-
-    }
-
-    @Override
-    public void onRequiredServicesEnabled() {
-
-    }
-
-    @Override
-    public void onRequiredServicesDisabled() {
-
+        permissionCheckUtility.tryAgain();
     }
 }

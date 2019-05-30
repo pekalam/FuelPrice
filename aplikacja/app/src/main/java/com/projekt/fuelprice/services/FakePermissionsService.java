@@ -4,7 +4,7 @@ import android.app.Activity;
 
 public class FakePermissionsService implements PermissionsService {
     @Override
-    public void checkServicesAvailability(Listener listener, Activity activity) {
-        listener.onRequiredServicesEnabled();
+    public void checkApplicationPermissions(Listener listener, Activity activity) {
+        listener.onPermissionsDenied();
     }
 }

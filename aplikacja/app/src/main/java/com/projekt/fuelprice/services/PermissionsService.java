@@ -12,8 +12,6 @@ public interface PermissionsService {
     interface Listener{
         void onPermissionsGranted();
         void onPermissionsDenied();
-        void onRequiredServicesEnabled();
-        void onRequiredServicesDisabled();
     }
 
     /**
@@ -22,5 +20,5 @@ public interface PermissionsService {
      * @param listener
      * @param activity
      */
-    void checkServicesAvailability(Listener listener, Activity activity);
+    void checkApplicationPermissions(Listener listener, Activity activity);
 }
