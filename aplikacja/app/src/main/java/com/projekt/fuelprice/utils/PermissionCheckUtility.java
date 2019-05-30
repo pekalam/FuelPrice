@@ -13,8 +13,12 @@ import com.projekt.fuelprice.services.PermissionsService;
 public class PermissionCheckUtility {
     private AlertDialog dialog;
     private PermissionsService.Listener listener;
+    private PermissionsService permissionsService;
+    private Activity callingActivity;
 
     public PermissionCheckUtility(@NonNull final PermissionsService permissionsService,@NonNull final Activity callingActivity){
+        this.permissionsService = permissionsService;
+        this.callingActivity = callingActivity;
         dialog = new AlertDialog.Builder(callingActivity)
                 .setTitle("Brak wystarczających uprawnień")
                 .setMessage("Aplikacja FuelPrice nie może działać bez dostępu do lokalizacji.")
@@ -52,7 +56,17 @@ public class PermissionCheckUtility {
 
     public void check(@NonNull PermissionsService.Listener listener){
         this.listener = listener;
-        dialog.show();
+        permissionsService.checkApplicationPermissions(new PermissionsService.Listener() {
+            @Override
+            public void onPermissionsGranted() {
+                PermissionCheckUtility.this.listener.onPermissionsGranted();
+            }
+
+            @Override
+            public void onPermissionsDenied() {
+                dialog.show();
+            }
+        }, callingActivity);
     }
 
     public void tryAgain(){
