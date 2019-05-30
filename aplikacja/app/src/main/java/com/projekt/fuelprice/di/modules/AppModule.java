@@ -8,6 +8,7 @@ import com.projekt.fuelprice.services.ApplicationSettingsService;
 import com.projekt.fuelprice.services.AsyncMapApiClient;
 import com.projekt.fuelprice.services.DistanceService;
 import com.projekt.fuelprice.services.FakeApplicationSettingsService;
+import com.projekt.fuelprice.services.FakeLocationService;
 import com.projekt.fuelprice.services.FakePermissionsService;
 import com.projekt.fuelprice.services.FakeTomTomApiClient;
 import com.projekt.fuelprice.services.GasStationLocalLogoService;
@@ -44,7 +45,8 @@ public class AppModule {
     @Provides
     @Named("locationService")
     LocationService provideLocationService(Application app){
-        return new RealLocationService(app.getApplicationContext());
+        return new FakeLocationService();
+        //return new RealLocationService(app.getApplicationContext());
     }
 
     @Singleton

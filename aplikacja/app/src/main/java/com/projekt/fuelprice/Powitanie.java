@@ -24,11 +24,19 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
         setContentView(R.layout.activity_powitanie);
         permissionsService.checkServicesAvailability(this, this);
         getSupportActionBar().hide();
+
     }
 
     @Override
     public void onPermissionsGranted() {
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 1000);
     }
 
     @Override
@@ -38,14 +46,7 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
 
     @Override
     public void onRequiredServicesEnabled() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }, 1000);
+
     }
 
     @Override
