@@ -48,7 +48,7 @@ public class GasStationsFragment extends Fragment {
         gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gas_stations, container, false);
 
-        adapter = new GasStationsAdapter(getContext());
+        adapter = new GasStationsAdapter(getContext(), gasStationsViewModel, getViewLifecycleOwner());
         binding.rec1.setAdapter(adapter);
         binding.rec1.setLayoutManager(new LinearLayoutManager(this.getContext()));
 

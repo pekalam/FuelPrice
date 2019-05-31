@@ -2,6 +2,9 @@ package com.projekt.fuelprice;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.ListItemBinding;
 import com.projekt.fuelprice.viewmodels.GasStationListItemVM;
+import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 
 import java.security.InvalidParameterException;
 import java.util.Arrays;
@@ -24,12 +28,30 @@ import java.util.Comparator;
 
 public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.ViewHolder> {
 
+    private RecyclerView attachedRecycler;
     private GasStationListItemVM[] listItemVM = new GasStationListItemVM[0];
     private GasStationListItemVM[] initialOrderListItemVM = new GasStationListItemVM[0];
     private Context context;
+    private GasStationsViewModel gasStationsViewModel;
 
-    public GasStationsAdapter(Context context) {
+    public GasStationsAdapter(Context context, GasStationsViewModel gasStationsViewModel, LifecycleOwner lifecycleOwner) {
         this.context = context;
+        this.gasStationsViewModel = gasStationsViewModel;
+        this.gasStationsViewModel.getSelectedGasStation().observe(lifecycleOwner, new Observer<GasStation>() {
+            @Override
+            public void onChanged(GasStation gasStation) {
+                for(int i = 0; i < listItemVM.length; i++){
+                    if(listItemVM[i].gasStation == gasStation){
+                        if(attachedRecycler != null){
+                            LinearLayoutManager manager = (LinearLayoutManager) attachedRecycler.getLayoutManager();
+                            int recHeight = attachedRecycler.getHeight();
+                            manager.scrollToPositionWithOffset(i, recHeight/2 - 90);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
     }
 
 
@@ -67,6 +89,18 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
     @Override
     public int getItemCount() {
         return listItemVM.length;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        this.attachedRecycler = recyclerView;
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        this.attachedRecycler = null;
+        super.onDetachedFromRecyclerView(recyclerView);
     }
 
     public void setGasStations(GasStation[] gasStations){
@@ -134,6 +168,14 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
         public void bindGasStation(final GasStationListItemVM itemVM){
             binding.setVm(itemVM);
+            binding.listItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(GasStationsAdapter.this.attachedRecycler != null){
+                        GasStationsAdapter.this.gasStationsViewModel.setSelectedGasStation(itemVM.gasStation);
+                    }
+                }
+            });
             binding.btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -33,6 +33,9 @@ import com.projekt.fuelprice.utils.PermissionCheckUtility;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
@@ -53,6 +56,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private Handler zoomCheckHandler;
     private float currentZoom;
+    private Map<GasStation, Marker> gasStationToMarker = new HashMap<>();
+    private Map<Marker, GasStation> markerToGasStation = new HashMap<>();
+    private Marker selectedMarker;
 
     private GasStationsViewModel gasStationsViewModel;
 
@@ -115,6 +121,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChanged(GasStation gasStation) {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(gasStation.lat, gasStation.lon)));
+                gasStationToMarker.get(gasStation).showInfoWindow();
+            }
+        });
+
+        gasStationsViewModel.getSelectedFuelType().observe(getViewLifecycleOwner(), new Observer<GasStation.FuelType>() {
+            @Override
+            public void onChanged(GasStation.FuelType fuelType) {
+                if(selectedMarker != null){
+                    selectedMarker.hideInfoWindow();
+                }
             }
         });
 
@@ -180,6 +196,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         gasStationsViewModel.getGasStations().observe(getViewLifecycleOwner() ,new Observer<GasStation[]>() {
             @Override
             public void onChanged(@Nullable GasStation[] gasStations) {
+                for (Marker marker: markerToGasStation.keySet()
+                     ) {
+                    marker.remove();
+                }
+                selectedMarker = null;
+                gasStationToMarker.clear();
+                markerToGasStation.clear();
                 for (final GasStation station: gasStations
                 ) {
 
@@ -195,7 +218,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             .title(station.name)
                             .snippet(station.brandName)
                             .icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-                    mMap.addMarker(options);
+                    Marker marker = mMap.addMarker(options);
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            if(markerToGasStation.containsKey(marker)){
+                                selectedMarker = marker;
+                                GasStation gasStation = markerToGasStation.get(marker);
+                                gasStationsViewModel.setSelectedGasStation(gasStation);
+                            }
+                            else{
+                                throw new NullPointerException();
+                            }
+                            return false;
+                        }
+                    });
+                    gasStationToMarker.put(station, marker);
+                    markerToGasStation.put(marker, station);
                 }
 
             }
