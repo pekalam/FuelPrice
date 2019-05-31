@@ -59,8 +59,8 @@ public class AppModule {
     @Singleton
     @Provides
     PermissionsService providePermissionsService(){
-        return new FakePermissionsService();
-        //return new ApplicationPermissionsService();
+        //return new FakePermissionsService();
+        return new ApplicationPermissionsService();
     }
 
     @Singleton
