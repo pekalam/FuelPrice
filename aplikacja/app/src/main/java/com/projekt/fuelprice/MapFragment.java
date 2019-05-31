@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,6 +138,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         return binding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        if(mMap != null) {
+            gasStationsViewModel.startFindingCurrentPosition();
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        gasStationsViewModel.stopFindingCurrentPosition();
+        super.onPause();
+    }
+
     private Runnable zoomCheck = new Runnable() {
         @Override
         public void run() {
@@ -175,7 +190,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(MIN_ZOOM);
         //mMap.setMaxZoomPreference(19f);
-
         permissionCheckUtility.check(new PermissionsService.Listener() {
             @Override
             public void onPermissionsGranted() {

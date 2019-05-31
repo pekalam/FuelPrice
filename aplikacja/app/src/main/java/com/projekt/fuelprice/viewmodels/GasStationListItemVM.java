@@ -32,7 +32,7 @@ public class GasStationListItemVM{
     }
 
     public String formattedDistance(){
-        if(distance == Double.NaN) {
+        if(Double.isNaN(distance)) {
             return "";
         }
         return String.format("%.2f km", distance);

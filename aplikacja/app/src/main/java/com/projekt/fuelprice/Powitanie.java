@@ -22,6 +22,7 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
     PermissionsService permissionsService;
 
     private PermissionCheckUtility permissionCheckUtility;
+    private Handler nextActivityHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +31,33 @@ public class Powitanie extends AppCompatActivity implements PermissionsService.L
         setContentView(R.layout.activity_powitanie);
         getSupportActionBar().hide();
         permissionCheckUtility = new PermissionCheckUtility(permissionsService, this);
+        nextActivityHandler = new Handler();
+    }
+
+    private Runnable startHomeActivity = new Runnable(){
+        @Override
+        public void run() {
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        nextActivityHandler.removeCallbacksAndMessages(null);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
         permissionCheckUtility.check(this);
+        super.onResume();
     }
 
     @Override
     public void onPermissionsGranted() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }, 1000);
+        nextActivityHandler.postDelayed(startHomeActivity, 1000);
     }
 
     @Override

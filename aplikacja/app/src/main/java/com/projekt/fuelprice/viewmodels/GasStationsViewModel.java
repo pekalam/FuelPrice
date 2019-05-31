@@ -1,5 +1,7 @@
 package com.projekt.fuelprice.viewmodels;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -71,6 +73,7 @@ public class GasStationsViewModel extends ViewModel {
     }
 
     public void forceLoadGasStations(){
+        Log.d("A:GasStationsViewModel", "Force load");
         LatLng pos = currentPosition.getValue();
         Integer radius = searchingRadius.getValue();
         loadGasStations(pos, radius);
@@ -82,16 +85,13 @@ public class GasStationsViewModel extends ViewModel {
      * @param radius promien wokol ktorego wyszukiwane sa stacje
      */
     private void loadGasStations(LatLng pos, int radius){
-        if(radius <= MIN_SEARCHING_RADIUS){
-            throw new InvalidParameterException();
-        }
-        if(radius > MAX_SEARCHING_RADIUS){
-            radius = MAX_SEARCHING_RADIUS;
-        }
+        Log.d("A:GasStationsViewModel", "loadGasStations radius: " + radius);
         gasStationsRepo.getGasStations(pos, radius, new Consumer<GasStation[]>() {
             @Override
             public void accept(GasStation[] fetchedGasStations) {
                 gasStations.setValue(fetchedGasStations);
+                //Brak zmierzonej odleglosci dla pobranych stacji
+                gasStationsDistance.setValue(new Double[0]);
                 LatLng myPosition = currentPosition.getValue();
                 getDistanceToGasStations(fetchedGasStations, myPosition);
             }
@@ -104,6 +104,7 @@ public class GasStationsViewModel extends ViewModel {
      * @param myPos
      */
     private void getDistanceToGasStations(GasStation[] gasStations, LatLng myPos){
+        Log.d("A:GasStationsViewModel", "getDistance");
         final Double[] distances = new Double[gasStations.length];
         final ArrayList<Integer> found = new ArrayList<>();
         for (int i = 0; i < gasStations.length; i++) {
@@ -131,6 +132,7 @@ public class GasStationsViewModel extends ViewModel {
      * Rozpoczyna wyszukiwanie aktualnej lokalizacji klienta
      */
     public void startFindingCurrentPosition(){
+        Log.d("A:GasStationsViewModel", "startFindingCurrentPosition");
         if(!_locationServiceStarted) {
             locationService.startService(new LocationService.Listener() {
                 @Override
@@ -152,6 +154,7 @@ public class GasStationsViewModel extends ViewModel {
      * Zatrzymuje usluge pobierania aktualnej lokalizacji klienta
      */
     public void stopFindingCurrentPosition(){
+        Log.d("A:GasStationsViewModel", "stopFindingCurrentPosition");
         if(_locationServiceStarted) {
             locationService.stopService();
             _locationServiceStarted = false;
@@ -192,7 +195,17 @@ public class GasStationsViewModel extends ViewModel {
 
     public LiveData<Double[]> getGasStationsDistance() { return gasStationsDistance; }
 
-    public void setSearchingRadius(int radius){searchingRadius.setValue(radius);}
+    public void setSearchingRadius(int radius){
+        if(radius <= MIN_SEARCHING_RADIUS){
+            throw new InvalidParameterException("Ustawiono zbyt maly promien: " + radius);
+        }
+        if(radius > MAX_SEARCHING_RADIUS){
+            Log.d("A:GasStationsViewModel", "Ustawiono za duzy promien: " + radius);
+            radius = MAX_SEARCHING_RADIUS;
+        }
+        Log.d("A:GasStationsViewModel", "Ustawiono promien: " + radius);
+        searchingRadius.setValue(radius);
+    }
 
     public LiveData<Integer> getSearchingRadius(){return searchingRadius;}
 
