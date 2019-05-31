@@ -5,6 +5,7 @@ import com.projekt.fuelprice.GasStationsFragment;
 import com.projekt.fuelprice.HomeActivity;
 import com.projekt.fuelprice.MapFragment;
 import com.projekt.fuelprice.Powitanie;
+import com.projekt.fuelprice.VoiceRecognitionFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -26,4 +27,7 @@ public abstract class AppComponentInjectorContributors {
 
     @ContributesAndroidInjector
     abstract FuelSelectionBottomSheetDialogFragment bindFuelSelectionBottomSheetDialogFragment();
+
+    @ContributesAndroidInjector
+    abstract VoiceRecognitionFragment bindVoiceRecognitionFragment();
 }

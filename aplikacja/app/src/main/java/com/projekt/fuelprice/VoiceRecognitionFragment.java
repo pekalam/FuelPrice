@@ -1,43 +1,51 @@
 package com.projekt.fuelprice;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.projekt.fuelprice.databinding.FragmentOverlayBinding;
+import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
+import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class OverlayFragment extends Fragment implements RecognitionListener {
+import javax.inject.Inject;
+
+public class VoiceRecognitionFragment extends Fragment implements RecognitionListener {
+
+    @Inject
+    GasStationsViewModelFactory gasStationsViewModelFactory;
+
+    GasStationsViewModel gasStationsViewModel;
 
     private FragmentOverlayBinding binding;
 
-    public OverlayFragment() {
+    public VoiceRecognitionFragment() {
         // Required empty public constructor
     }
 
-    public static OverlayFragment newInstance() {
-        OverlayFragment fragment = new OverlayFragment();
+    public static VoiceRecognitionFragment newInstance() {
+        VoiceRecognitionFragment fragment = new VoiceRecognitionFragment();
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overlay, container, false);
         binding.overlayRoot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +63,7 @@ public class OverlayFragment extends Fragment implements RecognitionListener {
 
                 // Add custom listeners.
                 SpeechRecognizer sr = SpeechRecognizer.createSpeechRecognizer(getContext());
-                sr.setRecognitionListener(OverlayFragment.this);
+                sr.setRecognitionListener(VoiceRecognitionFragment.this);
                 sr.startListening(intent);
             }
         });
