@@ -3,6 +3,8 @@ package com.projekt.fuelprice;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
     private ActivityHomeBinding binding;
 
     FuelSelectionBottomSheetDialogFragment fuelSelectionBottomSheetDialogFragment;
+    OverlayFragment overlayFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,28 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
                         "fuel_bottom_sheet");
             }
         });
+        binding.fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                overlayFragment = OverlayFragment.newInstance();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.add(R.id.mainLayout, overlayFragment);
+                transaction.commit();
+                return true;
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(overlayFragment != null){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.remove(overlayFragment);
+            transaction.commit();
+        }else{
+            super.onBackPressed();
+        }
 
     }
 

@@ -11,4 +11,7 @@
     <string name="null_string"> </string>
     <string name="preferences_file_name">FuelPrice_preferences</string>
     <string name="preferences_fuel_type_key">fuel_type</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
