@@ -1,7 +1,11 @@
 package com.projekt.fuelprice.viewmodels;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -77,6 +81,13 @@ public class GasStationsViewModel extends ViewModel {
         LatLng pos = currentPosition.getValue();
         Integer radius = searchingRadius.getValue();
         loadGasStations(pos, radius);
+    }
+
+    public void navigateTo(@NonNull GasStation gasStation, @NonNull Context context){
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + gasStation.lat + "," + gasStation.lon);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        context.startActivity(mapIntent);
     }
 
     /**

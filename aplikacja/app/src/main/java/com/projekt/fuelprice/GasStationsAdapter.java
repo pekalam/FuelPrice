@@ -179,10 +179,8 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
             binding.btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Uri gmmIntentUri = Uri.parse("google.navigation:q=" + itemVM.gasStation.lat + "," + itemVM.gasStation.lon);
-                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                    mapIntent.setPackage("com.google.android.apps.maps");
-                    context.startActivity(mapIntent);
+                    GasStationsAdapter.this.gasStationsViewModel.navigateTo(itemVM.gasStation,
+                                GasStationsAdapter.this.context);
                 }
             });
         }
