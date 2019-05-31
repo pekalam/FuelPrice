@@ -84,14 +84,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         AndroidSupportInjection.inject(this);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false);
         permissionCheckUtility = new PermissionCheckUtility(permissionsService, getActivity());
-        /*
-            Zainicjowanie wspolnego viewmodelu
-         */
         gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel.class);
 
-        /*
-            Na bindingu sie nie da
-         */
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -156,17 +150,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         @Override
         public void run() {
             float newZoom = mMap.getCameraPosition().zoom;
+            //jeżeli użytkownik oddala lub przybliza
             if(currentZoom - newZoom > ZOOM_CHECK_THRESHOLD ||
                     newZoom - currentZoom > ZOOM_CHECK_THRESHOLD){
+                //nowy promien w obrebie ktorego szukane sa stacje
                 int newRadius = calcSearchingRadius();
                 int currentRadius = gasStationsViewModel.getSearchingRadius().getValue();
-                if(newRadius - currentRadius > ZOOM_CHECK_RADIUS_THRESHOLD){
+                //jezeli uzytkownik chce wyszukac w obrebie wiekszego lub mniejszego promienia
+                if(newRadius - currentRadius > ZOOM_CHECK_RADIUS_THRESHOLD || currentRadius - newRadius > ZOOM_CHECK_RADIUS_THRESHOLD){
                     gasStationsViewModel.setSearchingRadius(newRadius);
-                    if(currentZoom - newZoom > ZOOM_CHECK_THRESHOLD) {
-                        gasStationsViewModel.forceLoadGasStations();
-                    }
+                    //TODO cache
+                    gasStationsViewModel.forceLoadGasStations();
                 }
                 currentZoom = newZoom;
+                //jesli mapa jest maksymalnie oddalona a maksymalny promien wyszukiwania nie zostal osiagniety
+
+            }
+            if(currentZoom == MIN_ZOOM && gasStationsViewModel.getSearchingRadius().getValue() < GasStationsViewModel.MAX_SEARCHING_RADIUS){
+                MIN_ZOOM -= 0.5f;
+                mMap.setMinZoomPreference(MIN_ZOOM);
             }
 
             zoomCheckHandler.removeCallbacks(zoomCheck);
@@ -178,7 +180,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         LatLng l = mMap.getProjection().getVisibleRegion().nearLeft;
         LatLng r = mMap.getProjection().getVisibleRegion().farRight;
         double dist = DistanceUtils.distanceBetween(l.latitude, l.longitude, r.latitude, r.longitude);
-        return (int)dist*1000;
+        return ((int)dist*1000)/2;
     }
 
 
