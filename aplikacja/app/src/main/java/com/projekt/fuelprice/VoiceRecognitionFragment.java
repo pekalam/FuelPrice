@@ -1,35 +1,37 @@
 package com.projekt.fuelprice;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.speech.RecognitionListener;
-import android.speech.RecognizerIntent;
-import android.speech.SpeechRecognizer;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FragmentOverlayBinding;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
-
-import java.util.ArrayList;
-import java.util.Locale;
+import com.projekt.fuelprice.viewmodels.VoiceRecognitionFragmentVM;
+import com.projekt.fuelprice.viewmodels.VoiceRecognitionFragmentVMFactory;
 
 import javax.inject.Inject;
 
-public class VoiceRecognitionFragment extends Fragment implements RecognitionListener {
+import dagger.android.support.AndroidSupportInjection;
+
+public class VoiceRecognitionFragment extends Fragment{
 
     @Inject
     GasStationsViewModelFactory gasStationsViewModelFactory;
-
     GasStationsViewModel gasStationsViewModel;
+
+    @Inject
+    VoiceRecognitionFragmentVMFactory voiceRecognitionFragmentVMFactory;
+    private VoiceRecognitionFragmentVM voiceRecognitionFragmentVM;
 
     private FragmentOverlayBinding binding;
 
@@ -45,74 +47,47 @@ public class VoiceRecognitionFragment extends Fragment implements RecognitionLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        AndroidSupportInjection.inject(this);
         gasStationsViewModel = ViewModelProviders.of(getActivity(), gasStationsViewModelFactory).get(GasStationsViewModel.class);
+        voiceRecognitionFragmentVM = ViewModelProviders.of(this, voiceRecognitionFragmentVMFactory).get(VoiceRecognitionFragmentVM.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overlay, container, false);
-        binding.overlayRoot.setOnClickListener(new View.OnClickListener() {
+        binding.setVm(voiceRecognitionFragmentVM);
+        binding.setLifecycleOwner(this);
+
+        voiceRecognitionFragmentVM.getRecognizedCommandName().observe(getViewLifecycleOwner(), new Observer<VoiceCommandName>() {
             @Override
-            public void onClick(View v) {
-                // Intent to listen to user vocal input and return the result to the same activity.
-                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            public void onChanged(VoiceCommandName voiceCommandName) {
+                /*//TODO: VoiceCommandFactory tworzy konkretną klasę implementująca VoiceCommand
+                //i przyjmujaca gasStationsViewModel w konstruktorze na podstawie voiceCommandName
+                //np stworzy NavigateVoiceCommand i tam beda wywolane odpowiednie metody gasStationsViewModel
+                //zeby rozpoczac nawigacje do konkretnej stacji
+                //VoiceCommand to interfejs z metodą invoke()
+                VoiceCommand cmd = VoiceCommandFactory.createCommand(voiceCommandName, gasStationsViewModel);
+                cmd.invoke();*/
 
-                // Use a language model based on free-form speech recognition.
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-                intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
-                intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
-                        getContext().getPackageName());
 
-                // Add custom listeners.
-                SpeechRecognizer sr = SpeechRecognizer.createSpeechRecognizer(getContext());
-                sr.setRecognitionListener(VoiceRecognitionFragment.this);
-                sr.startListening(intent);
+                if(voiceCommandName == VoiceCommandName.NAVIGATE_TO){
+                    //Dzialajacy przyklad co moze być w NavigateVoiceCommand:
+                    GasStation stations[] = gasStationsViewModel.getGasStations().getValue();
+                    if(stations.length > 0) {
+                        GasStation cheap = stations[0];
+                        for (int i = 1; i < stations.length; i++) {
+                            if (stations[i].price95 < cheap.price95){
+                                cheap = stations[i];
+                            }
+                        }
+                        gasStationsViewModel.navigateTo(cheap, getContext());
+                    }
+                }
             }
         });
+
         return binding.getRoot();
     }
 
     @Override
-    public void onReadyForSpeech(Bundle params) {
-        Log.d("end", "error");
-    }
-
-    @Override
-    public void onBeginningOfSpeech() {
-        Log.d("end", "error");
-    }
-
-    @Override
-    public void onRmsChanged(float rmsdB) {
-        Log.d("end", "error");
-    }
-
-    @Override
-    public void onBufferReceived(byte[] buffer) {
-        Log.d("end", "error");
-    }
-
-    @Override
-    public void onEndOfSpeech() {
-        Log.d("end", "error");
-    }
-
-    @Override
-    public void onError(int error) {
-        Log.d("end", "error");
-    }
-
-    @Override
-    public void onResults(Bundle results) {
-        ArrayList<String> result = results
-                .getStringArrayList(RecognizerIntent.EXTRA_RESULTS);
-    }
-
-    @Override
-    public void onPartialResults(Bundle partialResults) {
-        Log.d("end", "error");
-    }
-
-    @Override
-    public void onEvent(int eventType, Bundle params) {
-        Log.d("end", "error");
+    public void onResume() {
+        voiceRecognitionFragmentVM.startListening();
+        super.onResume();
     }
 }

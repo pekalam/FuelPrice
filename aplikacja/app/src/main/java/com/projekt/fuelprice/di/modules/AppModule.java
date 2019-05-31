@@ -11,6 +11,7 @@ import com.projekt.fuelprice.services.FakeApplicationSettingsService;
 import com.projekt.fuelprice.services.FakeLocationService;
 import com.projekt.fuelprice.services.FakePermissionsService;
 import com.projekt.fuelprice.services.FakeTomTomApiClient;
+import com.projekt.fuelprice.services.FakeVoiceRecognitionService;
 import com.projekt.fuelprice.services.GasStationLocalLogoService;
 import com.projekt.fuelprice.services.GasStationLogoService;
 import com.projekt.fuelprice.services.LocationService;
@@ -19,6 +20,7 @@ import com.projekt.fuelprice.services.RealApplicationSettingsService;
 import com.projekt.fuelprice.services.RealLocationService;
 import com.projekt.fuelprice.services.SimpleDistanceService;
 import com.projekt.fuelprice.services.TomTomApiClient;
+import com.projekt.fuelprice.services.VoiceRecognitionService;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -69,6 +71,13 @@ public class AppModule {
     AsyncMapApiClient provideAsyncMapApiClient(Application app){
         //return new TomTomApiClient();
         return new FakeTomTomApiClient(app.getApplicationContext());
+    }
+
+    @Singleton
+    @Provides
+    @Named("voiceRecognitionService")
+    VoiceRecognitionService provideVoiceRecognitionService(Application app){
+        return new FakeVoiceRecognitionService();
     }
 
 }
