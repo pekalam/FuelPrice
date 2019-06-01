@@ -1,14 +1,12 @@
 package com.projekt.fuelprice.viewmodels;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.projekt.fuelprice.VoiceCommandName;
-import com.projekt.fuelprice.services.VoiceRecognitionService;
+import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
 
 public class VoiceRecognitionFragmentVM extends ViewModel {
 

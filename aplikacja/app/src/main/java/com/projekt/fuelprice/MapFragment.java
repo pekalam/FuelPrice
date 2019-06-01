@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FragmentMapBinding;
-import com.projekt.fuelprice.services.PermissionsService;
+import com.projekt.fuelprice.services.interfaces.PermissionsService;
 import com.projekt.fuelprice.utils.DistanceUtils;
 import com.projekt.fuelprice.utils.PermissionCheckUtility;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;

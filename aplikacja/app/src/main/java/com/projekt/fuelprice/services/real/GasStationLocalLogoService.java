@@ -1,4 +1,4 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.real;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,8 +11,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.projekt.fuelprice.R;
 import com.projekt.fuelprice.data.GasStation;
-
-import java.util.concurrent.ExecutionException;
+import com.projekt.fuelprice.services.interfaces.GasStationLogoService;
 
 public class GasStationLocalLogoService implements GasStationLogoService {
 

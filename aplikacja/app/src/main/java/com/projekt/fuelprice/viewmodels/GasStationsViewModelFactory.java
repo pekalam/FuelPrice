@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
 import com.projekt.fuelprice.data.GasStationsRepository;
-import com.projekt.fuelprice.services.ApplicationSettingsService;
-import com.projekt.fuelprice.services.DistanceService;
-import com.projekt.fuelprice.services.LocationService;
+import com.projekt.fuelprice.services.interfaces.ApplicationSettingsService;
+import com.projekt.fuelprice.services.interfaces.DistanceService;
+import com.projekt.fuelprice.services.interfaces.LocationService;
 
 public class GasStationsViewModelFactory implements ViewModelProvider.Factory {
     private GasStationsVMDepedencies viewModelDepedencies = new GasStationsVMDepedencies();

@@ -16,14 +16,10 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.FuelBottomSheetBinding;
-import com.projekt.fuelprice.services.ApplicationSettingsService;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
 import javax.inject.Inject;
-
-import dagger.android.AndroidInjection;
-import dagger.android.support.AndroidSupportInjection;
 
 public class FuelSelectionBottomSheetDialogFragment extends BottomSheetDialogFragment {
 

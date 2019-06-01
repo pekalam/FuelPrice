@@ -1,8 +1,8 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.real;
 
 import android.util.Log;
 
-import java.text.DecimalFormat;
+import com.projekt.fuelprice.services.interfaces.DistanceService;
 
 public class SimpleDistanceService implements DistanceService {
     @Override

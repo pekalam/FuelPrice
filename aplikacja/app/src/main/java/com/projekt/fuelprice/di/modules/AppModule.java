@@ -2,26 +2,21 @@ package com.projekt.fuelprice.di.modules;
 
 import android.app.Application;
 
-import com.projekt.fuelprice.services.ApplicationPermissionsService;
+import com.projekt.fuelprice.services.real.ApplicationPermissionsService;
 
-import com.projekt.fuelprice.services.ApplicationSettingsService;
-import com.projekt.fuelprice.services.AsyncMapApiClient;
-import com.projekt.fuelprice.services.DistanceService;
-import com.projekt.fuelprice.services.FakeApplicationSettingsService;
-import com.projekt.fuelprice.services.FakeLocationService;
-import com.projekt.fuelprice.services.FakePermissionsService;
-import com.projekt.fuelprice.services.FakeTomTomApiClient;
-import com.projekt.fuelprice.services.FakeVoiceRecognitionService;
-import com.projekt.fuelprice.services.GasStationLocalLogoService;
-import com.projekt.fuelprice.services.GasStationLogoService;
-import com.projekt.fuelprice.services.LocationService;
-import com.projekt.fuelprice.services.PermissionsService;
-import com.projekt.fuelprice.services.RealApplicationSettingsService;
-import com.projekt.fuelprice.services.RealLocationService;
-import com.projekt.fuelprice.services.RealVoiceRecognitionService;
-import com.projekt.fuelprice.services.SimpleDistanceService;
-import com.projekt.fuelprice.services.TomTomApiClient;
-import com.projekt.fuelprice.services.VoiceRecognitionService;
+import com.projekt.fuelprice.services.interfaces.ApplicationSettingsService;
+import com.projekt.fuelprice.services.interfaces.AsyncMapApiClient;
+import com.projekt.fuelprice.services.interfaces.DistanceService;
+import com.projekt.fuelprice.services.fake.FakeApplicationSettingsService;
+import com.projekt.fuelprice.services.fake.FakeLocationService;
+import com.projekt.fuelprice.services.fake.FakeTomTomApiClient;
+import com.projekt.fuelprice.services.fake.FakeVoiceRecognitionService;
+import com.projekt.fuelprice.services.real.GasStationLocalLogoService;
+import com.projekt.fuelprice.services.interfaces.GasStationLogoService;
+import com.projekt.fuelprice.services.interfaces.LocationService;
+import com.projekt.fuelprice.services.interfaces.PermissionsService;
+import com.projekt.fuelprice.services.real.SimpleDistanceService;
+import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

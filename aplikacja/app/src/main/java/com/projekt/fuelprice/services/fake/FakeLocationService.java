@@ -1,6 +1,7 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.fake;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.projekt.fuelprice.services.interfaces.LocationService;
 
 public class FakeLocationService implements LocationService {
     @Override

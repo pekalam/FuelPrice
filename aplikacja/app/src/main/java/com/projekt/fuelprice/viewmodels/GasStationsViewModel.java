@@ -14,10 +14,10 @@ import androidx.core.util.Consumer;
 import com.google.android.gms.maps.model.LatLng;
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.data.GasStationsRepository;
-import com.projekt.fuelprice.services.ApplicationSettingsService;
-import com.projekt.fuelprice.services.DistanceService;
-import com.projekt.fuelprice.services.LocationService;
-import java.security.InvalidParameterException;
+import com.projekt.fuelprice.services.interfaces.ApplicationSettingsService;
+import com.projekt.fuelprice.services.interfaces.DistanceService;
+import com.projekt.fuelprice.services.interfaces.LocationService;
+
 import java.util.ArrayList;
 
 /**

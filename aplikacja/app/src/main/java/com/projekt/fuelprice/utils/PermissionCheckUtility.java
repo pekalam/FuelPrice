@@ -8,7 +8,7 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.projekt.fuelprice.services.PermissionsService;
+import com.projekt.fuelprice.services.interfaces.PermissionsService;
 
 public class PermissionCheckUtility {
     private AlertDialog dialog;

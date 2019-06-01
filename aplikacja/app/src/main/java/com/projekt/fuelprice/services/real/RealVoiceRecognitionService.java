@@ -1,16 +1,12 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.real;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
-import androidx.annotation.NonNull;
-
-import com.projekt.fuelprice.VoiceRecognitionFragment;
+import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
+import com.projekt.fuelprice.services.real.RealRecognitionListener;
 
 import java.util.Locale;
 

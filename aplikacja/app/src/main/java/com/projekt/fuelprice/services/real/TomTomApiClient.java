@@ -1,10 +1,11 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.real;
 
 import androidx.core.util.Consumer;
 import android.util.Log;
 
 import com.loopj.android.http.*;
 import com.projekt.fuelprice.data.GasStation;
+import com.projekt.fuelprice.services.interfaces.AsyncMapApiClient;
 import com.projekt.fuelprice.utils.QueryStringBuilder;
 
 import org.json.JSONArray;

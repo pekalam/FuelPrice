@@ -1,4 +1,4 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.interfaces;
 
 import com.google.android.gms.maps.model.LatLng;
 

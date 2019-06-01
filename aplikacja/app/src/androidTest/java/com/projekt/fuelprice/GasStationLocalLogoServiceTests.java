@@ -6,8 +6,8 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.projekt.fuelprice.data.GasStation;
-import com.projekt.fuelprice.services.GasStationLocalLogoService;
-import com.projekt.fuelprice.services.GasStationLogoService;
+import com.projekt.fuelprice.services.real.GasStationLocalLogoService;
+import com.projekt.fuelprice.services.interfaces.GasStationLogoService;
 
 import org.junit.Assert;
 import org.junit.Test;

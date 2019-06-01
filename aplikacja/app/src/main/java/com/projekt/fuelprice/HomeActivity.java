@@ -63,6 +63,7 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.remove(voiceRecognitionFragment);
             transaction.commit();
+            voiceRecognitionFragment = null;
         }else{
             super.onBackPressed();
         }

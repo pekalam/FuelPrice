@@ -1,9 +1,10 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.real;
 
 import android.content.Context;
 import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.projekt.fuelprice.services.interfaces.LocationService;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;

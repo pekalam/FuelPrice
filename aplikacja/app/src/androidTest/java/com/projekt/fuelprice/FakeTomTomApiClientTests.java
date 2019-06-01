@@ -5,8 +5,8 @@ import androidx.test.runner.AndroidJUnit4;
 import androidx.core.util.Consumer;
 
 import com.projekt.fuelprice.data.GasStation;
-import com.projekt.fuelprice.services.AsyncMapApiClient;
-import com.projekt.fuelprice.services.FakeTomTomApiClient;
+import com.projekt.fuelprice.services.interfaces.AsyncMapApiClient;
+import com.projekt.fuelprice.services.fake.FakeTomTomApiClient;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,9 +1,9 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.fake;
 
-import android.content.Context;
 import android.os.Handler;
 
 import com.projekt.fuelprice.VoiceCommandName;
+import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
 
 public class FakeVoiceRecognitionService implements VoiceRecognitionService {
     @Override

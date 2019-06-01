@@ -7,7 +7,7 @@ import androidx.test.runner.AndroidJUnit4;
 import androidx.core.util.Consumer;
 
 import com.projekt.fuelprice.data.GasStation;
-import com.projekt.fuelprice.services.TomTomApiClient;
+import com.projekt.fuelprice.services.real.TomTomApiClient;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

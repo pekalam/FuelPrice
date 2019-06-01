@@ -1,4 +1,4 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.real;
 
 import android.os.Bundle;
 import android.speech.RecognitionListener;
@@ -6,6 +6,7 @@ import android.speech.RecognizerIntent;
 import android.util.Log;
 
 import com.projekt.fuelprice.VoiceCommandName;
+import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
 
 import java.util.ArrayList;
 

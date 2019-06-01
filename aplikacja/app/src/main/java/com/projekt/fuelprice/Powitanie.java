@@ -1,15 +1,12 @@
 package com.projekt.fuelprice;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
-import android.view.KeyEvent;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.projekt.fuelprice.services.PermissionsService;
+import com.projekt.fuelprice.services.interfaces.PermissionsService;
 import com.projekt.fuelprice.utils.PermissionCheckUtility;
 
 import javax.inject.Inject;

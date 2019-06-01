@@ -1,4 +1,4 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.fake;
 
 import android.content.Context;
 import androidx.core.util.Consumer;
@@ -6,6 +6,7 @@ import android.util.JsonReader;
 import android.util.JsonToken;
 
 import com.projekt.fuelprice.data.GasStation;
+import com.projekt.fuelprice.services.interfaces.AsyncMapApiClient;
 
 import java.io.IOException;
 import java.io.InputStream;

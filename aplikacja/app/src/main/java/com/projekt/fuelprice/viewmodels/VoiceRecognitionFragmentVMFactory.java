@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.projekt.fuelprice.services.VoiceRecognitionService;
+import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
 
 public class VoiceRecognitionFragmentVMFactory implements ViewModelProvider.Factory {
 

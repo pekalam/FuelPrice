@@ -6,11 +6,10 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.projekt.fuelprice.services.AsyncMapApiClient;
-import com.projekt.fuelprice.services.GasStationLogoService;
+import com.projekt.fuelprice.services.interfaces.AsyncMapApiClient;
+import com.projekt.fuelprice.services.interfaces.GasStationLogoService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Domyslne repozytorium stacji korzystajace z AsyncMapApiClient

@@ -1,4 +1,4 @@
-package com.projekt.fuelprice.services;
+package com.projekt.fuelprice.services.interfaces;
 
 import androidx.core.util.Consumer;
 
