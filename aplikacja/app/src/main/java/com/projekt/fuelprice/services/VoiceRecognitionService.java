@@ -1,5 +1,7 @@
 package com.projekt.fuelprice.services;
 
+import android.content.Context;
+
 import com.projekt.fuelprice.VoiceCommandName;
 
 /**
@@ -13,11 +15,16 @@ public interface VoiceRecognitionService {
          */
         void onRecognized(String text);
         /**
-         * Zwraca jako parametr rozpoznaną komendę
-         * @param command rozpoznana komenda.
-         *       Jeżeli ma wartość null rozpoznany tekst nie jest komendą
+         * Zwraca czesc dowolnego rozpoznanego tekstu
+         * @param text
          */
-        void onCommandRecognized(VoiceCommandName command);
+        void onPartiallyRecognized(String text);
+        /**
+         * Zwraca rozpoznana komende
+         * @param command komenda
+         * @param cmdTail pozostala czesc tekstu po wydzieleniu slowa kluczowego
+         */
+        void onCommandRecognized(VoiceCommandName command, String cmdTail);
 
         void onEndOfSpeech();
         void onBegginingOfSpeech();

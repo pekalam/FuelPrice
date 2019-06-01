@@ -1,5 +1,5 @@
 package com.projekt.fuelprice;
 
 public enum VoiceCommandName {
-    NAVIGATE_TO
+    NOT_RECOGNIZED, NAVIGATE_TO
 }

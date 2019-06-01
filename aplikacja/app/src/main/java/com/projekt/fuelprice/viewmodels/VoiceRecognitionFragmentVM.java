@@ -1,5 +1,7 @@
 package com.projekt.fuelprice.viewmodels;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -12,7 +14,6 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
 
     private VoiceRecognitionService voiceRecognitionService;
     private MutableLiveData<String> recognizedString = new MutableLiveData<>();
-    private MutableLiveData<VoiceCommandName> recognizedCommandName = new MutableLiveData<>();
 
     public VoiceRecognitionFragmentVM(@NonNull VoiceRecognitionService voiceRecognitionService){
         this.voiceRecognitionService = voiceRecognitionService;
@@ -26,8 +27,12 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
             }
 
             @Override
-            public void onCommandRecognized(VoiceCommandName command) {
-                recognizedCommandName.setValue(command);
+            public void onPartiallyRecognized(String text) {
+                recognizedString.setValue(text);
+            }
+
+            @Override
+            public void onCommandRecognized(VoiceCommandName command, String tail) {
             }
 
             @Override
@@ -44,9 +49,5 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
 
     public LiveData<String> getRecognizedString(){
         return recognizedString;
-    }
-
-    public LiveData<VoiceCommandName> getRecognizedCommandName(){
-        return recognizedCommandName;
     }
 }

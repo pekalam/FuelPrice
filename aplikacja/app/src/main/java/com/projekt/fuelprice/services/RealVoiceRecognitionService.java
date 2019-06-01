@@ -1,5 +1,6 @@
 package com.projekt.fuelprice.services;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class RealVoiceRecognitionService implements VoiceRecognitionService {
 
     private Context context;
 
-    public RealVoiceRecognitionService(@NonNull Context context){
+    public RealVoiceRecognitionService(Context context){
         this.context = context;
     }
 

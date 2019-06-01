@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -54,31 +55,10 @@ public class VoiceRecognitionFragment extends Fragment{
         binding.setVm(voiceRecognitionFragmentVM);
         binding.setLifecycleOwner(this);
 
-        voiceRecognitionFragmentVM.getRecognizedCommandName().observe(getViewLifecycleOwner(), new Observer<VoiceCommandName>() {
+        binding.getRoot().setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onChanged(VoiceCommandName voiceCommandName) {
-                /*//TODO: VoiceCommandFactory tworzy konkretną klasę implementująca VoiceCommand
-                //i przyjmujaca gasStationsViewModel w konstruktorze na podstawie voiceCommandName
-                //np stworzy NavigateVoiceCommand i tam beda wywolane odpowiednie metody gasStationsViewModel
-                //zeby rozpoczac nawigacje do konkretnej stacji
-                //VoiceCommand to interfejs z metodą invoke()
-                VoiceCommand cmd = VoiceCommandFactory.createCommand(voiceCommandName, gasStationsViewModel);
-                cmd.invoke();*/
-
-
-                if(voiceCommandName == VoiceCommandName.NAVIGATE_TO){
-                    //Dzialajacy przyklad co moze być w NavigateVoiceCommand:
-                    GasStation stations[] = gasStationsViewModel.getGasStations().getValue();
-                    if(stations.length > 0) {
-                        GasStation cheap = stations[0];
-                        for (int i = 1; i < stations.length; i++) {
-                            if (stations[i].price95 < cheap.price95){
-                                cheap = stations[i];
-                            }
-                        }
-                        gasStationsViewModel.navigateTo(cheap, getContext());
-                    }
-                }
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
             }
         });
 

@@ -1,5 +1,6 @@
 package com.projekt.fuelprice.services;
 
+import android.content.Context;
 import android.os.Handler;
 
 import com.projekt.fuelprice.VoiceCommandName;
@@ -11,16 +12,22 @@ public class FakeVoiceRecognitionService implements VoiceRecognitionService {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                listener.onPartiallyRecognized("Nawig");
+            }
+        }, 1000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
                 listener.onEndOfSpeech();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         listener.onRecognized("Nawiguj do najtańszej stacji");
-                        listener.onCommandRecognized(VoiceCommandName.NAVIGATE_TO);
+                        listener.onCommandRecognized(VoiceCommandName.NAVIGATE_TO, " do najtańszej stacji");
                     }
-                }, 200);
+                }, 500);
             }
-        }, 1500);
+        }, 2000);
 
     }
 }

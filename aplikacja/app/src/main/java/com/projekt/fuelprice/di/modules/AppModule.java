@@ -18,6 +18,7 @@ import com.projekt.fuelprice.services.LocationService;
 import com.projekt.fuelprice.services.PermissionsService;
 import com.projekt.fuelprice.services.RealApplicationSettingsService;
 import com.projekt.fuelprice.services.RealLocationService;
+import com.projekt.fuelprice.services.RealVoiceRecognitionService;
 import com.projekt.fuelprice.services.SimpleDistanceService;
 import com.projekt.fuelprice.services.TomTomApiClient;
 import com.projekt.fuelprice.services.VoiceRecognitionService;
@@ -78,6 +79,7 @@ public class AppModule {
     @Named("voiceRecognitionService")
     VoiceRecognitionService provideVoiceRecognitionService(Application app){
         return new FakeVoiceRecognitionService();
+        //return new RealVoiceRecognitionService(app.getApplicationContext());
     }
 
 }
