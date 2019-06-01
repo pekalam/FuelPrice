@@ -8,6 +8,7 @@ import com.projekt.fuelprice.di.modules.AppModule;
 import com.projekt.fuelprice.di.modules.AppComponentInjectorContributors;
 import com.projekt.fuelprice.di.modules.GasStationsRepositoryModule;
 import com.projekt.fuelprice.di.modules.GasStationsVMFactoryModule;
+import com.projekt.fuelprice.di.modules.VoiceRecogntionVMFactoryModule;
 
 import javax.inject.Singleton;
 
@@ -21,6 +22,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AppModule.class,
         GasStationsRepositoryModule.class,
         GasStationsVMFactoryModule.class,
+        VoiceRecogntionVMFactoryModule.class,
         AppComponentInjectorContributors.class,
         AndroidSupportInjectionModule.class
 })

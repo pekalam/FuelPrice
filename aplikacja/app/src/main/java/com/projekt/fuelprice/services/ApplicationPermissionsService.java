@@ -16,7 +16,7 @@ import java.util.List;
 public class ApplicationPermissionsService implements PermissionsService {
     @Override
     public void checkApplicationPermissions(final Listener listener, Activity activity) {
-        Dexter.withActivity(activity).withPermissions("android.permission.ACCESS_FINE_LOCATION")
+        Dexter.withActivity(activity).withPermissions("android.permission.ACCESS_FINE_LOCATION", "android.permission.RECORD_AUDIO")
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {

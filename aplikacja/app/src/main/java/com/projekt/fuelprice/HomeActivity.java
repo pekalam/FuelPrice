@@ -3,18 +3,12 @@ package com.projekt.fuelprice;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.View;
 
-import com.crashlytics.android.Crashlytics;
 import com.projekt.fuelprice.databinding.ActivityHomeBinding;
-import com.projekt.fuelprice.services.ApplicationSettingsService;
-import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
-import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 
 
 import javax.inject.Inject;
@@ -23,10 +17,6 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-import io.fabric.sdk.android.Fabric;
-
-
-
 
 
 public class HomeActivity extends FragmentActivity implements HasSupportFragmentInjector {
@@ -37,7 +27,7 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
     private ActivityHomeBinding binding;
 
     FuelSelectionBottomSheetDialogFragment fuelSelectionBottomSheetDialogFragment;
-    OverlayFragment overlayFragment;
+    VoiceRecognitionFragment voiceRecognitionFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +47,9 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
         binding.fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                overlayFragment = OverlayFragment.newInstance();
+                voiceRecognitionFragment = VoiceRecognitionFragment.newInstance();
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.mainLayout, overlayFragment);
+                transaction.add(R.id.mainLayout, voiceRecognitionFragment);
                 transaction.commit();
                 return true;
             }
@@ -69,9 +59,9 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
 
     @Override
     public void onBackPressed() {
-        if(overlayFragment != null){
+        if(voiceRecognitionFragment != null){
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.remove(overlayFragment);
+            transaction.remove(voiceRecognitionFragment);
             transaction.commit();
         }else{
             super.onBackPressed();
