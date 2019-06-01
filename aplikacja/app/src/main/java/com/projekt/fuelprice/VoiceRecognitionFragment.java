@@ -19,6 +19,7 @@ import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 import com.projekt.fuelprice.viewmodels.GasStationsViewModelFactory;
 import com.projekt.fuelprice.viewmodels.VoiceRecognitionFragmentVM;
 import com.projekt.fuelprice.viewmodels.VoiceRecognitionFragmentVMFactory;
+import com.projekt.fuelprice.voicerecog.VoiceCommand;
 
 import javax.inject.Inject;
 
@@ -59,6 +60,29 @@ public class VoiceRecognitionFragment extends Fragment{
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
+            }
+        });
+
+        voiceRecognitionFragmentVM.getRecognizedVoiceCommand().observe(getViewLifecycleOwner(), new Observer<VoiceCommand>() {
+            @Override
+            public void onChanged(final VoiceCommand voiceCommand) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .remove(VoiceRecognitionFragment.this)
+                                .commit();
+                    }
+                }, 2000);
+                if(voiceCommand == null){
+                    binding.overlayRoot.setBackgroundColor(getContext().getResources().getColor(R.color.red_overlay));
+                    binding.commandName.setText("Nie rozpoznano komendy");
+                }else{
+                    binding.overlayRoot.setBackgroundColor(getContext().getResources().getColor(R.color.green_overlay));
+                    voiceCommand.execute(gasStationsViewModel);
+                    binding.commandName.setText("");
+                }
             }
         });
 

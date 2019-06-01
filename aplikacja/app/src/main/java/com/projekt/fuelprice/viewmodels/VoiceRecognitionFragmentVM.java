@@ -5,13 +5,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.projekt.fuelprice.VoiceCommandName;
+import com.projekt.fuelprice.voicerecog.VoiceCommand;
+import com.projekt.fuelprice.voicerecog.VoiceCommandFactory;
+import com.projekt.fuelprice.voicerecog.VoiceCommandName;
 import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
 
 public class VoiceRecognitionFragmentVM extends ViewModel {
 
     private VoiceRecognitionService voiceRecognitionService;
     private MutableLiveData<String> recognizedString = new MutableLiveData<>();
+    private MutableLiveData<VoiceCommand> recognizedCommand = new MutableLiveData<>();
 
     public VoiceRecognitionFragmentVM(@NonNull VoiceRecognitionService voiceRecognitionService){
         this.voiceRecognitionService = voiceRecognitionService;
@@ -30,7 +33,17 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
             }
 
             @Override
-            public void onCommandRecognized(VoiceCommandName command, String tail) {
+            public void onCommandRecognized(VoiceCommandName commandName, String tail) {
+                if(commandName == VoiceCommandName.NOT_RECOGNIZED){
+                    recognizedCommand.setValue(null);
+                    return;
+                }
+                VoiceCommand cmd = VoiceCommandFactory.create(commandName, tail);
+                if(cmd != null){
+                    recognizedCommand.setValue(cmd);
+                }else{
+                    recognizedCommand.setValue(null);
+                }
             }
 
             @Override
@@ -47,5 +60,9 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
 
     public LiveData<String> getRecognizedString(){
         return recognizedString;
+    }
+
+    public LiveData<VoiceCommand> getRecognizedVoiceCommand(){
+        return recognizedCommand;
     }
 }

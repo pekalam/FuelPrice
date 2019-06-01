@@ -1,8 +1,6 @@
 package com.projekt.fuelprice.services.interfaces;
 
-import android.content.Context;
-
-import com.projekt.fuelprice.VoiceCommandName;
+import com.projekt.fuelprice.voicerecog.VoiceCommandName;
 
 /**
  * Rozpoznaje wypowiadane komendy
