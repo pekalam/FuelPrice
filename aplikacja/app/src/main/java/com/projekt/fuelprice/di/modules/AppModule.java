@@ -15,6 +15,7 @@ import com.projekt.fuelprice.services.real.GasStationLocalLogoService;
 import com.projekt.fuelprice.services.interfaces.GasStationLogoService;
 import com.projekt.fuelprice.services.interfaces.LocationService;
 import com.projekt.fuelprice.services.interfaces.PermissionsService;
+import com.projekt.fuelprice.services.real.RealVoiceRecognitionService;
 import com.projekt.fuelprice.services.real.SimpleDistanceService;
 import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
 
@@ -73,8 +74,8 @@ public class AppModule {
     @Provides
     @Named("voiceRecognitionService")
     VoiceRecognitionService provideVoiceRecognitionService(Application app){
-        return new FakeVoiceRecognitionService();
-        //return new RealVoiceRecognitionService(app.getApplicationContext());
+        //return new FakeVoiceRecognitionService();
+        return new RealVoiceRecognitionService(app.getApplicationContext());
     }
 
 }

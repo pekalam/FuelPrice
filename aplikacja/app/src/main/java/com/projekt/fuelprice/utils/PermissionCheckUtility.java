@@ -19,6 +19,7 @@ public class PermissionCheckUtility {
     public PermissionCheckUtility(@NonNull final PermissionsService permissionsService,@NonNull final Activity callingActivity){
         this.permissionsService = permissionsService;
         this.callingActivity = callingActivity;
+        //TODO: inny tekst?
         dialog = new AlertDialog.Builder(callingActivity)
                 .setTitle("Brak wystarczających uprawnień")
                 .setMessage("Aplikacja FuelPrice nie może działać bez dostępu do lokalizacji.")

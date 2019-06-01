@@ -1,7 +1,9 @@
 package com.projekt.fuelprice;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -63,6 +65,7 @@ public class VoiceRecognitionFragment extends Fragment{
             }
         });
 
+        //funkcja wykonywana po rozpoznaniu mowy
         voiceRecognitionFragmentVM.getRecognizedVoiceCommand().observe(getViewLifecycleOwner(), new Observer<VoiceCommand>() {
             @Override
             public void onChanged(final VoiceCommand voiceCommand) {
@@ -80,9 +83,28 @@ public class VoiceRecognitionFragment extends Fragment{
                     binding.commandName.setText("Nie rozpoznano komendy");
                 }else{
                     binding.overlayRoot.setBackgroundColor(getContext().getResources().getColor(R.color.green_overlay));
-                    voiceCommand.execute(gasStationsViewModel);
-                    binding.commandName.setText("");
+                    //wykonanie komendy
+                    voiceCommand.execute(gasStationsViewModel, getActivity());
+                    binding.commandName.setText(voiceCommand.getClass().getName());
                 }
+            }
+        });
+
+        voiceRecognitionFragmentVM.getVoiceRecognitionAvailable().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean available) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Brak funkcji rozpoznawania mowy")
+                        .setMessage("Funkcja rozpoznawania mowy nie jest dostępna na Twoim urządzeniu")
+                        .setPositiveButton("Powrót", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                getActivity().getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .remove(VoiceRecognitionFragment.this)
+                                        .commit();
+                            }
+                        }).show();
             }
         });
 
@@ -91,7 +113,7 @@ public class VoiceRecognitionFragment extends Fragment{
 
     @Override
     public void onResume() {
-        voiceRecognitionFragmentVM.startListening();
+        voiceRecognitionFragmentVM.startListening(getContext());
         super.onResume();
     }
 }

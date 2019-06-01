@@ -1,5 +1,7 @@
 package com.projekt.fuelprice.viewmodels;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,11 +18,13 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
     private MutableLiveData<String> recognizedString = new MutableLiveData<>();
     private MutableLiveData<VoiceCommand> recognizedCommand = new MutableLiveData<>();
 
+    private MutableLiveData<Boolean> voiceRecognitionAvailable = new MutableLiveData<>();
+
     public VoiceRecognitionFragmentVM(@NonNull VoiceRecognitionService voiceRecognitionService){
         this.voiceRecognitionService = voiceRecognitionService;
     }
 
-    public void startListening(){
+    public void startListening(Context context){
         voiceRecognitionService.startListening(new VoiceRecognitionService.Listener() {
             @Override
             public void onRecognized(String text) {
@@ -38,6 +42,7 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
                     recognizedCommand.setValue(null);
                     return;
                 }
+                //TODO: 3) na podstawie commandName i tail fabryka tworzy komende
                 VoiceCommand cmd = VoiceCommandFactory.create(commandName, tail);
                 if(cmd != null){
                     recognizedCommand.setValue(cmd);
@@ -52,8 +57,13 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
             }
 
             @Override
-            public void onBegginingOfSpeech() {
+            public void onReadyForSpeech() {
                 recognizedString.setValue("Proszę mówić");
+            }
+
+            @Override
+            public void onRecognitionNotAvailable() {
+                voiceRecognitionAvailable.setValue(false);
             }
         });
     }
@@ -64,5 +74,9 @@ public class VoiceRecognitionFragmentVM extends ViewModel {
 
     public LiveData<VoiceCommand> getRecognizedVoiceCommand(){
         return recognizedCommand;
+    }
+
+    public LiveData<Boolean> getVoiceRecognitionAvailable() {
+        return voiceRecognitionAvailable;
     }
 }

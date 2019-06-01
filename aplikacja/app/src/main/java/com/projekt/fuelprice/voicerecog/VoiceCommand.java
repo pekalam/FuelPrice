@@ -1,8 +1,13 @@
 package com.projekt.fuelprice.voicerecog;
 
+import android.content.Context;
+
 import com.projekt.fuelprice.viewmodels.GasStationsViewModel;
 
 public abstract class VoiceCommand {
-    public VoiceCommand(String cmdTail){}
-    public abstract void execute(GasStationsViewModel gasStationsViewModel);
+    protected String cmdTail;
+    public VoiceCommand(String cmdTail){
+        this.cmdTail = cmdTail;
+    }
+    public abstract boolean execute(GasStationsViewModel gasStationsViewModel, Context context);
 }

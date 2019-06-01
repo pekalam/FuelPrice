@@ -19,19 +19,27 @@ public class RealRecognitionListener implements RecognitionListener {
     }
 
     private boolean recognizeCommand(String text){
+        //TODO: 2) na podstawie rozpoznanego tekstu (male znaki) wywolywane sa 2 funkcje
         String lowerText = text.toLowerCase();
         if(lowerText.startsWith("nawiguj")){
-            String tail = text.substring(lowerText.indexOf("nawiguj"));
-            listener.onRecognized(text);
-            listener.onCommandRecognized(VoiceCommandName.NAVIGATE_TO, tail);
+            String tail = text.substring(lowerText.indexOf("nawiguj")); //reszta tekstu oprocz slowa kluczowego
+            //tail ma sluzyc jako ew. parametry typu " do Orlen"
+            listener.onRecognized(text); //jaki tekst sluzyl do rozpoznania
+            listener.onCommandRecognized(VoiceCommandName.NAVIGATE_TO, tail); //nazwa komendy utworzona w 1) i reszta tekstu
             return true;
         }
         return false;
     }
 
+    private void commandNotRecognized(String text){
+        listener.onRecognized(text);
+        listener.onCommandRecognized(VoiceCommandName.NOT_RECOGNIZED, "");
+    }
+
     @Override
     public void onReadyForSpeech(Bundle params) {
         Log.d("asd", "Asd");
+        listener.onReadyForSpeech();
     }
 
     @Override
@@ -52,22 +60,34 @@ public class RealRecognitionListener implements RecognitionListener {
     @Override
     public void onEndOfSpeech() {
         Log.d("asd", "Asd");
+        listener.onEndOfSpeech();
     }
 
     @Override
     public void onError(int error) {
         Log.d("asd", "Asd");
+        if(error == 7){
+            //TODO: odpowiedz jesli wystapil blad
+            commandNotRecognized("Nie rozumiem");
+        }
     }
 
     @Override
     public void onResults(Bundle results) {
-        ArrayList<String> result = results
-                .getStringArrayList(RecognizerIntent.EXTRA_RESULTS);
-        for (String txt: result
-             ) {
-            if(recognizeCommand(txt)){
-                return;
+        ArrayList<String> txtResults = results.getStringArrayList("results_recognition");
+        if(txtResults != null){
+            //najlepsze dopasowanie
+            String first = txtResults.get(0);
+            for (String txt: txtResults
+                 ) {
+                if(recognizeCommand(txt)){
+                    return;
+                }
             }
+            commandNotRecognized(first);
+        }else{
+            //TODO: odpowiedz jesli wystapil blad
+            commandNotRecognized("Nie rozumiem");
         }
         Log.d("asd", "Asd");
     }

@@ -1,5 +1,7 @@
 package com.projekt.fuelprice.services.interfaces;
 
+import android.content.Context;
+
 import com.projekt.fuelprice.voicerecog.VoiceCommandName;
 
 /**
@@ -24,8 +26,20 @@ public interface VoiceRecognitionService {
          */
         void onCommandRecognized(VoiceCommandName command, String cmdTail);
 
+        /**
+         * Zakonczono rejestrowanie mowy
+         */
         void onEndOfSpeech();
-        void onBegginingOfSpeech();
+
+        /**
+         * Rozpoczeto rejestrowanie mowy
+         */
+        void onReadyForSpeech();
+
+        /**
+         * Usluga rozpoznawania mowy nie jest dostepna
+         */
+        void onRecognitionNotAvailable();
     }
     /**
      * Zaczyna nasłuchiwać w celu rozpoznania komend

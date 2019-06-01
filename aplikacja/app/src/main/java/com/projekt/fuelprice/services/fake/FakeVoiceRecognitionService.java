@@ -9,7 +9,7 @@ public class FakeVoiceRecognitionService implements VoiceRecognitionService {
     static int i = 0;
     @Override
     public void startListening(final Listener listener) {
-        listener.onBegginingOfSpeech();
+        listener.onReadyForSpeech();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -28,10 +28,14 @@ public class FakeVoiceRecognitionService implements VoiceRecognitionService {
                             listener.onCommandRecognized(VoiceCommandName.NAVIGATE_TO, " do najtańszej stacji");
                             i++;
                         }
-                        else{
+                        else if(i==1){
                             listener.onCommandRecognized(VoiceCommandName.NOT_RECOGNIZED, " do najtańszej stacji");
                             i++;
-                            i = i %2;
+
+                        }else{
+                            listener.onRecognitionNotAvailable();
+                            i++;
+                            i = i %3;
                         }
                     }
                 }, 500);
