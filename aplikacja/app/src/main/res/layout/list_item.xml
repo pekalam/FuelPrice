@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:gravity="center_vertical"
-        android:background = "@drawable/text_border">
+        tools:background="@drawable/text_border_selected"
+        android:background = "@{vm.selected ? @drawable/text_border_selected : @drawable/text_border}">
 
         <ImageView
             android:id="@+id/image1"

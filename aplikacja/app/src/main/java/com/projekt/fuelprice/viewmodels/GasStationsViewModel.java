@@ -86,9 +86,13 @@ public class GasStationsViewModel extends ViewModel {
     }
 
     public void forceLoadGasStations(){
-        Log.d("A:GasStationsViewModel", "Force load");
         LatLng pos = currentPosition.getValue();
+        if(pos == null){
+            Log.d("A:GasStationsViewModel", "Force load null pos");
+            return;
+        }
         Integer radius = searchingRadius.getValue();
+        Log.d("A:GasStationsViewModel", "Force load");
         loadGasStations(pos, radius);
     }
 

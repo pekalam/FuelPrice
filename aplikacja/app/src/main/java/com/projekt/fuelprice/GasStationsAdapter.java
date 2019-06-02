@@ -41,12 +41,13 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
             @Override
             public void onChanged(GasStation gasStation) {
                 for(int i = 0; i < listItemVM.length; i++){
+                    listItemVM[i].selected.set(false);
                     if(listItemVM[i].gasStation == gasStation){
                         if(attachedRecycler != null){
                             LinearLayoutManager manager = (LinearLayoutManager) attachedRecycler.getLayoutManager();
                             int recHeight = attachedRecycler.getHeight();
                             manager.scrollToPositionWithOffset(i, recHeight/2 - 90);
-                            break;
+                            listItemVM[i].selected.set(true);
                         }
                     }
                 }
@@ -54,6 +55,11 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         });
     }
 
+    private void unselectItem(){
+        for(int i = 0; i < listItemVM.length; i++){
+            listItemVM[i].selected.set(false);
+        }
+    }
 
     private void sortListItems(){
         if(listItemVM.length > 0) {

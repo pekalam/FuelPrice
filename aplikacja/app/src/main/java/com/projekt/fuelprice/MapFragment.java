@@ -66,8 +66,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private Marker mPositionMarker;
 
-    private Toast _testToast;
-
     private PermissionCheckUtility permissionCheckUtility;
 
     @Inject
@@ -104,10 +102,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 }
                 mPositionMarker = mMap.addMarker(positionMarker);
 
-                if(_testToast != null)
-                    _testToast.cancel();
-                _testToast = Toast.makeText(getContext(), "[TEST] Znaleziono bieżącą lokalizacje", Toast.LENGTH_LONG);
-                _testToast.show();
+                showInfoBar("Znaleziono bieżącą lokalizację", R.color.colorPrimaryDark, R.color.white);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideInfoBar();
+                    }
+                }, 2000);
             }
         });
 
@@ -143,6 +144,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onPause() {
         gasStationsViewModel.stopFindingCurrentPosition();
         super.onPause();
+    }
+
+    private void showInfoBar(String infoTxt, int color, int textColor){
+        binding.info.setVisibility(View.VISIBLE);
+        binding.info.setText(infoTxt);
+        binding.info.setBackgroundColor(getResources().getColor(color));
+        binding.info.setTextColor(getResources().getColor(textColor));
+    }
+
+    private void hideInfoBar(){
+        binding.info.setVisibility(View.GONE);
     }
 
     private Runnable zoomCheck = new Runnable() {
@@ -195,10 +207,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onPermissionsGranted() {
                 gasStationsViewModel.startFindingCurrentPosition();
-                if(_testToast != null)
-                    _testToast.cancel();
-                _testToast = Toast.makeText(getContext(), "[TEST] Trwa wyszukiwanie bieżącej lokalizacji...", Toast.LENGTH_LONG);
-                _testToast.show();
+                showInfoBar("Trwa wyszukiwanie lokalizacji...", R.color.white, R.color.black);
             }
 
             @Override
@@ -237,6 +246,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
+                            if(marker.equals(mPositionMarker)){
+                                return true;
+                            }
                             if(markerToGasStation.containsKey(marker)){
                                 selectedMarker = marker;
                                 GasStation gasStation = markerToGasStation.get(marker);

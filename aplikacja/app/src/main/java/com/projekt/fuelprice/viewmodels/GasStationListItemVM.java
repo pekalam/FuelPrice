@@ -1,16 +1,21 @@
 package com.projekt.fuelprice.viewmodels;
 import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableField;
+
 import com.projekt.fuelprice.R;
 import com.projekt.fuelprice.data.GasStation;
 
 public class GasStationListItemVM{
     public GasStation gasStation;
     public double distance = Double.NaN;
+    public ObservableField<Boolean> selected;
     private GasStation.FuelType selectedFuelType;
 
     public GasStationListItemVM(GasStation gasStation){
         this.gasStation = gasStation;
+        selected = new ObservableField<>();
+        selected.set(false);
     }
 
     public void setSelectedFuelPrice(GasStation.FuelType type){
