@@ -60,10 +60,4 @@ public class GasStationListItemVM{
     public String formattedPrice(){
         return String.format("%.2f zł", getSelectedFuelPrice());
     }
-
-    public boolean isNullItem(){
-        if(gasStation == null)
-            return true;
-        return false;
-    }
 }

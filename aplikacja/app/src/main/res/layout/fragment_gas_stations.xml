@@ -21,7 +21,8 @@
         android:id="@+id/rec1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/list_item"/>
+        tools:listitem="@layout/list_item"
+        android:paddingBottom="50dp"/>
 
 </LinearLayout>
 </layout>

@@ -57,7 +57,7 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
 
     private void sortListItems(){
         if(listItemVM.length > 0) {
-            Arrays.sort(listItemVM, 0, listItemVM.length - 1, new Comparator<GasStationListItemVM>() {
+            Arrays.sort(listItemVM, 0, listItemVM.length, new Comparator<GasStationListItemVM>() {
                 @Override
                 public int compare(GasStationListItemVM o1, GasStationListItemVM o2) {
                     if (o1.getSelectedFuelPrice() == o2.getSelectedFuelPrice()) {
@@ -104,14 +104,12 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
     }
 
     public void setGasStations(GasStation[] gasStations){
-        listItemVM = new GasStationListItemVM[gasStations.length+1];
-        initialOrderListItemVM = new GasStationListItemVM[gasStations.length+1];
+        listItemVM = new GasStationListItemVM[gasStations.length];
+        initialOrderListItemVM = new GasStationListItemVM[gasStations.length];
         for(int i = 0; i < gasStations.length; i++){
             listItemVM[i] = new GasStationListItemVM(gasStations[i]);
             initialOrderListItemVM[i] = listItemVM[i];
         }
-        //null item
-        listItemVM[gasStations.length] = new GasStationListItemVM(null);
         notifyDataSetChanged();
     }
 
@@ -119,7 +117,7 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         if(listItemVM.length == 0 || distances.length == 0){
             return;
         }
-        if(distances.length != listItemVM.length-1){
+        if(distances.length != listItemVM.length){
             throw new InvalidParameterException();
         }
         for(int i = 0; i < distances.length; i++){
