@@ -116,7 +116,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onChanged(GasStation gasStation) {
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(gasStation.lat, gasStation.lon)));
-                gasStationToMarker.get(gasStation).showInfoWindow();
+                selectedMarker = gasStationToMarker.get(gasStation);
+                selectedMarker.showInfoWindow();
             }
         });
 

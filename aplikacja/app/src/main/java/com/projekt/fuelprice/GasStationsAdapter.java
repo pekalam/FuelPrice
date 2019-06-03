@@ -53,12 +53,14 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
                 }
             }
         });
-    }
-
-    private void unselectItem(){
-        for(int i = 0; i < listItemVM.length; i++){
-            listItemVM[i].selected.set(false);
-        }
+        this.gasStationsViewModel.getSelectedFuelType().observe(lifecycleOwner, new Observer<GasStation.FuelType>() {
+            @Override
+            public void onChanged(GasStation.FuelType fuelType) {
+                for(int i = 0; i < listItemVM.length; i++){
+                    listItemVM[i].selected.set(false);
+                }
+            }
+        });
     }
 
     private void sortListItems(){
