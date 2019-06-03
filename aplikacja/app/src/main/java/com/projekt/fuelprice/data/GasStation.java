@@ -1,5 +1,6 @@
 package com.projekt.fuelprice.data;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 public class GasStation {
@@ -35,6 +36,7 @@ public class GasStation {
     public float priceLPG;
     public float priceON;
     public Drawable logo;
+    public Bitmap miniLogo;
 
     public GasStation(){
         randomPrices();

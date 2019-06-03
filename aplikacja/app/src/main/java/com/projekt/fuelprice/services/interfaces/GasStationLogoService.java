@@ -1,5 +1,6 @@
 package com.projekt.fuelprice.services.interfaces;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,9 @@ public interface GasStationLogoService {
     interface Listener{
         void onSuccess(Drawable drawable);
     }
-    @NonNull
+    interface ListenerMiniLogo{
+        void onSuccess(Bitmap bitmap);
+    };
     void getGasStationLogo(GasStation gasStation, GasStationLogoService.Listener listener) throws Exception;
+    void getGasStationMiniLogo(GasStation gasStation, GasStationLogoService.ListenerMiniLogo listener) throws Exception;
 }

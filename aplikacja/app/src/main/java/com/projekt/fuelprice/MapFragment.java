@@ -121,15 +121,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        gasStationsViewModel.getSelectedFuelType().observe(getViewLifecycleOwner(), new Observer<GasStation.FuelType>() {
-            @Override
-            public void onChanged(GasStation.FuelType fuelType) {
-                if(selectedMarker != null){
-                    selectedMarker.hideInfoWindow();
-                }
-            }
-        });
-
         return binding.getRoot();
     }
 
@@ -231,18 +222,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 for (final GasStation station: gasStations
                 ) {
 
-                    BitmapDrawable bitmapdraw=(BitmapDrawable)station.logo;
-                    Bitmap b=bitmapdraw.getBitmap();
-                    //TODO
-                    //ZMIANA ROZMIARU LOGO NA POTRZEBY WYSWIETLENIA JAKO MARKER
-                    Bitmap smallMarker = Bitmap.createScaledBitmap(b, 48,48, false);
-
-                    //dodanie markera do mapy
                     MarkerOptions options = new MarkerOptions()
                             .position(new LatLng(station.lat, station.lon))
                             .title(station.name)
                             .snippet(station.brandName)
-                            .icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                            .icon(BitmapDescriptorFactory.fromBitmap(station.miniLogo));
                     Marker marker = mMap.addMarker(options);
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override

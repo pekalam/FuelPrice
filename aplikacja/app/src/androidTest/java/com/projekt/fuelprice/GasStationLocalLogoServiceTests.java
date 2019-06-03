@@ -23,16 +23,14 @@ public class GasStationLocalLogoServiceTests {
     public void getGasStationLogo_when_good_brandName_returns_logo() throws Exception {
         GasStationLogoService service = new GasStationLocalLogoService(InstrumentationRegistry.getTargetContext());
         GasStation station = new GasStation();
+        station.name = "Stacja Shell";
         station.brandName = "Shell";
         final CountDownLatch lock = new CountDownLatch(1);
 
-        final Drawable expected = InstrumentationRegistry.getTargetContext().getDrawable(R.drawable.shell);
+        final Drawable expected = InstrumentationRegistry.getTargetContext().getDrawable(R.drawable.shell1);
         service.getGasStationLogo(station, new GasStationLogoService.Listener() {
             @Override
             public void onSuccess(Drawable logo) {
-                /*
-                TODO: porownanie 2 drawable
-                 */
                 if(logo != null)
                     lock.countDown();
             }

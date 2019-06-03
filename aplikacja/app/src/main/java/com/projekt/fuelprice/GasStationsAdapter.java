@@ -9,12 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.Button;
 
 import com.projekt.fuelprice.data.GasStation;
 import com.projekt.fuelprice.databinding.ListItemBinding;
@@ -40,27 +44,23 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         this.gasStationsViewModel.getSelectedGasStation().observe(lifecycleOwner, new Observer<GasStation>() {
             @Override
             public void onChanged(GasStation gasStation) {
-                for(int i = 0; i < listItemVM.length; i++){
-                    listItemVM[i].selected.set(false);
-                    if(listItemVM[i].gasStation == gasStation){
-                        if(attachedRecycler != null){
-                            LinearLayoutManager manager = (LinearLayoutManager) attachedRecycler.getLayoutManager();
-                            int recHeight = attachedRecycler.getHeight();
-                            manager.scrollToPositionWithOffset(i, recHeight/2 - 90);
-                            listItemVM[i].selected.set(true);
-                        }
-                    }
-                }
+                selectGasStation(gasStation);
             }
         });
-        this.gasStationsViewModel.getSelectedFuelType().observe(lifecycleOwner, new Observer<GasStation.FuelType>() {
-            @Override
-            public void onChanged(GasStation.FuelType fuelType) {
-                for(int i = 0; i < listItemVM.length; i++){
-                    listItemVM[i].selected.set(false);
+    }
+
+    private void selectGasStation(GasStation gasStation){
+        for(int i = 0; i < listItemVM.length; i++){
+            listItemVM[i].selected.set(false);
+            if(listItemVM[i].gasStation == gasStation){
+                if(attachedRecycler != null){
+                    LinearLayoutManager manager = (LinearLayoutManager) attachedRecycler.getLayoutManager();
+                    int recHeight = attachedRecycler.getHeight();
+                    manager.scrollToPositionWithOffset(i, recHeight/2 - 90);
+                    listItemVM[i].selected.set(true);
                 }
             }
-        });
+        }
     }
 
     private void sortListItems(){
@@ -142,6 +142,21 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         }
         sortListItems();
         notifyDataSetChanged();
+        if(attachedRecycler != null){
+            attachedRecycler.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    if(gasStationsViewModel.getSelectedGasStation().getValue() != null){
+                        selectGasStation(gasStationsViewModel.getSelectedGasStation().getValue());
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        attachedRecycler.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }else {
+                        attachedRecycler.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    }
+                }
+            });
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -151,25 +166,33 @@ public class GasStationsAdapter extends RecyclerView.Adapter<GasStationsAdapter.
         public ViewHolder(final ListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            /*binding.btn1.setOnTouchListener(new View.OnTouchListener() {
+            binding.btn1.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public boolean onTouch(View view, MotionEvent event) {
-                    switch(event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            binding.btn1.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.arrow_disable));
-                            return true;
-                        case MotionEvent.ACTION_UP:
-                            binding.btn1.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.arrow_enable));
-                           return true;
-                        case MotionEvent.ACTION_OUTSIDE:
-                            binding.btn1.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.arrow_enable));
-                           return true;
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            Button view = (Button) v;
+                            view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                            v.invalidate();
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP: {
+                            Button view = (Button) v;
+                            view.getBackground().clearColorFilter();
+                            view.invalidate();
+                            view.callOnClick();
+                            break;
+                        }
+                        case MotionEvent.ACTION_CANCEL: {
+                            Button view = (Button) v;
+                            view.getBackground().clearColorFilter();
+                            view.invalidate();
+                            break;
+                        }
                     }
-                    return false;
-
+                    return true;
                 }
-            }
-            );*/
+            });
         }
 
         public void bindGasStation(final GasStationListItemVM itemVM){

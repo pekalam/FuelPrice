@@ -2,6 +2,7 @@ package com.projekt.fuelprice.data;
 
 import androidx.core.util.Consumer;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
@@ -34,11 +35,11 @@ public class WebGasStationsRepository implements GasStationsRepository {
             public void accept(final GasStation[] gasStations) {
 
                 final ArrayList<Integer> li = new ArrayList<Integer>();
-                final GasStationLogoService.Listener l = new GasStationLogoService.Listener() {
+                final Runnable l = new Runnable() {
                     @Override
-                    public void onSuccess(Drawable drawable) {
+                    public void run() {
                         li.add(1);
-                        if(li.size() == gasStations.length)
+                        if(li.size() == gasStations.length*2)
                             onSuccess.accept(gasStations);
                     }
                 };
@@ -51,15 +52,25 @@ public class WebGasStationsRepository implements GasStationsRepository {
                             @Override
                             public void onSuccess(Drawable drawable) {
                                 station.logo = drawable;
-                                l.onSuccess(drawable);
+                                l.run();
                             }
                         });
                     } catch (Exception e) {
-
                         e.printStackTrace();
-
                         Log.d("ERROR", "WebGasStationsRepository: logo service error", e);
-
+                        return;
+                    }
+                    try {
+                        logoService.getGasStationMiniLogo(station, new GasStationLogoService.ListenerMiniLogo() {
+                            @Override
+                            public void onSuccess(Bitmap drawable) {
+                                station.miniLogo = drawable;
+                                l.run();
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d("ERROR", "WebGasStationsRepository: logo service error (mini)", e);
                         return;
                     }
                 }
