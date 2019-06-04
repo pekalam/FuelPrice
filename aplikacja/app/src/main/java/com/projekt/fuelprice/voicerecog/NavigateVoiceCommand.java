@@ -15,13 +15,13 @@ public class NavigateVoiceCommand extends VoiceCommand {
 
     @Override
     public boolean execute(GasStationsViewModel gasStationsViewModel, Context context) {
-        //TODO 6): korzystajac z gasStationsViewModel, context i ewentualnie szukajac parametrow w
-        //this.cmdTail mozna wykonac komende
+        if(gasStationsViewModel.getSelectedGasStation().getValue() != null){
+            gasStationsViewModel.navigateTo(gasStationsViewModel.getSelectedGasStation().getValue(),
+                    context);
+            return true;
+        }else{
+            return false;
+        }
 
-        //np. nawigacja do pierwszej wyszukanej stacji (nie najtanszej):
-        GasStation[] stacje = gasStationsViewModel.getGasStations().getValue();
-        gasStationsViewModel.navigateTo(stacje[0], context);
-        //jak bedzie 0 stacji to return false
-        return true;
     }
 }

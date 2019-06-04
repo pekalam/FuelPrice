@@ -23,17 +23,7 @@ public class GasStationListItemVM{
     }
 
     public float getSelectedFuelPrice(){
-        switch (selectedFuelType){
-            case LPG:
-                return gasStation.priceLPG;
-            case t95:
-                return gasStation.price95;
-            case t98:
-                return gasStation.price98;
-            case ON:
-                return gasStation.priceON;
-        }
-        return 0;
+        return gasStation.getPriceOf(selectedFuelType);
     }
 
     public String formattedDistance(){

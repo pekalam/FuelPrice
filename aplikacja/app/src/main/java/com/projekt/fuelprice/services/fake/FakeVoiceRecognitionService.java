@@ -25,7 +25,7 @@ public class FakeVoiceRecognitionService implements VoiceRecognitionService {
                     public void run() {
                         listener.onRecognized("Nawiguj do najtańszej stacji");
                         if(i == 0) {
-                            listener.onCommandRecognized(VoiceCommandName.NAVIGATE_TO, " do najtańszej stacji");
+                            listener.onCommandRecognized(VoiceCommandName.NAVIGATE, " do najtańszej stacji");
                             i++;
                         }
                         else if(i==1){

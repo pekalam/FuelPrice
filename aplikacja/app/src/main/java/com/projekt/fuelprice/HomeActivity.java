@@ -58,6 +58,11 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onBackPressed() {
         if(voiceRecognitionFragment != null){
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

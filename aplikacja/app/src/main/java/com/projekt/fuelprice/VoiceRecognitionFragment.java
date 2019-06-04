@@ -39,6 +39,8 @@ public class VoiceRecognitionFragment extends Fragment{
 
     private FragmentOverlayBinding binding;
 
+    private boolean removeOnReturn = false;
+
     public VoiceRecognitionFragment() {
         // Required empty public constructor
     }
@@ -46,6 +48,15 @@ public class VoiceRecognitionFragment extends Fragment{
     public static VoiceRecognitionFragment newInstance() {
         VoiceRecognitionFragment fragment = new VoiceRecognitionFragment();
         return fragment;
+    }
+
+    private void delayedRemove(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                removeFragment();
+            }
+        }, 1500);
     }
 
     @Override
@@ -69,23 +80,22 @@ public class VoiceRecognitionFragment extends Fragment{
         voiceRecognitionFragmentVM.getRecognizedVoiceCommand().observe(getViewLifecycleOwner(), new Observer<VoiceCommand>() {
             @Override
             public void onChanged(final VoiceCommand voiceCommand) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-                                .remove(VoiceRecognitionFragment.this)
-                                .commit();
-                    }
-                }, 2000);
                 if(voiceCommand == null){
                     binding.overlayRoot.setBackgroundColor(getContext().getResources().getColor(R.color.red_overlay));
                     binding.commandName.setText("Nie rozpoznano komendy");
+                    delayedRemove();
+
                 }else{
                     binding.overlayRoot.setBackgroundColor(getContext().getResources().getColor(R.color.green_overlay));
                     //wykonanie komendy
-                    voiceCommand.execute(gasStationsViewModel, getActivity());
-                    binding.commandName.setText(voiceCommand.getClass().getName());
+                    removeOnReturn = true;
+                    if(!voiceCommand.execute(gasStationsViewModel, getActivity())){
+                        binding.overlayRoot.setBackgroundColor(getContext().getResources().getColor(R.color.red_overlay));
+                        binding.commandName.setText("Błąd");
+                        delayedRemove();
+                    }else {
+                        binding.commandName.setText(voiceCommand.getClass().getName());
+                    }
                 }
             }
         });
@@ -99,10 +109,7 @@ public class VoiceRecognitionFragment extends Fragment{
                         .setPositiveButton("Powrót", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                getActivity().getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .remove(VoiceRecognitionFragment.this)
-                                        .commit();
+                                removeFragment();
                             }
                         }).show();
             }
@@ -111,9 +118,20 @@ public class VoiceRecognitionFragment extends Fragment{
         return binding.getRoot();
     }
 
+    private void removeFragment(){
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .remove(this)
+                .commit();
+    }
+
     @Override
     public void onResume() {
-        voiceRecognitionFragmentVM.startListening(getContext());
+        if(removeOnReturn) {
+            removeFragment();
+        }else {
+            voiceRecognitionFragmentVM.startListening(getContext());
+        }
         super.onResume();
     }
 }
