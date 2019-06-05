@@ -17,6 +17,7 @@ import com.projekt.fuelprice.data.GasStationsRepository;
 import com.projekt.fuelprice.services.interfaces.ApplicationSettingsService;
 import com.projekt.fuelprice.services.interfaces.DistanceService;
 import com.projekt.fuelprice.services.interfaces.LocationService;
+import com.projekt.fuelprice.utils.DistanceUtils;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,11 @@ public class GasStationsViewModel extends ViewModel {
      * Maksymalny promien (w metrach) w jakim wyszukiwane sa stacje
      */
     public static int MAX_SEARCHING_RADIUS = 70000; //TODO: 70KM?
+    /**
+     * Minimalna odleglosc o jaka musi zmienic sie obecne polozenie uzytkownika w
+     * stosunku do poprzedniego polozenia aby pobrac nowe stacje
+     */
+    public static int MIN_RADIUS_DIFF = 4000;
 
     /**
      * Aktualna lokalizacja klienta
@@ -110,7 +116,20 @@ public class GasStationsViewModel extends ViewModel {
      */
     private void loadGasStations(LatLng pos, final int radius){
         Log.d("A:GasStationsViewModel", "loadGasStations radius: " + radius);
-        //TODO cache
+        if(_loadPos != null && _loadRadius != -1){
+            if(radius == _loadRadius){
+                if(DistanceUtils.distanceBetween(_loadPos.latitude, _loadPos.longitude, pos.latitude, pos.longitude) <= MIN_RADIUS_DIFF){
+                    Log.d("A:GasStationsViewModel", "cached stations loaded");
+                    return;
+                }
+            }
+            if(radius < _loadRadius){
+                if(DistanceUtils.distanceBetween(_loadPos.latitude, _loadPos.longitude, pos.latitude, pos.longitude) + radius <= _loadRadius){
+                    Log.d("A:GasStationsViewModel", "cached stations loaded");
+                    return;
+                }
+            }
+        }
         gasStationsRepo.getGasStations(pos, radius, new Consumer<GasStation[]>() {
             @Override
             public void accept(GasStation[] fetchedGasStations) {
