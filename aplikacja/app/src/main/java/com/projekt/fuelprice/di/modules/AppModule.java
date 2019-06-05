@@ -15,9 +15,12 @@ import com.projekt.fuelprice.services.real.GasStationLocalLogoService;
 import com.projekt.fuelprice.services.interfaces.GasStationLogoService;
 import com.projekt.fuelprice.services.interfaces.LocationService;
 import com.projekt.fuelprice.services.interfaces.PermissionsService;
+import com.projekt.fuelprice.services.real.RealApplicationSettingsService;
+import com.projekt.fuelprice.services.real.RealLocationService;
 import com.projekt.fuelprice.services.real.RealVoiceRecognitionService;
 import com.projekt.fuelprice.services.real.SimpleDistanceService;
 import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
+import com.projekt.fuelprice.services.real.TomTomApiClient;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -37,15 +40,15 @@ public class AppModule {
     @Provides
     @Named("applicationSettingsService")
     ApplicationSettingsService provideApplicationSettingsService(Application app){
-        return new FakeApplicationSettingsService();
+        return new RealApplicationSettingsService(app.getApplicationContext());
     }
 
     @Singleton
     @Provides
     @Named("locationService")
     LocationService provideLocationService(Application app){
-        return new FakeLocationService();
-        //return new RealLocationService(app.getApplicationContext());
+        //return new FakeLocationService();
+        return new RealLocationService(app.getApplicationContext());
     }
 
     @Singleton
@@ -66,8 +69,8 @@ public class AppModule {
     @Provides
     @Named("asyncMapApiClient")
     AsyncMapApiClient provideAsyncMapApiClient(Application app){
-        //return new TomTomApiClient();
-        return new FakeTomTomApiClient(app.getApplicationContext());
+        return new TomTomApiClient();
+        //return new FakeTomTomApiClient(app.getApplicationContext());
     }
 
     @Singleton
