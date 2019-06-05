@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.gms.ads.AdListener;
 import com.projekt.fuelprice.databinding.ActivityHomeBinding;
 
 
@@ -17,10 +18,12 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class HomeActivity extends FragmentActivity implements HasSupportFragmentInjector {
-
+    private InterstitialAd mInterstitialAd;
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
@@ -54,7 +57,22 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
                 return true;
             }
         });
+        MobileAds.initialize(this, "ca-app-pub-5768880253719503~7329247068");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        AdRequest request = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+            }
+        });
     }
 
     @Override
