@@ -27,7 +27,7 @@ public class FakeTomTomApiClient implements AsyncMapApiClient {
         GasStation[] gasStations = null;
         int i = 0;
         try {
-            String path =  radius > 25000 ? "testsData/tomTomApiClient/nearby2.json" : "testsData/tomTomApiClient/nearby.json";
+            String path =  radius > 25000 ? "testsData/tomTomApiClient/nearby.json" : "testsData/tomTomApiClient/nearby.json";
             InputStream jsonStream = mContext.getAssets().open(path);
             JsonReader reader = new JsonReader(new InputStreamReader(jsonStream));
             reader.beginObject();

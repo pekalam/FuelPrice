@@ -11,7 +11,7 @@ public class FakeLocationService implements LocationService {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                listener.onLocationChanged(new LatLng(50.041187, 21.999121));
+                listener.onLocationChanged(new LatLng(50.026736, 21.985154));
             }
         }, 2000);
 
@@ -19,7 +19,7 @@ public class FakeLocationService implements LocationService {
 
     @Override
     public void singleRequest(Listener listener) {
-        listener.onLocationChanged(new LatLng(50.041187, 21.999121));
+        listener.onLocationChanged(new LatLng(50.026736, 21.985154));
     }
 
     @Override

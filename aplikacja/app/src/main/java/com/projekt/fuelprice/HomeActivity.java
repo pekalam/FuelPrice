@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.AdListener;
 import com.projekt.fuelprice.databinding.ActivityHomeBinding;
 
@@ -18,6 +19,8 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+import io.fabric.sdk.android.Fabric;
+
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -36,7 +39,7 @@ public class HomeActivity extends FragmentActivity implements HasSupportFragment
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        //Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics());
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         fuelSelectionBottomSheetDialogFragment =
                 FuelSelectionBottomSheetDialogFragment.newInstance();
