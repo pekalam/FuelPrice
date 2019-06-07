@@ -20,6 +20,6 @@ public class RealApplicationSettingsService implements ApplicationSettingsServic
 
     @Override
     public void setSelectedFuelType(GasStation.FuelType type) {
-        setSelectedFuelType(type);
+        FuelTypeSettings.setSelectedFuelType(context, type);
     }
 }
