@@ -19,7 +19,6 @@ public class RealRecognitionListener implements RecognitionListener {
     }
 
     private boolean recognizeCommand(String text){
-        //TODO: 2) na podstawie rozpoznanego tekstu (male znaki) wywolywane sa 2 funkcje
         String lowerText = text.toLowerCase();
         String tail = "";
         VoiceCommandName commandName = VoiceCommandName.NOT_RECOGNIZED;

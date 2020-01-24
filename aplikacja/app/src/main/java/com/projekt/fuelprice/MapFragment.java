@@ -56,8 +56,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private Handler zoomCheckHandler;
     private float currentZoom;
-    private Map<GasStation, Marker> gasStationToMarker = new HashMap<>();
-    private Map<Marker, GasStation> markerToGasStation = new HashMap<>();
+    private Map<GasStation, Marker> gasStationToMarker = new HashMap<GasStation, Marker>();
+    private Map<Marker, GasStation> markerToGasStation = new HashMap<Marker, GasStation>();
     private Marker selectedMarker;
 
     private GasStationsViewModel gasStationsViewModel;

@@ -15,10 +15,10 @@ import com.projekt.fuelprice.services.interfaces.VoiceRecognitionService;
 public class VoiceRecognitionFragmentVM extends ViewModel {
 
     private VoiceRecognitionService voiceRecognitionService;
-    private MutableLiveData<String> recognizedString = new MutableLiveData<>();
-    private MutableLiveData<VoiceCommand> recognizedCommand = new MutableLiveData<>();
+    private MutableLiveData<String> recognizedString = new MutableLiveData<String>();
+    private MutableLiveData<VoiceCommand> recognizedCommand = new MutableLiveData<VoiceCommand>();
 
-    private MutableLiveData<Boolean> voiceRecognitionAvailable = new MutableLiveData<>();
+    private MutableLiveData<Boolean> voiceRecognitionAvailable = new MutableLiveData<Boolean>();
 
     public VoiceRecognitionFragmentVM(@NonNull VoiceRecognitionService voiceRecognitionService){
         this.voiceRecognitionService = voiceRecognitionService;
